@@ -1,0 +1,110 @@
+default_view:
+    view: true
+    name: Lights
+    entities:
+    - group.Main
+    - group.Outdoor
+    - group.Garage
+    - group.Kitchen
+    - group.Basement
+
+Audio:
+    view: true
+    name: Audio
+    entities:
+    - media_player.spotify
+    - media_player.main_floor
+    - media_player.all_indoor
+    - switch.radio_amp
+    - switch.deck_amp
+    - switch.garage_amp
+    - automation.amp_autoon__radio
+    - automation.amp_autooff__radio
+    - automation.amp_autoon__deck
+    - automation.amp_autooff__deck
+    - automation.amp_autoon__garage
+    - automation.amp_autooff__garage
+    
+Upstairs:
+    view: true
+    name: Upstairs
+    entities:
+    - group.Bedroom_Lights
+    - switch.wemo_large
+    - switch.wemo_mini
+    - group.Bedroom_Status
+
+Outdoor:
+    name: Outdoor Lights
+    entities:
+    - switch.outdoor_driveway_light
+    - switch.outdoor_front_house_light
+    - switch.outdoor_front_porch_light
+    - switch.deck_lights
+
+Garage:
+    name: Garage
+    entities:
+    - cover.garage_door
+    - switch.garage_light
+
+Kitchen:
+    name: Kitchen
+    entities:
+    - light.kitchen_side_level
+    - light.kitchen_entry_level
+    - light.kitchen_main_level
+    - light.kitchen_center_level
+
+Main: 
+    name: Main
+    entities:
+    - light.dining_room
+    - light.living_room
+    - light.main_floor_accents
+    
+Basement: 
+    name: Basement
+    entities:
+    - switch.basement_stairs
+    - switch.basement_lights_north
+    - switch.basement_lights_south
+
+Bedroom_Lights:
+    name: Bedroom Lights
+    entities:
+    - light.marks_light
+    - light.mollys_light
+
+Bedroom_Status:
+    name: Bedroom Status
+    entities:
+    - sensor.bedroom_multi_relative_humidity
+    - sensor.bedroom_multi_temperature
+    - binary_sensor.bedroom_window_north_sensor
+    - binary_sensor.bedroom_window_north_status
+
+Molly_and_Mark:
+    name: Molly and Mark
+    entities:
+    - device_tracker.mark_md
+    - device_tracker.molly_243f96aa487a47fea4a49c7729a4fea8
+
+Scenes:
+    view: true
+    name: Automation
+    entities:
+    - scene.away
+    - scene.goodnight
+    - scene.tv
+    - automation.lights_off_when_home_empty
+    - automation.garage_door_lights_on
+    - automation.garage_door_lights_off
+    
+Batteries:
+    view: true
+    name: Batteries
+    entities:
+    - zwave.sensor_bedroom_multi
+    - zwave.sensor_lr_door_slider
+    

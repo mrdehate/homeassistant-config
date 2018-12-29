@@ -1,0 +1,180 @@
+zwave:
+  usb_path: /dev/ttyACM0
+
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 860
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zoness
+  time_zone: America/Detroit
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  base_url: !secret base_url
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+  
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+  enable:
+    - homekit
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor:
+#   - platform: yr
+   - platform: darksky
+     api_key: !secret darksky_api
+     monitored_conditions:
+       - summary
+       - icon
+       - temperature
+       - humidity
+       - temperature_high
+
+binary_sensor:
+  - platform: template
+    sensors:
+      livingroom_door_status:
+        friendly_name: 'Living Room Slider'
+        device_class: opening
+        value_template: >-
+          {%- if is_state('sensor.livingroom_door_slider_access_control', '22') -%}
+          true
+          {%- else -%}
+          false
+          {%- endif -%}
+      bedroom_window_north_status:
+        friendly_name: 'Bedroom Window North'
+        device_class: opening
+        value_template: >-
+          {%- if is_state('sensor.bedroom_window_north_access_control', '22') -%}
+          true
+          {%- else -%}
+          false
+          {%- endif -%}
+      kitchen_motion:
+        friendly_name: 'Bedroom Motion'
+        device_class: motion
+        value_template: >-
+          {%- if is_state("sensor.bedroom_multi_burglar", "0") -%}
+              No
+          {%- else -%}
+              Yes
+          {%- endif -%}
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+# Includes
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# Config
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: !secret configurator_url
+
+# Homekit    
+homekit:
+
+# Garage Door
+cover:
+  - platform: gogogate2
+    username: !secret garagedoor_username
+    password: !secret garagedoor_password
+    ip_address: !secret garagedoor_ip
+
+# Media
+media_player:
+  - platform: spotify
+    client_id: !secret spotify_id
+    client_secret: !secret spotify_secret
+
+# Google Assistant
+google_assistant:
+  project_id: !secret google_assistant_projectid
+  api_key: !secret google_assistant_api
+  exposed_domains:
+    - switch
+    - light
+    - group
+    - scene
+
+      
+# Presence Detection
+owntracks:
+    waypoints: false # disable owntracks from reporting regions - prevents overlapping homes
+
+device_tracker:
+  - platform: automatic
+    client_id: !secret automatic_id
+    secret: !secret automatic_secret
+    current_location: true
+
+zone:
+  - name: Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: 90
+    icon: mdi:home
+  - name: WFS
+    latitude: !secret wfs_latitude
+    longitude: !secret wfs_longitude
+    radius: 90
+    icon: mdi:worker
+  - name: A-O
+    latitude: !secret ao_latitude
+    longitude: !secret ao_longitude
+    radius: 540
+    icon: mdi:worker

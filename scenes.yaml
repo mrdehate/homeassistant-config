@@ -1,0 +1,41 @@
+- name: Away
+  entities:
+    switch.deck_lights: off
+    switch.outdoor_driveway_light: off
+    switch.outdoor_front_porch_light: off
+    switch.garage_light: off
+    light.kitchen_entry: off
+    light.kitchen_side: off
+    switch.outdoor_front_house_light: off
+    switch.radio_amp: off
+    light.dining_room_accent: off
+    light.dining_room: off
+    light.living_room_accent: off
+    light.living_room: off
+    light.bedroom: off
+    light.main_floor_accents: off
+- name: Goodnight
+  entities:
+    switch.deck_lights: off
+    switch.outdoor_driveway_light: off
+    switch.outdoor_front_porch_light: off
+    switch.garage_light: off
+    light.kitchen_entry: off
+    light.kitchen_side: off
+    switch.outdoor_front_house_light: off
+    switch.radio_amp: off
+    light.dining_room_accent: off
+    light.dining_room: off
+    light.living_room_accent: off
+    light.living_room: off
+#    light.bedroom: off
+    light.main_floor_accents: off
+- name: tv
+  entities:
+    light.kitchen_entry: off
+    light.kitchen_side: on
+#    light.dining_room_accent: off
+    light.dining_room: off
+#    light.living_room_accent: on
+    light.living_room: on
+    light.main_floor_accents: on

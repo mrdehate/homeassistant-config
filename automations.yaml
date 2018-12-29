@@ -1,0 +1,350 @@
+# Garage Door -----------------------------------
+- id: '1539744009480'
+  alias: Indoor Light when Garage Door Opens
+  trigger:
+  - platform: state
+    entity_id: cover.garage_door
+    from: 'closed'
+    to: 'open'
+  condition:
+  - condition: sun
+    after: sunset
+  action:
+  - service: homeassistant.turn_on
+    entity_id: light.kitchen_entry_level
+
+- id: 'garagelightson'
+  alias: Garage Door Lights On
+  trigger:
+  - platform: state
+    entity_id: cover.garage_door
+    from: 'closed'
+    to: 'open'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  action:
+  - service: homeassistant.turn_on
+    entity_id: switch.garage_light
+
+- id: 'garagelightsoff'
+  alias: Garage Door Lights Off
+  trigger:
+  - platform: state
+    entity_id: cover.garage_door
+    from: 'open'
+    to: 'closed'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: switch.garage_light
+
+# Audio -----------------------------------
+- id: 'radioampon'
+  alias: Amp Auto-On - Radio
+  trigger:
+  - platform: state
+    entity_id: media_player.radio
+    to: 'playing'
+  - platform: state
+    entity_id: media_player.all_indoor
+    to: 'playing'
+  - platform: state
+    entity_id: media_player.all_indoor_and_outdoor
+    to: 'playing'
+  - platform: state
+    entity_id: media_player.main_floor
+    to: 'playing'
+  - platform: state
+    entity_id: media_player.main_and_basement
+    to: 'playing'
+  action:
+  - service: homeassistant.turn_on
+    entity_id: switch.radio_amp
+
+
+- id: 'radioampoff'
+  alias: Amp Auto-Off - Radio
+  trigger:
+  - platform: state
+    entity_id: media_player.radio
+    to: 'off'
+  - platform: state
+    entity_id: media_player.all_indoor
+    to: 'off'
+  - platform: state
+    entity_id: media_player.all_indoor_and_outdoor
+    to: 'off'
+  - platform: state
+    entity_id: media_player.main_floor
+    to: 'off'
+  - platform: state
+    entity_id: media_player.main_and_basement
+    to: 'off'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: switch.radio_amp
+
+
+- id: 'deckampon'
+  alias: Amp Auto-On - Deck
+  trigger:
+  - platform: state
+    entity_id: media_player.deck
+    to: 'playing'
+  - platform: state
+    entity_id: media_player.all_outdoor
+    to: 'playing'
+  - platform: state
+    entity_id: media_player.all_indoor_and_outdoor
+    to: 'playing'
+  action:
+  - service: homeassistant.turn_on
+    entity_id: switch.deck_amp
+
+
+- id: 'deckampoff'
+  alias: Amp Auto-Off - Deck
+  trigger:
+  - platform: state
+    entity_id: media_player.deck
+    to: 'off'
+  - platform: state
+    entity_id: media_player.all_outdoor
+    to: 'off'
+  - platform: state
+    entity_id: media_player.all_indoor_and_outdoor
+    to: 'off'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: switch.deck_amp
+
+- id: 'garageampon'
+  alias: Amp Auto-On - Garage
+  trigger:
+  - platform: state
+    entity_id: media_player.garage
+    to: 'playing'
+  - platform: state
+    entity_id: media_player.all_outdoor
+    to: 'playing'
+  - platform: state
+    entity_id: media_player.all_indoor_and_outdoor
+    to: 'playing'
+  action:
+  - service: homeassistant.turn_on
+    entity_id: switch.garage_amp
+
+
+- id: 'garageampoff'
+  alias: Amp Auto-Off - Garage
+  trigger:
+  - platform: state
+    entity_id: media_player.garage
+    to: 'off'
+  - platform: state
+    entity_id: media_player.all_outdoor
+    to: 'off'
+  - platform: state
+    entity_id: media_player.all_indoor_and_outdoor
+    to: 'off'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: switch.garage_amp
+
+
+# Outdoor Lights -----------------------------------
+- id: 'alloutdooron'
+  alias: Porch Switch - Double Tap All On
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.switch_outdoor_front_porch
+      scene_id: 1
+      scene_data: 7860
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.outdoor_front_porch_light
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.outdoor_front_house_light
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.outdoor_driveway_light
+        
+- id: 'alloutdooroff'
+  alias: Porch Switch - Double Tap All Off
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.switch_outdoor_front_porch
+      scene_id: 2
+      scene_data: 7860
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.outdoor_front_porch_light
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.outdoor_front_house_light
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.outdoor_driveway_light
+
+
+# Basement Stair Light -----------------------------------
+- id: 'allbasementon'
+  alias: Basement Switch - Triple Tap All Basement On
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.switch_basement_stair
+      scene_id: 1
+      scene_data: 7920
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.basement_stairs
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.basement_lights_south
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.basement_lights_north
+        
+- id: 'allbasementoff'
+  alias: Basement Switch - Triple Tap All Basement Off
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.switch_basement_stair
+      scene_id: 2
+      scene_data: 7920
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.basement_stairs
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.basement_lights_south
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.basement_lights_north
+
+- id: 'allkitchenon'
+  alias: Basement Switch - Double Tap All Kitchen On
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.switch_basement_stair
+      scene_id: 1
+      scene_data: 7860
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.kitchen_center_level
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.kitchen_main_level
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.kitchen_side_level
+        
+- id: 'allkitchenoff'
+  alias: Basement Switch - Double Tap All Kitchen Off
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.switch_basement_stair
+      scene_id: 2
+      scene_data: 7860
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: light.kitchen_center_level
+    - service: homeassistant.turn_off
+      data:
+        entity_id: light.kitchen_main_level
+    - service: homeassistant.turn_off
+      data:
+        entity_id: light.kitchen_side_level
+
+
+# Bedroom  -----------------------------------
+- id: 'bedheatermarkon'
+  alias: Bed Heater Auto On - Mark
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.bedroom_multi_temperature
+      below: 68
+    - platform: time
+      minutes: '/5'
+      seconds: 00
+  condition:
+    condition: time
+    after: '21:00:00'
+    before: '04:00:00'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.bedroom_bedwarmer_mark
+
+- id: 'bedheatermarkoff'
+  alias: Bed Heater Auto Off - Mark
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.bedroom_multi_temperature
+      above: 68
+    - platform: time
+      minutes: '/6'
+      seconds: 00
+  condition:
+    condition: time
+    after: '21:00:00'
+    before: '04:00:00'
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.bedroom_bedwarmer_mark
+
+
+# Presence  -----------------------------------
+- id: 'lightsoffondeparture'
+  alias: Lights Off When Home Empty
+  trigger:
+    - platform: state
+      entity_id: group.molly_and_mark
+      from: 'home'
+      to: 'not_home'
+      for:
+        minutes: 1
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: group.all_lights
+    - service: homeassistant.turn_off
+      data:
+        entity_id: group.all_switches
+
+ 
+# Certificate
+- id: letsencrypt-renewal
+  alias: "Let's Encrypt Renewal"
+  trigger:
+  - platform: time
+    at: '00:00:00'
+  action:
+  - service: hassio.addon_restart
+    data:
+      addon: core_letsencrypt
