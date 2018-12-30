@@ -291,7 +291,7 @@
   condition:
     - condition: time
       after: '23:00:00'
-      before: '04:00:00'
+      before: '02:00:00'
     - condition: numeric_state
       entity_id: sensor.bedroom_multi_temperature
       below: 68
@@ -312,10 +312,26 @@
   condition:
     - condition: time
       after: '23:00:00'
-      before: '04:00:00'
+      before: '02:00:00'
     - condition: numeric_state
       entity_id: sensor.bedroom_multi_temperature
       above: 68
+    - condition: state
+      entity_id: switch.bedroom_bedwarmer_mark
+      state: 'on'
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.bedroom_bedwarmer_mark
+
+- id: 'bedheatermarkofftime'
+  alias: Bed Heater Auto Off - Mark
+  trigger:
+    - platform: time
+      hours: 2
+      minutes: 05
+      seconds: 00
+  condition:
     - condition: state
       entity_id: switch.bedroom_bedwarmer_mark
       state: 'on'
