@@ -1,3 +1,6 @@
+#########################
+# Basic Config
+#########################
 zwave:
   usb_path: /dev/ttyACM0
 
@@ -26,18 +29,12 @@ frontend:
 config:
 
 http:
-  # Secrets are defined in the file secrets.yaml
-  # api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: !secret base_url
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
   
 # Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
 updater:
   # Optional, allows Home Assistant developers to focus on popular components.
   # include_used_components: true
@@ -48,7 +45,7 @@ discovery:
     - homekit
 
 # Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
+#conversation:
 
 # Enables support for tracking state changes over time
 history:
@@ -56,13 +53,14 @@ history:
 # View all events in a logbook
 logbook:
 
-# Enables a map showing the location of tracked devices
-map:
-
+#########################
 # Track the sun
+#########################
 sun:
 
-# Weather prediction
+#########################
+# Sensors
+#########################
 sensor:
 #   - platform: yr
    - platform: darksky
@@ -105,54 +103,90 @@ binary_sensor:
               Yes
           {%- endif -%}
 
+#########################
 # Text to speech
+#########################
 tts:
   - platform: google
 
+#########################
 # Cloud
+#########################
 cloud:
 
+#########################
 # Includes
+#########################
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
-# Config
+#########################
+# Configurator
+#########################
 panel_iframe:
   configurator:
     title: Configurator
     icon: mdi:wrench
     url: !secret configurator_url
 
-# Homekit    
+#########################
+# Homekit
+#########################
 homekit:
 
+#########################
 # Garage Door
+#########################
 cover:
   - platform: gogogate2
     username: !secret garagedoor_username
     password: !secret garagedoor_password
     ip_address: !secret garagedoor_ip
 
+#########################
 # Media
+#########################
 media_player:
   - platform: spotify
     client_id: !secret spotify_id
     client_secret: !secret spotify_secret
 
+#########################
 # Google Assistant
+#########################
+# Hiding groups that come from Hue. Someday might swap this out to set up rooms
+# here, rather than duplicating effort in GA. And/or use only groups from Hue
+# and not exposing individual bulbs in GA. TBD.
 google_assistant:
   project_id: !secret google_assistant_projectid
   api_key: !secret google_assistant_api
   exposed_domains:
     - switch
     - light
-    - group
     - scene
+  entity_config:
+    light.custom_group_for_lights:
+      expose: false
+    light.custom_group_for_lights_2:
+      expose: false
+    light.dining_room:
+      expose: false
+    light.living_room:
+      expose: false
+    light.main_floor_accents:
+      expose: false
+    light.bedroom:
+      expose: false
 
-      
+
+#########################
 # Presence Detection
+#########################
+# Enables a map showing the location of tracked devices
+map:
+
 owntracks:
     waypoints: false # disable owntracks from reporting regions - prevents overlapping homes
 

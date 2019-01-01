@@ -1,4 +1,6 @@
-# Garage Door -----------------------------------
+#########################
+# Garage Door           #
+#########################
 - id: '1539744009480'
   alias: Indoor Light when Garage Door Opens
   trigger:
@@ -43,7 +45,10 @@
   - service: homeassistant.turn_off
     entity_id: switch.garage_light
 
-# Audio -----------------------------------
+
+#########################
+# Audio                 #
+#########################
 - id: 'radioampon'
   alias: Amp Auto-On - Radio
   trigger:
@@ -157,7 +162,9 @@
     entity_id: switch.garage_amp
 
 
-# Outdoor Lights -----------------------------------
+#########################
+# Outdoor Lights        #
+#########################
 - id: 'alloutdooron'
   alias: Porch Switch - Double Tap All On
   trigger:
@@ -198,8 +205,9 @@
       data:
         entity_id: switch.outdoor_driveway_light
 
-
-# Basement Stair Light -----------------------------------
+#########################
+# Basement Stair Light  #
+#########################
 - id: 'allbasementon'
   alias: Basement Switch - Triple Tap All Basement On
   trigger:
@@ -281,7 +289,10 @@
         entity_id: light.kitchen_side_level
 
 
-# Bedroom  -----------------------------------
+#########################
+# Bedroom               #
+#########################
+# Turn on bed heater if too cold
 - id: 'bedheatermarkon'
   alias: Bed Heater Auto On - Mark
   trigger:
@@ -294,7 +305,7 @@
       before: '02:00:00'
     - condition: numeric_state
       entity_id: sensor.bedroom_multi_temperature
-      below: 68
+      below: 69
     - condition: state
       entity_id: switch.bedroom_bedwarmer_mark
       state: 'off'
@@ -303,6 +314,7 @@
       data:
         entity_id: switch.bedroom_bedwarmer_mark
 
+# Turn off bed heater if too warm
 - id: 'bedheatermarkoff'
   alias: Bed Heater Auto Off - Mark
   trigger:
@@ -315,7 +327,7 @@
       before: '02:00:00'
     - condition: numeric_state
       entity_id: sensor.bedroom_multi_temperature
-      above: 68
+      above: 69
     - condition: state
       entity_id: switch.bedroom_bedwarmer_mark
       state: 'on'
@@ -324,6 +336,7 @@
       data:
         entity_id: switch.bedroom_bedwarmer_mark
 
+# Always turn off bed heater in the middle of the night
 - id: 'bedheatermarkofftime'
   alias: Bed Heater Auto Off - Mark
   trigger:
@@ -341,7 +354,9 @@
         entity_id: switch.bedroom_bedwarmer_mark
 
 
-# Presence  -----------------------------------
+#########################
+# Presence              #
+#########################
 - id: 'lightsoffondeparture'
   alias: Lights Off When Home Empty
   trigger:
@@ -359,8 +374,10 @@
       data:
         entity_id: group.all_switches
 
- 
-# Certificate
+
+#########################
+# Certificate           #
+#########################
 - id: letsencrypt-renewal
   alias: "Let's Encrypt Renewal"
   trigger:
