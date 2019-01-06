@@ -1,6 +1,8 @@
 #########################
 # Garage Door           #
 #########################
+# Only fires in the evening; not in the morning because we're probably leaving
+# the house. This could be improved with presence detection.
 - id: '1539744009480'
   alias: Indoor Light when Garage Door Opens
   trigger:
@@ -49,6 +51,11 @@
 #########################
 # Audio                 #
 #########################
+# Note: All of these have conditions attached to only turn off when already on, and
+# vice-versa. This is because the Chromecasts are super flaky and often flip to
+# "unavailable" randomly throughout the day, so this helps clean up the logs
+# a tiny bit.
+
 - id: 'radioampon'
   alias: Amp Auto-On - Radio
   trigger:
@@ -67,6 +74,10 @@
   - platform: state
     entity_id: media_player.main_and_basement
     to: 'playing'
+  condition:
+    - condition: state
+      entity_id: switch.radio_amp
+      state: 'off'
   action:
   - service: homeassistant.turn_on
     entity_id: switch.radio_amp
@@ -90,6 +101,10 @@
   - platform: state
     entity_id: media_player.main_and_basement
     to: 'off'
+  condition:
+    - condition: state
+      entity_id: switch.radio_amp
+      state: 'on'
   action:
   - service: homeassistant.turn_off
     entity_id: switch.radio_amp
@@ -107,6 +122,10 @@
   - platform: state
     entity_id: media_player.all_indoor_and_outdoor
     to: 'playing'
+  condition:
+    - condition: state
+      entity_id: switch.deck_amp
+      state: 'off'
   action:
   - service: homeassistant.turn_on
     entity_id: switch.deck_amp
@@ -124,6 +143,10 @@
   - platform: state
     entity_id: media_player.all_indoor_and_outdoor
     to: 'off'
+  condition:
+    - condition: state
+      entity_id: switch.deck_amp
+      state: 'on'
   action:
   - service: homeassistant.turn_off
     entity_id: switch.deck_amp
@@ -140,6 +163,10 @@
   - platform: state
     entity_id: media_player.all_indoor_and_outdoor
     to: 'playing'
+  condition:
+    - condition: state
+      entity_id: switch.garage_amp
+      state: 'off'
   action:
   - service: homeassistant.turn_on
     entity_id: switch.garage_amp
@@ -157,6 +184,10 @@
   - platform: state
     entity_id: media_player.all_indoor_and_outdoor
     to: 'off'
+  condition:
+    - condition: state
+      entity_id: switch.garage_amp
+      state: 'on'
   action:
   - service: homeassistant.turn_off
     entity_id: switch.garage_amp
@@ -342,7 +373,7 @@
   trigger:
     - platform: time
       hours: 2
-      minutes: 05
+      minutes: 35
       seconds: 00
   condition:
     - condition: state
