@@ -384,6 +384,78 @@
       data:
         entity_id: switch.bedroom_bedwarmer_mark
 
+# Turn on bedroom lamps with Hank controller
+- id: 'bedroomlampson'
+  alias: Bedroom Lamps - Turn On
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.button_bedroom_hank_four
+      scene_id: 3
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.marks_light
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.mollys_light
+
+# Turn off bedroom lamps with Hank controller
+- id: 'bedroomlampsoff'
+  alias: Bedroom Lamps - Turn Off
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.button_bedroom_hank_four
+      scene_id: 4
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: light.marks_light
+    - service: homeassistant.turn_off
+      data:
+        entity_id: light.mollys_light
+
+# Set lamp brightness to 75%
+- id: 'bedroomlampsbrightup'
+  alias: 'Make the lights go bright'
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        scene_id: 2
+        entity_id: zwave.button_bedroom_hank_four
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.marks_light
+        brightness_pct: 75
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.mollys_light
+        brightness_pct: 75
+
+# Set lamp brightness to 25%
+- id: 'bedroomlampsbrightdown'
+  alias: 'Make the lights go dim'
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        scene_id: 1
+        entity_id: zwave.button_bedroom_hank_four
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.marks_light
+        brightness_pct: 25
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.mollys_light
+        brightness_pct: 25
+
 
 #########################
 # Presence              #
@@ -404,6 +476,23 @@
     - service: homeassistant.turn_off
       data:
         entity_id: group.all_switches
+
+
+#########################
+# Button                #
+#########################
+- id: 'goodnightbutton'
+  alias: Goodnight House Button
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.button_hank_one_scene
+      scene_id: 1
+  action:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.goodnight
 
 
 #########################
