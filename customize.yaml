@@ -1,0 +1,5 @@
+sensor.bedroom_multi_relative_humidity:
+  icon: mdi:water-percent
+  
+sensor.bedroom_multi_luminance:
+  icon: mdi:theme-light-dark
