@@ -109,3 +109,5 @@ Batteries:
     - zwave.sensor_bedroom_multi
     - zwave.sensor_lr_door_slider
     - sensor.bedroom_multi_battery
+    - sensor.hank_four_button_battery
+    - sensor.hank_one_button_battery

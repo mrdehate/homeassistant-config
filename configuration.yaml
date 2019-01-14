@@ -71,6 +71,23 @@ sensor:
        - temperature
        - humidity
        - temperature_high
+   - platform: template
+     sensors:
+       bedroom_multi_battery:
+         value_template: "{{ states.sensor.bedroom_multi_alarm_level.attributes.battery_level }}"
+         friendly_name: "Bedroom Multi Sensor Battery"
+         entity_id: sensor.bedroom_multi_alarm_level
+         unit_of_measurement: '%'
+       hank_four_button_battery:
+         value_template: "{{ states.zwave.button_bedroom_hank_four.attributes.battery_level }}"
+         friendly_name: "Bedroom Four Button"
+         entity_id: zwave.button_bedroom_hank_four
+         unit_of_measurement: '%'
+       hank_one_button_battery:
+         value_template: "{{ states.zwave.button_hank_one_scene.attributes.battery_level }}"
+         friendly_name: "Hank One Button"
+         entity_id: zwave.button_hank_one_scene
+         unit_of_measurement: '%'
 
 binary_sensor:
   - platform: template
