@@ -142,6 +142,13 @@ tts:
 cloud:
 
 #########################
+# Arlo Cameras
+#########################
+arlo:
+  username: !secret arlo_username
+  password: !secret arlo_password
+
+#########################
 # Includes
 #########################
 group: !include groups.yaml
