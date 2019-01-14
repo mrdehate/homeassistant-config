@@ -93,6 +93,15 @@ binary_sensor:
           {%- else -%}
           false
           {%- endif -%}
+      bedroom_window_south_status:
+        friendly_name: 'Bedroom Window South'
+        device_class: opening
+        value_template: >-
+          {%- if is_state('sensor.bedroom_window_south_access_control', '22') -%}
+          true
+          {%- else -%}
+          false
+          {%- endif -%}
       bedroom_motion:
         friendly_name: 'Bedroom Motion'
         device_class: motion
