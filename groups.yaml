@@ -13,8 +13,6 @@ Audio:
     name: Audio
     entities:
     - media_player.spotify
-    - media_player.main_floor
-    - media_player.all_indoor
     - switch.radio_amp
     - switch.deck_amp
     - switch.garage_amp
@@ -33,6 +31,7 @@ Upstairs:
     - switch.wemo_large
     - switch.wemo_mini
     - group.Bedroom_Status
+    - switch.attic_house_fan
 
 Outdoor:
     name: Outdoor Lights
@@ -81,8 +80,10 @@ Bedroom_Status:
     entities:
     - sensor.bedroom_multi_relative_humidity
     - sensor.bedroom_multi_temperature
-    - binary_sensor.bedroom_window_north_sensor
+    - sensor.bedroom_multi_luminance
+    - binary_sensor.bedroom_motion
     - binary_sensor.bedroom_window_north_status
+    - binary_sensor.bedroom_window_south_status
 
 Molly_and_Mark:
     name: Molly and Mark
@@ -107,4 +108,4 @@ Batteries:
     entities:
     - zwave.sensor_bedroom_multi
     - zwave.sensor_lr_door_slider
-    
+    - sensor.bedroom_multi_battery
