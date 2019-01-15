@@ -74,21 +74,36 @@ sensor:
    - platform: template
      sensors:
        bedroom_multi_battery:
-         value_template: "{{ states.sensor.bedroom_multi_alarm_level.attributes.battery_level }}"
+         value_template: "{{ states.zwave.sensor_bedroom_multi.attributes.battery_level }}"
          friendly_name: "Bedroom Multi Sensor Battery"
-         entity_id: sensor.bedroom_multi_alarm_level
+         entity_id: zwave.sensor_bedroom_multi
          unit_of_measurement: '%'
        hank_four_button_battery:
          value_template: "{{ states.zwave.button_bedroom_hank_four.attributes.battery_level }}"
-         friendly_name: "Bedroom Four Button"
+         friendly_name: "Bedroom Four Button Battery"
          entity_id: zwave.button_bedroom_hank_four
          unit_of_measurement: '%'
        hank_one_button_battery:
          value_template: "{{ states.zwave.button_hank_one_scene.attributes.battery_level }}"
-         friendly_name: "Hank One Button"
+         friendly_name: "Hank One Button Battery"
          entity_id: zwave.button_hank_one_scene
          unit_of_measurement: '%'
-
+       bedroom_window_north_battery:
+         value_template: "{{ states.zwave.sensor_bedroom_window_north.attributes.battery_level }}"
+         friendly_name: "Bedroom Window North Battery"
+         entity_id: zwave.sensor_bedroom_window_north
+         unit_of_measurement: '%'
+       bedroom_window_south_battery:
+         value_template: "{{ states.zwave.sensor_bedroom_window_south.attributes.battery_level }}"
+         friendly_name: "Bedroom Window South Battery"
+         entity_id: zwave.sensor_bedroom_window_south
+         unit_of_measurement: '%'
+       livingroom_door_slider_battery:
+         value_template: "{{ states.zwave.livingroom_door_slider.attributes.battery_level }}"
+         friendly_name: "Living Room Slider Battery"
+         entity_id: zwave.livingroom_door_slider
+         unit_of_measurement: '%'
+         
 binary_sensor:
   - platform: template
     sensors:
