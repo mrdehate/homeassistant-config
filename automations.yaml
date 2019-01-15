@@ -1,8 +1,10 @@
 #########################
 # Garage Door           #
 #########################
-# Only fires in the evening; not in the morning because we're probably leaving
-# the house. This could be improved with presence detection.
+# When garage door opens, turn on light in kitchen...
+# IF after sunset, and no other kitchen lights are on
+# (Only fires in the evening - not in the morning because we're probably leaving
+# the house. This could be improved with presence detection?)
 - id: '1539744009480'
   alias: Indoor Light when Garage Door Opens
   trigger:
@@ -11,12 +13,23 @@
     from: 'closed'
     to: 'open'
   condition:
-  - condition: sun
-    after: sunset
+    - condition: sun
+      after: sunset
+    - condition: state
+      entity_id: light.kitchen_side_level
+      state: 'off'
+    - condition: state
+      entity_id: light.kitchen_center_level
+      state: 'off'
+    - condition: state
+      entity_id: light.kitchen_main_level
+      state: 'off'
   action:
   - service: homeassistant.turn_on
     entity_id: light.kitchen_entry_level
 
+# Turn on garage lights when door opens
+# IF sun is down
 - id: 'garagelightson'
   alias: Garage Door Lights On
   trigger:
@@ -32,6 +45,8 @@
   - service: homeassistant.turn_on
     entity_id: switch.garage_light
 
+# Turn off garage lights when door closes
+# IF sun is down
 - id: 'garagelightsoff'
   alias: Garage Door Lights Off
   trigger:
@@ -336,7 +351,7 @@
       before: '02:00:00'
     - condition: numeric_state
       entity_id: sensor.bedroom_multi_temperature
-      below: 69
+      below: 70
     - condition: state
       entity_id: switch.bedroom_bedwarmer_mark
       state: 'off'
@@ -358,7 +373,7 @@
       before: '02:00:00'
     - condition: numeric_state
       entity_id: sensor.bedroom_multi_temperature
-      above: 69
+      above: 70
     - condition: state
       entity_id: switch.bedroom_bedwarmer_mark
       state: 'on'
@@ -373,7 +388,7 @@
   trigger:
     - platform: time
       hours: 2
-      minutes: 35
+      minutes: 15
       seconds: 00
   condition:
     - condition: state
