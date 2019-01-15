@@ -99,9 +99,9 @@ sensor:
          entity_id: zwave.sensor_bedroom_window_south
          unit_of_measurement: '%'
        livingroom_door_slider_battery:
-         value_template: "{{ states.zwave.livingroom_door_slider.attributes.battery_level }}"
+         value_template: "{{ states.zwave.sensor_livingroom_door_slider.attributes.battery_level }}"
          friendly_name: "Living Room Slider Battery"
-         entity_id: zwave.livingroom_door_slider
+         entity_id: zwave.sensor_livingroom_door_slider
          unit_of_measurement: '%'
          
 binary_sensor:
