@@ -342,7 +342,7 @@
 - id: 'bedheatermarkon'
   alias: Bed Heater Auto On - Mark
   trigger:
-    - platform: time
+    - platform: time_pattern
       minutes: '/5'
       seconds: 00
   condition:
@@ -364,7 +364,7 @@
 - id: 'bedheatermarkoff'
   alias: Bed Heater Auto Off - Mark
   trigger:
-    - platform: time
+    - platform: time_pattern
       minutes: '/6'
       seconds: 00
   condition:
@@ -386,7 +386,7 @@
 - id: 'bedheatermarkofftime'
   alias: Bed Heater Auto Off - Mark
   trigger:
-    - platform: time
+    - platform: time_pattern
       hours: 2
       minutes: 15
       seconds: 00

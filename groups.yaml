@@ -16,12 +16,12 @@ Audio:
     - switch.radio_amp
     - switch.deck_amp
     - switch.garage_amp
-    - automation.amp_autoon__radio
-    - automation.amp_autooff__radio
-    - automation.amp_autoon__deck
-    - automation.amp_autooff__deck
-    - automation.amp_autoon__garage
-    - automation.amp_autooff__garage
+    - automation.amp_auto_on_radio
+    - automation.amp_auto_off_radio
+    - automation.amp_auto_on_deck
+    - automation.amp_auto_off_deck
+    - automation.amp_auto_on_garage
+    - automation.amp_auto_off_garage
     
 Upstairs:
     view: true
@@ -114,6 +114,7 @@ Batteries:
     - sensor.bedroom_window_north_battery
     - sensor.bedroom_window_south_battery
     - sensor.livingroom_door_slider_battery
+    - sensor.kitchen_multi_battery
 
 Sensors:
     view: true
@@ -122,7 +123,11 @@ Sensors:
     - sensor.bedroom_multi_relative_humidity
     - sensor.bedroom_multi_temperature
     - sensor.bedroom_multi_luminance
+    - sensor.kitchen_multi_relative_humidity
+    - sensor.kitchen_multi_temperature
+    - sensor.kitchen_multi_luminance
     - binary_sensor.bedroom_motion
+    - binary_sensor.kitchen_motion
     - binary_sensor.bedroom_window_north_status
     - binary_sensor.bedroom_window_south_status
     - binary_sensor.livingroom_door_status
