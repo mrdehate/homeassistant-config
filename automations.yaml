@@ -24,6 +24,9 @@
     - condition: state
       entity_id: light.kitchen_main_level
       state: 'off'
+    - condition: numeric_state
+      entity_id: sensor.kitchen_multi_luminance
+      below: 20
   action:
   - service: homeassistant.turn_on
     entity_id: light.kitchen_entry_level
