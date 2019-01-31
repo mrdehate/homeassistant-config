@@ -2,9 +2,10 @@
 # Garage Door           #
 #########################
 # When garage door opens, turn on light in kitchen...
-# IF after sunset, and no other kitchen lights are on
+# IF after sunset, and no other kitchen lights are on, and luminance is low
 # (Only fires in the evening - not in the morning because we're probably leaving
 # the house. This could be improved with presence detection?)
+# * Includes luminance sensor; probably overkill with switches, but meh
 - id: '1539744009480'
   alias: Indoor Light when Garage Door Opens
   trigger:
