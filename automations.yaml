@@ -355,7 +355,7 @@
       before: '02:00:00'
     - condition: numeric_state
       entity_id: sensor.bedroom_multi_temperature
-      below: 70
+      below: 71
     - condition: state
       entity_id: switch.bedroom_bedwarmer_mark
       state: 'off'
@@ -377,7 +377,7 @@
       before: '02:00:00'
     - condition: numeric_state
       entity_id: sensor.bedroom_multi_temperature
-      above: 70
+      above: 71
     - condition: state
       entity_id: switch.bedroom_bedwarmer_mark
       state: 'on'
