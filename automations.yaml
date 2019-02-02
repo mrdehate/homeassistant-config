@@ -498,6 +498,39 @@
 
 
 #########################
+# Whole House Fan       #
+#########################
+# Turn off whole house fan if insufficient ventilation, preventing death
+- id: 'wholehousefansafetycheck'
+  alias: Whole House Fan Safety Check
+  trigger:
+    - platform: time_pattern
+      minutes: '/10'
+      seconds: 00
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: switch.attic_house_fan
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.livingroom_door_status
+        state: 'closed'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: binary_sensor.bedroom_window_north_status
+            state: 'closed'
+          - condition: state
+            entity_id: binary_sensor.bedroom_window_south_status
+            state: 'closed'
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.attic_house_fan
+        
+
+#########################
 # Button                #
 #########################
 - id: 'goodnightbutton'
