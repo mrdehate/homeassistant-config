@@ -66,6 +66,21 @@
   - service: homeassistant.turn_off
     entity_id: switch.garage_light
 
+# Make sure garage door is closed at night
+- id: 'garagedoorautoclose'
+  alias: Garage Door Auto Close
+  trigger:
+    - platform: time_pattern
+      hours: 22
+      minutes: 20
+      seconds: 00
+  condition:
+    condition: state
+    entity_id: cover.garage_door
+    state: 'open'
+  action:
+  - service: cover.close_cover
+    entity_id: cover.garage_door
 
 #########################
 # Audio                 #

@@ -88,3 +88,4 @@ I have a Tuft and Needle king-size memory foam mattress, with a wood slat base. 
   * Unfortunately Google Cast groups are super flaky in my experience, so this doesn't work 100% of the time - some groups are better than others.
 * Turn on heated mattress pad before bed, based on the room temperature.
 * Safety switch to turn off whole house fan if insufficient ventilation.
+* Automatically close garage door every night in case it's left open.
