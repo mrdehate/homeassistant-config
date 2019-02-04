@@ -4,6 +4,11 @@
 zwave:
   usb_path: /dev/ttyACM0
 
+# Zigbee
+#zha:
+#  usb_path: /dev/ttyUSB0
+#  database_path: /config/zigbee.db
+  
 homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
@@ -54,15 +59,19 @@ history:
 logbook:
 
 #########################
-# Track the sun
+# Weather
 #########################
 sun:
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api
+    mode: daily
 
 #########################
 # Sensors
 #########################
 sensor:
-#   - platform: yr
    - platform: darksky
      api_key: !secret darksky_api
      monitored_conditions:
@@ -71,6 +80,9 @@ sensor:
        - temperature
        - humidity
        - temperature_high
+     update_interval:
+       minutes: 5
+
    - platform: template
      sensors:
        kitchen_multi_battery:
@@ -108,7 +120,32 @@ sensor:
          friendly_name: "Living Room Slider Battery"
          entity_id: zwave.sensor_livingroom_door_slider
          unit_of_measurement: '%'
-         
+### Xiaomi Temperature Sensors -----------------------------------------------
+       office_temp_battery:
+         value_template: "{{ states.sensor.office_temp.attributes.battery_level }}"
+         friendly_name: "Office Temp Battery"
+         entity_id: sensor.office_temp
+         unit_of_measurement: '%'
+       living_room_temp_battery:
+         value_template: "{{ states.sensor.living_room_temp.attributes.battery_level }}"
+         friendly_name: "Living Room Temp Battery"
+         entity_id: sensor.living_room_temp
+         unit_of_measurement: '%'
+       basement_temp_battery:
+         value_template: "{{ states.sensor.basement_temp.attributes.battery_level }}"
+         friendly_name: "Basement Temp Battery"
+         entity_id: sensor.basement_temp
+         unit_of_measurement: '%'
+### --------------------------------------------------------------------------
+   - platform: systemmonitor
+     resources:
+       - type: disk_use_percent
+         arg: /
+       - type: memory_free
+       - type: memory_use_percent
+       - type: processor_use
+
+
 binary_sensor:
   - platform: template
     sensors:
@@ -157,6 +194,26 @@ binary_sensor:
           {%- else -%}
           true
           {%- endif -%}
+      bed_mark:
+        friendly_name: 'In Bed - Mark'
+        device_class: presence
+        value_template: >-
+          {%- if is_state('binary_sensor.bedroom_bed_mark', 'on') -%}
+          false
+          {%- else -%}
+          true
+          {%- endif -%}
+      bed_molly:
+        friendly_name: 'In Bed - Molly'
+        device_class: presence
+        value_template: >-
+          {%- if is_state('binary_sensor.bedroom_bed_molly', 'on') -%}
+          false
+          {%- else -%}
+          true
+          {%- endif -%}
+
+          
 
 #########################
 # Text to speech
@@ -274,3 +331,32 @@ zone:
     longitude: !secret ao_longitude
     radius: 540
     icon: mdi:worker
+
+#########################
+# Inputs 
+#########################
+input_select:
+  radio_station:
+    name: 'Select Radio Station:'
+    options:
+      - BBC Radio 1
+      - BBC Radio 1 Xtra
+      - WIOG 102.5
+      - RTE 2FM
+      - Hotmix Japan
+      - The Bounce 105.1
+      - NRJ Sweden
+      - Amp Radio Calgary
+
+  chromecast_radio:
+    name: 'Select Speakers:'
+    options:
+      - Kitchen
+      - Living Room
+      - Main Floor
+      - Main and Basement
+      - Bedroom
+      - All Indoor
+      - Everywhere
+    initial: Kitchen
+    icon: mdi:speaker-wireless

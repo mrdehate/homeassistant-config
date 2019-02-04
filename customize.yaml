@@ -3,3 +3,7 @@ sensor.bedroom_multi_relative_humidity:
   
 sensor.bedroom_multi_luminance:
   icon: mdi:theme-light-dark
+  
+script.radio:
+  friendly_name: Start Playing
+  icon: mdi:play

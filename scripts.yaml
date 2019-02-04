@@ -1,0 +1,41 @@
+radio:
+# h/t this thread: https://community.home-assistant.io/t/chromecast-radio-with-station-and-player-selection/12732
+    alias: Play Radio
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: >
+            {% if is_state("input_select.radio_station", "BBC Radio 1") %} http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p
+            {% elif is_state("input_select.radio_station", "BBC Radio 1 Xtra") %} http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_high/ak/bbc_radio_one.m3u8
+            {% elif is_state("input_select.radio_station", "WIOG 102.5") %} https://15723.live.streamtheworld.com/WIOGFMAAC_SC
+            {% elif is_state("input_select.radio_station", "RTE 2FM") %} http://icecast2.rte.ie/ie2fm
+            {% elif is_state("input_select.radio_station", "Hotmix Japan") %} http://streaming.hotmixradio.fm/hotmixradio-japan-128.mp3
+            {% elif is_state("input_select.radio_station", "The Bounce 105.1") %} http://17633.live.streamtheworld.com:3690/WMGCFMAAC_SC
+            {% elif is_state("input_select.radio_station", "NRJ Sweden") %} http://edge-bauersefm-01-cr.sharp-stream.com/nrj_instreamtest_se_mp3
+            {% elif is_state("input_select.radio_station", "Amp Radio Calgary") %} http://newcap.leanstream.co/CKMPFM-MP3
+            {% endif %}
+           media_content_type: 'audio/mpeg'
+
+stop_playback:
+  alias: Stop stream
+  sequence:
+    - service: media_player.media_stop
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+          {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+          {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+          {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+          {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+          {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+          {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+          {% endif %}

@@ -103,7 +103,6 @@ Scenes:
     - automation.garage_door_lights_off
     
 Batteries:
-    view: true
     name: Batteries
     entities:
     - zwave.sensor_bedroom_multi
