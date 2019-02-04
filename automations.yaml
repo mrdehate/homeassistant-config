@@ -388,7 +388,7 @@
 
 # Always turn off bed heater in the middle of the night
 - id: 'bedheatermarkofftime'
-  alias: Bed Heater Auto Off - Mark
+  alias: Bed Heater Daily Off - Mark
   trigger:
     - platform: time_pattern
       hours: 2
