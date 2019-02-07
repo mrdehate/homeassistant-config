@@ -347,6 +347,8 @@ input_select:
       - The Bounce 105.1
       - NRJ Sweden
       - Amp Radio Calgary
+      - Groove Salad
+      - Deep House Lounge
 
   chromecast_radio:
     name: 'Select Speakers:'
