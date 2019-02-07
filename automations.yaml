@@ -494,6 +494,7 @@
 #########################
 # Presence              #
 #########################
+# Turn off everything when we leave
 - id: 'lightsoffondeparture'
   alias: Lights Off When Home Empty
   trigger:
@@ -511,7 +512,34 @@
       data:
         entity_id: group.all_switches
 
-
+# Turn on main floor lights when someone arrives home and it's dark
+- id: 'lightsononarrival'
+  alias: Lights On When Arrival
+  trigger:
+    - platform: state
+      entity_id: group.molly_and_mark
+      from: 'not_home'
+      to: 'home'
+      for:
+        seconds: 30
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.kitchen_multi_luminance
+      below: 20
+    - condition: sun
+      after: sunset
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id:
+          - light.kitchen_side_level
+          - light.kitchen_entry_level
+          - light.kitchen_main_level
+          - light.kitchen_center_level
+          - light.dining_room
+          - light.living_room
+    
+    
 #########################
 # Whole House Fan       #
 #########################
