@@ -1,3 +1,14 @@
+- name: Home
+  entities:
+    light.kitchen_entry_level: off
+    light.kitchen_side_level: on
+    light.kitchen_main_level: on
+    light.kitchen_center_level: on
+    light.dining_room_accent: on
+    light.dining_room: on
+    light.living_room_accent: on
+    light.living_room: on
+    light.main_floor_accents: off
 - name: Away
   entities:
     switch.deck_lights: off
