@@ -41,3 +41,36 @@ stop_playback:
           {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
           {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
           {% endif %}
+
+#########################
+# Entrance Music        #
+#########################
+# Play music for 60 seconds in the garage, then stop playback
+# KEY
+# https://www.youtube.com/watch?v=-cZ7ndjhhps <-- John Cena
+# https://www.youtube.com/watch?v=MrJLsNo9sCU <-- Stone Cold
+welcome_home_music_mark:
+  alias: Welcome Home Music - Mark
+  sequence:
+    - service: media_extractor.play_media
+      entity_id: media_player.garage
+      data_template:
+        media_content_id: "{{ ['https://www.youtube.com/watch?v=-cZ7ndjhhps', 'https://www.youtube.com/watch?v=MrJLsNo9sCU'] | random }}"
+        media_content_type: video/youtube
+    - delay:
+        seconds: 60
+    - service: media_player.media_stop
+      entity_id: media_player.garage
+
+welcome_home_music_molly:
+  alias: Welcome Home Music - Molly
+  sequence:
+    - service: media_extractor.play_media
+      entity_id: media_player.garage
+      data_template:
+        media_content_id: '{{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=MrJLsNo9sCU"] | random }}'
+        media_content_type: video/youtube
+    - delay:
+        seconds: 60
+    - service: media_player.media_stop
+      entity_id: media_player.garage

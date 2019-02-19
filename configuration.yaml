@@ -33,6 +33,9 @@ frontend:
 # Enables configuration UI
 config:
 
+# System health I guess?
+system_health:
+
 http:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: !secret base_url
@@ -271,6 +274,8 @@ media_player:
   - platform: spotify
     client_id: !secret spotify_id
     client_secret: !secret spotify_secret
+
+media_extractor:
 
 #########################
 # Google Assistant

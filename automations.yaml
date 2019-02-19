@@ -539,7 +539,47 @@
           - light.dining_room
           - light.living_room
     
-    
+# Turn on music for 30 seconds in the garage on arrival home
+- id: 'welcomehomemark'
+  alias: Welcome Home Mark
+  trigger:
+    - platform: state
+      entity_id: device_tracker.mark_md
+      from: 'not_home'
+      to: 'home'
+      for:
+        seconds: 30
+  condition:
+    - condition: template  # Don't interrupt if already playing
+      value_template: "{{ not is_state('media_player.garage', 'playing') }}"
+    - condition: time      # Only at reasonable times
+      after: '09:00:00'
+      before: '23:00:00'
+  action:
+    - service: script.turn_on
+      entity_id: script.welcome_home_music_mark
+
+# Turn on music for 30 seconds in the garage on arrival home
+- id: 'welcomehomemolly'
+  alias: Welcome Home Molly
+  trigger:
+    - platform: state
+      entity_id: device_tracker.molly_243f96aa_487a_47fe_a4a4_9c7729a4fea8
+      from: 'not_home'
+      to: 'home'
+      for:
+        seconds: 30
+  condition:
+    - condition: template  # Don't interrupt if already playing
+      value_template: "{{ not is_state('media_player.garage', 'playing') }}"
+    - condition: time      # Only at reasonable times
+      after: '09:00:00'
+      before: '23:00:00'
+  action:
+    - service: script.turn_on
+      entity_id: script.welcome_home_music_molly
+
+
 #########################
 # Whole House Fan       #
 #########################
