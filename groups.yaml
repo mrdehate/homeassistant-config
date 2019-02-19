@@ -89,7 +89,7 @@ Molly_and_Mark:
     name: Molly and Mark
     entities:
     - device_tracker.mark_md
-    - device_tracker.molly_243f96aa487a47fea4a49c7729a4fea8
+    - device_tracker.molly_243f96aa_487a_47fe_a4a4_9c7729a4fea8
 
 Scenes:
     view: true
