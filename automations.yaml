@@ -274,14 +274,14 @@
 # Basement Stair Light  #
 #########################
 - id: 'allbasementon'
-  alias: Basement Switch - Triple Tap All Basement On
+  alias: Basement Switch - Double Tap All Basement On
   trigger:
     platform: event
     event_type: zwave.scene_activated
     event_data:
       entity_id: zwave.switch_basement_stair
       scene_id: 1
-      scene_data: 7920
+      scene_data: 7860
   action:
     - service: homeassistant.turn_on
       data:
@@ -294,14 +294,14 @@
         entity_id: switch.basement_lights_north
         
 - id: 'allbasementoff'
-  alias: Basement Switch - Triple Tap All Basement Off
+  alias: Basement Switch - Double Tap All Basement Off
   trigger:
     platform: event
     event_type: zwave.scene_activated
     event_data:
       entity_id: zwave.switch_basement_stair
       scene_id: 2
-      scene_data: 7920
+      scene_data: 7860
   action:
     - service: homeassistant.turn_off
       data:
@@ -314,14 +314,14 @@
         entity_id: switch.basement_lights_north
 
 - id: 'allkitchenon'
-  alias: Basement Switch - Double Tap All Kitchen On
+  alias: Basement Switch - Triple Tap All Kitchen On
   trigger:
     platform: event
     event_type: zwave.scene_activated
     event_data:
       entity_id: zwave.switch_basement_stair
       scene_id: 1
-      scene_data: 7860
+      scene_data: 7920
   action:
     - service: homeassistant.turn_on
       data:
@@ -334,14 +334,14 @@
         entity_id: light.kitchen_side_level
         
 - id: 'allkitchenoff'
-  alias: Basement Switch - Double Tap All Kitchen Off
+  alias: Basement Switch - Triple Tap All Kitchen Off
   trigger:
     platform: event
     event_type: zwave.scene_activated
     event_data:
       entity_id: zwave.switch_basement_stair
       scene_id: 2
-      scene_data: 7860
+      scene_data: 7920
   action:
     - service: homeassistant.turn_off
       data:
