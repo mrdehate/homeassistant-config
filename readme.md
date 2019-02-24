@@ -2,7 +2,8 @@
 This is my Home Assistant (hassio) configuration!
 
 ## Hardware
-* Raspberry Pi 3
+* ~Raspberry Pi 3~
+* Intel NUC - [NUC8I3BEH](https://amzn.to/2Nrekjj)
 * Aeotec [Z-Stick Gen5 (ZW090)](https://amzn.to/2GjobGA)
 * Dresden Elektronik [Conbee Zigbee Gateway](https://amzn.to/2TuA9Rw)
 
@@ -90,3 +91,11 @@ I have a Tuft and Needle king-size memory foam mattress, with a wood slat base. 
 * Safety switch to turn off whole house fan if insufficient ventilation.
 * Automatically close garage door every night in case it's left open.
 * When arriving home, play inspirational entrance music in the garage
+
+## Upgrading from a Raspberry Pi 3 to an Intel NUC
+
+I recently went through this migration (version 0.88). It was a pain, but completely worth it in the end as the NUC is _so_ much faster. Some random notes on the pain points I had:
+* HomeSeer switches weren't reliably communicating with the server; had to remove and re-add them to get them functional
+* Turns out the 'snapshot' feature in HomeAssistant doesn't capture any of config, so it wasn't super useful for me
+* Door and window sensors didn't survive the migration for some reason; they needed to be re-added before they worked again
+* The Conbee Phoscon app has its own backup function (i.e. the snapshot doesn't help here), which I didn't realize until it was too late.
