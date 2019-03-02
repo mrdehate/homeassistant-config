@@ -99,3 +99,4 @@ I recently went through this migration (version 0.88). It was a pain, but comple
 * Turns out the 'snapshot' feature in HomeAssistant doesn't capture any of config, so it wasn't super useful for me
 * Door and window sensors didn't survive the migration for some reason; they needed to be re-added before they worked again
 * The Conbee Phoscon app has its own backup function (i.e. the snapshot doesn't help here), which I didn't realize until it was too late.
+* I started making changes to my config before remembering to setup git; note to self, pull from the repo first!
