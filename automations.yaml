@@ -490,6 +490,24 @@
         entity_id: light.mollys_light
         brightness_pct: 25
 
+# Auto-dim overhead lights in bedroom when bed is occupied
+- id: 'bedroomautodim-sideroom'
+  alias: 'Auto-Dim Bedroom Lights - Side Room'
+  trigger:
+#    - platform: state
+#      entity_id: light.bedroom_side_level
+#      to: 'on'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.bedroom_side_level
+        brightness_pct: 25
+    - service: homeassistant.turn_off
+      data:
+        entity_id: light.bedroom_side_level
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.bedroom_side_level
 
 #########################
 # Presence              #
@@ -544,7 +562,7 @@
   alias: Welcome Home Mark
   trigger:
     - platform: state
-      entity_id: device_tracker.mark_md
+      entity_id: person.mark_d
       from: 'not_home'
       to: 'home'
       for:
@@ -564,7 +582,7 @@
   alias: Welcome Home Molly
   trigger:
     - platform: state
-      entity_id: device_tracker.molly_243f96aa_487a_47fe_a4a4_9c7729a4fea8
+      entity_id: person.molly
       from: 'not_home'
       to: 'home'
       for:
@@ -614,7 +632,7 @@
         
 
 #########################
-# Button                #
+# Buttons               #
 #########################
 - id: 'goodnightbutton'
   alias: Goodnight House Button
@@ -629,6 +647,45 @@
       data:
         entity_id: scene.goodnight
 
+# --------- Kitchen IKEA Tradfri Multi button ----------
+- id: 'kitchenbutton_garageopen'
+  alias: 'Kitchen Button - Open Garage'
+  initial_state: 'on'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: kitchen_multi_button
+      event: 2002
+  action:
+    service: cover.open_cover
+    entity_id: cover.garage_door
+
+- id: 'kitchenbutton_garageclose'
+  alias: 'Kitchen Button - Close Garage'
+  initial_state: 'on'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: kitchen_multi_button
+      event: 3002
+  action:
+    service: cover.close_cover
+    entity_id: cover.garage_door
+
+- id: 'kitchenbutton_lightsout'
+  alias: 'Kitchen Button - Lights Out'
+  initial_state: 'on'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: kitchen_multi_button
+      event: 1002
+  action:
+    service: scene.turn_on
+    entity_id: scene.away
 
 #########################
 # Certificate           #
