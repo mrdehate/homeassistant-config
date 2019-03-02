@@ -39,6 +39,9 @@ system_health:
 # Fast.com speed test
 fastdotcom:
 
+# Persons
+person:
+
 http:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: !secret base_url
@@ -350,7 +353,7 @@ zone:
     icon: mdi:worker
 
 #########################
-# Inputs 
+# Radio Player Config
 #########################
 input_select:
   radio_station:
