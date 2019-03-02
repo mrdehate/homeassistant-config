@@ -31,10 +31,17 @@ I've really tried to stick with Z-Wave products for simplicity, though there are
 * [Zooz 4-in-1 Sensor (luminance, motion, humidity, temperature) (ZSE40, version 2)](https://amzn.to/2Glossr)
 * [Ecolink Door and Window Sensor (DWZWAVE2.5-ECO)](https://amzn.to/2TppjMh) (see Bed Presence Detection section below for why I'm using this one)
 
+#### Buttons
+* [Hank Four Button Scene Controller (HKZW-SCN04)](https://amzn.to/2EpT5uh)
+* [Hank One Button Scene Controller (HKZW-SCN01)](https://amzn.to/2XvNqvj)
+  * There aren't a lot of good Z-Wave options for simple buttons. These are a bit of a hassle, and not super reliable. They do look nice though.
+
 ### Zigbee
 I tried really hard to avoid having any Zigbee devices (well, non-Hue anyway), but the price of these Xiaomi sensors suckered me in.
 
 * Xiaomi Aqara Temperature Sensor (WSDCGQ11LM)
+* IKEA Tradfri Wireless Remote
+* IKEA Tradfri Wireless Dimmer
 
 ### Connected Bulbs
 All my connected bulbs go through the Philips Hue hub
@@ -87,16 +94,16 @@ I have a Tuft and Needle king-size memory foam mattress, with a wood slat base. 
 * Turn on amplifiers when sound is playing to the connected Chromecast Audio
   * I have a few sets of powered speakers throughout the house hooked to Chromecast Audios, and this ensures the amps aren't sucking power all day for no reason.
   * Unfortunately Google Cast groups are super flaky in my experience, so this doesn't work 100% of the time - some groups are better than others.
-* Turn on heated mattress pad before bed, based on the room temperature.
+* Turn on heated mattress pad before bed, based on the room temperature - turn it off in the middle of the night so I don't bake.
 * Safety switch to turn off whole house fan if insufficient ventilation.
 * Automatically close garage door every night in case it's left open.
 * When arriving home, play inspirational entrance music in the garage
 
 ## Upgrading from a Raspberry Pi 3 to an Intel NUC
 
-I recently went through this migration (version 0.88). It was a pain, but completely worth it in the end as the NUC is _so_ much faster. Some random notes on the pain points I had:
+I recently went through this migration (Home Assistant version 0.88). It was a pain, but completely worth it in the end as the NUC is _so_ much faster. Some random notes on the pain points I had:
 * HomeSeer switches weren't reliably communicating with the server; had to remove and re-add them to get them functional
 * Turns out the 'snapshot' feature in HomeAssistant doesn't capture any of config, so it wasn't super useful for me
-* Door and window sensors didn't survive the migration for some reason; they needed to be re-added before they worked again
+* Battery powered devices (Door and window sensors, and wireless buttons) didn't survive the migration for some reason; they needed to be re-added before they worked again
 * The Conbee Phoscon app has its own backup function (i.e. the snapshot doesn't help here), which I didn't realize until it was too late.
 * I started making changes to my config before remembering to setup git; note to self, pull from the repo first!
