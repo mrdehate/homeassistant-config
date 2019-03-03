@@ -30,7 +30,6 @@ config:             # Enables configuration UI
 fastdotcom:         # Fast.com speed test
 frontend:           # Enables the frontend
 history:            # Enables support for tracking state changes over time
-homekit:
 logbook:            # View all events in a logbook
 map:                # Enables a map showing the location of tracked devices
 person:             # Persons
@@ -257,8 +256,24 @@ media_player:
 # TV
   - platform: webostv
     name: Living Room TV
+    host: !secret ip_tv
 
 media_extractor:
+
+#########################
+# Notifications
+#########################
+notify:
+  - platform: webostv
+    host: !secret ip_tv
+    name: livingroom_tv
+
+  - platform: html5
+    name: notify
+    vapid_pub_key: !secret vapid_pub_key
+    vapid_prv_key: !secret vapid_prv_key
+    vapid_email: !secret vapid_email
+    
 
 #########################
 # Google Assistant
