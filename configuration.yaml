@@ -24,23 +24,26 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
-# Show links to resources in log and frontend
-# introduction:
+# introduction:     # Show links to resources in log and frontend
+cloud:
+config:             # Enables configuration UI
+fastdotcom:         # Fast.com speed test
+frontend:           # Enables the frontend
+history:            # Enables support for tracking state changes over time
+homekit:
+logbook:            # View all events in a logbook
+map:                # Enables a map showing the location of tracked devices
+person:             # Persons
+system_health:      # System health stuff
+updater:            # Checks for available updates
+wake_on_lan:        # enables `wake_on_lan` domain
 
-# Enables the frontend
-frontend:
+# Includes
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
 
-# Enables configuration UI
-config:
-
-# System health stuff
-system_health:
-
-# Fast.com speed test
-fastdotcom:
-
-# Persons
-person:
 
 http:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
@@ -48,24 +51,12 @@ http:
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
   
-# Checks for available updates
-updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
 
 # Discover some devices automatically
 discovery:
   enable:
     - homekit
 
-# Allows you to issue voice commands from the frontend in enabled browsers
-#conversation:
-
-# Enables support for tracking state changes over time
-history:
-
-# View all events in a logbook
-logbook:
 
 #########################
 # Weather
@@ -231,24 +222,11 @@ tts:
   - platform: google
 
 #########################
-# Cloud
-#########################
-cloud:
-
-#########################
 # Arlo Cameras
 #########################
 arlo:
   username: !secret arlo_username
   password: !secret arlo_password
-
-#########################
-# Includes
-#########################
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
-scene: !include scenes.yaml
 
 #########################
 # Configurator
@@ -258,11 +236,6 @@ panel_iframe:
     title: Configurator
     icon: mdi:wrench
     url: !secret configurator_url
-
-#########################
-# Homekit
-#########################
-homekit:
 
 #########################
 # Garage Door
@@ -280,6 +253,10 @@ media_player:
   - platform: spotify
     client_id: !secret spotify_id
     client_secret: !secret spotify_secret
+
+# TV
+  - platform: webostv
+    name: Living Room TV
 
 media_extractor:
 
@@ -311,20 +288,19 @@ google_assistant:
       expose: false
 
 # Google Home integration
-googlehome:
-  devices:
-    - host: !secret ip-googlehomehub
-    - host: !secret ip-googlehome
-    - host: !secret ip-googlehomemini-bedroom
-    - host: !secret ip-googlehomemini-basement
-    - host: !secret ip-googlehomemini-garage
+#googlehome:
+#  devices:
+#    - host: !secret ip-googlehomehub
+#    - host: !secret ip-googlehome
+#    - host: !secret ip-googlehomemini-bedroom
+#    - host: !secret ip-googlehomemini-basement
+#    - host: !secret ip-googlehomemini-garage
+#      track_devices: false
 
 
 #########################
 # Presence Detection
 #########################
-# Enables a map showing the location of tracked devices
-map:
 
 owntracks:
     waypoints: false # disable owntracks from reporting regions - prevents overlapping homes
@@ -334,6 +310,8 @@ device_tracker:
     client_id: !secret automatic_id
     secret: !secret automatic_secret
     current_location: true
+  - platform: netgear
+    password: !secret router_password
 
 zone:
   - name: Home
