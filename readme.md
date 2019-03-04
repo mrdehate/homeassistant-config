@@ -90,14 +90,18 @@ I have a Tuft and Needle king-size memory foam mattress, with a wood slat base. 
 * Turn on entry lights when garage door opens
   * Someday would like to make this presence-based, but I'm still not real confident in my presence solution.
 
-### Other Stuff
+## Fun with Presence Detection
+* Turn on heated mattress pad before bed, based on the room temperature - turn it off in the middle of the night so I don't bake.
+* Automatically close garage door every night in case it's left open.
+* Send a push notification if everybody leaves the house and the garage door is left open
+* When arriving home, play inspirational entrance music in the garage
+
+### Other Automations
 * Turn on amplifiers when sound is playing to the connected Chromecast Audio
   * I have a few sets of powered speakers throughout the house hooked to Chromecast Audios, and this ensures the amps aren't sucking power all day for no reason.
   * Unfortunately Google Cast groups are super flaky in my experience, so this doesn't work 100% of the time - some groups are better than others.
-* Turn on heated mattress pad before bed, based on the room temperature - turn it off in the middle of the night so I don't bake.
+* Using an IKEA Tradfri dimmer as a universal volume knob, changing volume of whatever Chromecast Audio group is playing
 * Safety switch to turn off whole house fan if insufficient ventilation.
-* Automatically close garage door every night in case it's left open.
-* When arriving home, play inspirational entrance music in the garage
 
 ## Upgrading from a Raspberry Pi 3 to an Intel NUC
 
