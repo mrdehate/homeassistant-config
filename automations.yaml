@@ -79,8 +79,11 @@
     entity_id: cover.garage_door
     state: 'open'
   action:
-  - service: cover.close_cover
-    entity_id: cover.garage_door
+    - service: cover.close_cover
+      entity_id: cover.garage_door
+    - service: notify.notify_pixel_3
+      data:
+        message: 'Hey I closed the garage door for you!'
 
 #########################
 # Audio                 #
@@ -658,7 +661,8 @@
       state: 'open'
   action:
     - service: notify.notify_pixel_3
-      message: 'The garage door is open!'
+      data:
+        message: 'The garage door is open!'
 
 
 #########################
