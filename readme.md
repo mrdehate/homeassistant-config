@@ -90,7 +90,7 @@ I have a Tuft and Needle king-size memory foam mattress, with a wood slat base. 
 * Turn on entry lights when garage door opens
   * Someday would like to make this presence-based, but I'm still not real confident in my presence solution.
 
-## Fun with Presence Detection
+### Fun with Presence Detection
 * Turn on heated mattress pad before bed, based on the room temperature - turn it off in the middle of the night so I don't bake.
 * Automatically close garage door every night in case it's left open.
 * Send a push notification if everybody leaves the house and the garage door is left open
