@@ -62,19 +62,25 @@ welcome_home_music_mark:
         media_content_id: '{{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=MrJLsNo9sCU"] | random }}'
         media_content_type: video/youtube
     - delay:
-        seconds: 60
+        seconds: 65
     - service: media_player.media_stop
       entity_id: media_player.garage
 
+# Gotta get down on Friday
 welcome_home_music_molly:
   alias: Welcome Home Music - Molly
   sequence:
     - service: media_extractor.play_media
       entity_id: media_player.garage
       data_template:
-        media_content_id: '{{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=WDZJPJV__bQ&t=16", "https://www.youtube.com/watch?v=CSav51fVlKU", "https://www.youtube.com/watch?v=tgIqecROs5M&t=15"] | random }}'
+        media_content_id: >
+          {% if(now().isoweekday() == 5) %}
+          '{{ ["https://www.youtube.com/watch?v=kfVsfOSbJY0", "https://youtu.be/uSD4vsh1zDA?t=25"] | random }}'
+          {% else %}
+          '{{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=WDZJPJV__bQ&t=16", "https://www.youtube.com/watch?v=CSav51fVlKU", "https://www.youtube.com/watch?v=tgIqecROs5M&t=15"] | random }}'
+          {% endif %}
         media_content_type: video/youtube
     - delay:
-        seconds: 60
+        seconds: 65
     - service: media_player.media_stop
       entity_id: media_player.garage

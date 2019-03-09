@@ -615,7 +615,7 @@
       from: 'not_home'
       to: 'home'
       for:
-        seconds: 30
+        seconds: 20
   condition:
     - condition: template  # Don't interrupt if already playing
       value_template: "{{ not is_state('media_player.garage', 'playing') }}"
@@ -635,7 +635,7 @@
       from: 'not_home'
       to: 'home'
       for:
-        seconds: 30
+        seconds: 20
   condition:
     - condition: template  # Don't interrupt if already playing
       value_template: "{{ not is_state('media_player.garage', 'playing') }}"
