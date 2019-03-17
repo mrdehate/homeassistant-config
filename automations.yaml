@@ -739,15 +739,15 @@
         state: 'on'
       - condition: state
         entity_id: binary_sensor.livingroom_door_status
-        state: 'closed'
+        state: 'off'
       - condition: or
         conditions:
           - condition: state
             entity_id: binary_sensor.bedroom_window_north_status
-            state: 'closed'
+            state: 'off'
           - condition: state
             entity_id: binary_sensor.bedroom_window_south_status
-            state: 'closed'
+            state: 'off'
   action:
     - service: homeassistant.turn_off
       data:
