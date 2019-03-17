@@ -1,0 +1,177 @@
+- platform: darksky
+  api_key: !secret darksky_api
+  monitored_conditions:
+    - summary
+    - icon
+    - temperature
+    - humidity
+    - temperature_high
+  scan_interval:
+    minutes: 5
+
+- platform: template
+  sensors:
+    kitchen_multi_battery:
+      value_template: "{{ states.zwave.sensor_kitchen_multi.attributes.battery_level }}"
+      friendly_name: "Kitchen Multi Sensor Battery"
+      entity_id: zwave.sensor_kitchen_multi
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.zwave.sensor_kitchen_multi.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('zwave.sensor_kitchen_multi', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
+    bedroom_multi_battery:
+      value_template: "{{ states.zwave.sensor_bedroom_multi.attributes.battery_level }}"
+      friendly_name: "Bedroom Multi Sensor Battery"
+      entity_id: zwave.sensor_bedroom_multi
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.zwave.sensor_bedroom_multi.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('zwave.sensor_bedroom_multi', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
+    hank_four_button_battery:
+      value_template: "{{ states.zwave.button_bedroom_hank_four.attributes.battery_level }}"
+      friendly_name: "Bedroom Four Button Battery"
+      entity_id: zwave.button_bedroom_hank_four
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.zwave.button_bedroom_hank_four.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('zwave.button_bedroom_hank_four', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
+    hank_one_button_battery:
+      value_template: "{{ states.zwave.button_hank_one_scene.attributes.battery_level }}"
+      friendly_name: "Hank One Button Battery"
+      entity_id: zwave.button_hank_one_scene
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.zwave.button_hank_one_scene.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('zwave.button_hank_one_scene', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
+        
+### Xiaomi Temperature Sensors ###################################################
+    office_temp_battery:
+      value_template: "{{ states.sensor.office_temp.attributes.battery_level }}"
+      friendly_name: "Office Temp Battery"
+      entity_id: sensor.office_temp
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.sensor.office_temp.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('sensor.office_temp', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
+    living_room_temp_battery:
+      value_template: "{{ states.sensor.living_room_temp.attributes.battery_level }}"
+      friendly_name: "Living Room Temp Battery"
+      entity_id: sensor.living_room_temp
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.sensor.living_room_temp.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('sensor.living_room_temp', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
+    basement_temp_battery:
+      value_template: "{{ states.sensor.basement_temp.attributes.battery_level }}"
+      friendly_name: "Basement Temp Battery"
+      entity_id: sensor.basement_temp
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.sensor.basement_temp.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('sensor.basement_temp', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
+
+### Xiaomi Door/Window Sensors ###################################################
+    bedroom_window_north_battery:
+      value_template: "{{ states.binary_sensor.bedroom_window_north.attributes.battery_level }}"
+      friendly_name: "Bedroom Window North Battery"
+      entity_id: binary_sensor.bedroom_window_north
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.binary_sensor.bedroom_window_north.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('binary_sensor.bedroom_window_north', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
+    bedroom_window_south_battery:
+      value_template: "{{ states.binary_sensor.bedroom_window_south.attributes.battery_level }}"
+      friendly_name: "Bedroom Window South Battery"
+      entity_id: binary_sensor.bedroom_window_south
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.binary_sensor.bedroom_window_south.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('binary_sensor.bedroom_window_south', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
+    livingroom_door_slider_battery:
+      value_template: "{{ states.binary_sensor.livingroom_door_slider.attributes.battery_level }}"
+      friendly_name: "Living Room Door Slider Battery"
+      entity_id: binary_sensor.livingroom_door_slider
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.binary_sensor.livingroom_door_slider.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('binary_sensor.livingroom_door_slider', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
+
+######################################################
+
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /
+    - type: memory_free
+    - type: memory_use_percent
+    - type: processor_use
