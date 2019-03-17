@@ -558,6 +558,65 @@
       data:
         entity_id: light.bedroom_side_level
 
+# Keep bedroom humidity up in winter
+- id: 'bedroomhumidifieron'
+  alias: 'Bedroom Humidifier On'
+  trigger:
+    - platform: time_pattern
+      minutes: '/5'
+      seconds: 00
+  condition:
+    - condition: time
+      after: '21:00:00'
+      before: '05:00:00'
+    - condition: numeric_state
+      entity_id: sensor.bedroom_multi_relative_humidity
+      below: 49
+    - condition: state
+      entity_id: switch.wemo_large
+      state: 'off'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.wemo_large
+
+# Turn off humidifier if target is reached
+- id: 'bedroomhumidifieroff'
+  alias: 'Bedroom Humidifier Off'
+  trigger:
+    - platform: time_pattern
+      minutes: '/6'
+      seconds: 00
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.bedroom_multi_relative_humidity
+      above: 49
+    - condition: state
+      entity_id: switch.wemo_large
+      state: 'on'
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.wemo_large
+
+# Turn off humidifer in the morning
+- id: 'bedroomhumidifierautooff'
+  alias: 'Bedroom Humidifier Auto Off'
+  trigger:
+    - platform: time_pattern
+      hours: 5
+      minutes: 15
+      seconds: 00
+  condition:
+    - condition: state
+      entity_id: switch.wemo_large
+      state: 'on'
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.wemo_large
+
+
 #########################
 # Presence              #
 #########################
