@@ -7,3 +7,12 @@ sensor.bedroom_multi_luminance:
 script.radio:
   friendly_name: Start Playing
   icon: mdi:play
+
+binary_sensor.bedroom_window_south:
+  icon: mdi:window-closed
+
+binary_sensor.bedroom_window_north:
+  icon: mdi:window-closed
+
+binary_sensor.livingroom_door_slider:
+  icon: mdi:door
