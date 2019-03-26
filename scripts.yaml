@@ -46,13 +46,18 @@ stop_playback:
 #########################
 # Entrance Music        #
 #########################
-# Play music for 60 seconds in the garage, then stop playback
+# Play music for 65 seconds in the garage, then stop playback
 # KEY -----
 # https://www.youtube.com/watch?v=-cZ7ndjhhps <-- John Cena
 # https://www.youtube.com/watch?v=MrJLsNo9sCU <-- Stone Cold
 # https://www.youtube.com/watch?v=WDZJPJV__bQ&t=16 <-- Beyonce - Formation
-# https://www.youtube.com/watch?v=CSav51fVlKU <-- Chariots of Fire *BROKEN*
+# https://www.youtube.com/watch?v=z11tquXTW6g <-- Ni**as in Paris
 # https://www.youtube.com/watch?v=tgIqecROs5M&t=15 <-- AWOLNATION - Sail
+# https://www.youtube.com/watch?v=-ly4NHauQHU <-- Rihanna - Phresh out the Runway
+# https://www.youtube.com/watch?v=QFy0hQ3lY-w <-- Turn Down for What
+# FRIDAY JAMS ----
+# https://youtu.be/uSD4vsh1zDA?t=25 <-- Black Eyed Peas
+# https://www.youtube.com/watch?v=kfVsfOSbJY0 <-- Rebecca Black
 welcome_home_music_mark:
   alias: Welcome Home Music - Mark
   sequence:
@@ -77,7 +82,7 @@ welcome_home_music_molly:
           {% if(now().isoweekday() == 5) %}
           {{ ["https://www.youtube.com/watch?v=kfVsfOSbJY0", "https://youtu.be/uSD4vsh1zDA?t=25"] | random }}
           {% else %}
-          {{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=WDZJPJV__bQ&t=16", "https://www.youtube.com/watch?v=tgIqecROs5M&t=15"] | random }}
+          {{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=QFy0hQ3lY-w", "https://www.youtube.com/watch?v=WDZJPJV__bQ&t=16", "https://www.youtube.com/watch?v=z11tquXTW6g", "https://www.youtube.com/watch?v=-ly4NHauQHU", "https://www.youtube.com/watch?v=tgIqecROs5M&t=15"] | random }}
           {% endif %}
         media_content_type: video/youtube
     - delay:
