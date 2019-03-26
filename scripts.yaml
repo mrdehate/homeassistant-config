@@ -51,7 +51,7 @@ stop_playback:
 # https://www.youtube.com/watch?v=-cZ7ndjhhps <-- John Cena
 # https://www.youtube.com/watch?v=MrJLsNo9sCU <-- Stone Cold
 # https://www.youtube.com/watch?v=WDZJPJV__bQ&t=16 <-- Beyonce - Formation
-# https://www.youtube.com/watch?v=CSav51fVlKU <-- Chariots of Fire
+# https://www.youtube.com/watch?v=CSav51fVlKU <-- Chariots of Fire *BROKEN*
 # https://www.youtube.com/watch?v=tgIqecROs5M&t=15 <-- AWOLNATION - Sail
 welcome_home_music_mark:
   alias: Welcome Home Music - Mark
@@ -75,9 +75,9 @@ welcome_home_music_molly:
       data_template:
         media_content_id: >
           {% if(now().isoweekday() == 5) %}
-          '{{ ["https://www.youtube.com/watch?v=kfVsfOSbJY0", "https://youtu.be/uSD4vsh1zDA?t=25"] | random }}'
+          {{ ["https://www.youtube.com/watch?v=kfVsfOSbJY0", "https://youtu.be/uSD4vsh1zDA?t=25"] | random }}
           {% else %}
-          '{{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=WDZJPJV__bQ&t=16", "https://www.youtube.com/watch?v=CSav51fVlKU", "https://www.youtube.com/watch?v=tgIqecROs5M&t=15"] | random }}'
+          {{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=WDZJPJV__bQ&t=16", "https://www.youtube.com/watch?v=tgIqecROs5M&t=15"] | random }}
           {% endif %}
         media_content_type: video/youtube
     - delay:
