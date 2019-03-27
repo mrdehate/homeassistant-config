@@ -16,3 +16,6 @@ binary_sensor.bedroom_window_north:
 
 binary_sensor.livingroom_door_slider:
   icon: mdi:door
+
+binary_sensor.kitchen_door_garage:
+  icon: mdi:door

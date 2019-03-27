@@ -46,7 +46,7 @@ stop_playback:
 #########################
 # Entrance Music        #
 #########################
-# Play music for 65 seconds in the garage, then stop playback
+# Play music for 65 seconds in the garage OR until door to house opens, then stop playback
 # KEY -----
 # https://www.youtube.com/watch?v=-cZ7ndjhhps <-- John Cena
 # https://www.youtube.com/watch?v=MrJLsNo9sCU <-- Stone Cold
@@ -66,8 +66,9 @@ welcome_home_music_mark:
       data_template:
         media_content_id: '{{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=MrJLsNo9sCU"] | random }}'
         media_content_type: video/youtube
-    - delay:
-        seconds: 65
+    - wait_template: "{{ is_state('binary_sensor.kitchen_door_garage', 'on') }}"
+      timeout: '00:01:05'
+      continue_on_timeout: 'true'
     - service: media_player.media_stop
       entity_id: media_player.garage
 
@@ -85,7 +86,8 @@ welcome_home_music_molly:
           {{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=QFy0hQ3lY-w", "https://www.youtube.com/watch?v=WDZJPJV__bQ&t=16", "https://www.youtube.com/watch?v=z11tquXTW6g", "https://www.youtube.com/watch?v=-ly4NHauQHU", "https://www.youtube.com/watch?v=tgIqecROs5M&t=15"] | random }}
           {% endif %}
         media_content_type: video/youtube
-    - delay:
-        seconds: 65
+    - wait_template: "{{ is_state('binary_sensor.kitchen_door_garage', 'on') }}"
+      timeout: '00:01:05'
+      continue_on_timeout: 'true'
     - service: media_player.media_stop
       entity_id: media_player.garage
