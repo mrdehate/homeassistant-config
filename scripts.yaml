@@ -1,48 +1,3 @@
-radio:
-# h/t this thread: https://community.home-assistant.io/t/chromecast-radio-with-station-and-player-selection/12732
-    alias: Play Radio
-    sequence:
-      - service: media_player.play_media
-        data_template:
-           entity_id: >
-            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
-            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
-            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
-            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
-            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
-            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
-            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
-            {% endif %}
-           media_content_id: >
-            {% if is_state("input_select.radio_station", "BBC Radio 1") %} http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p
-            {% elif is_state("input_select.radio_station", "BBC Radio 1 Xtra") %} http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_high/ak/bbc_radio_one.m3u8
-            {% elif is_state("input_select.radio_station", "WIOG 102.5") %} https://15723.live.streamtheworld.com/WIOGFMAAC_SC
-            {% elif is_state("input_select.radio_station", "RTE 2FM") %} http://icecast2.rte.ie/ie2fm
-            {% elif is_state("input_select.radio_station", "Hotmix Japan") %} http://streaming.hotmixradio.fm/hotmixradio-japan-128.mp3
-            {% elif is_state("input_select.radio_station", "The Bounce 105.1") %} http://17633.live.streamtheworld.com:3690/WMGCFMAAC_SC
-            {% elif is_state("input_select.radio_station", "NRJ Sweden") %} http://edge-bauersefm-01-cr.sharp-stream.com/nrj_instreamtest_se_mp3
-            {% elif is_state("input_select.radio_station", "Amp Radio Calgary") %} http://newcap.leanstream.co/CKMPFM-MP3
-            {% elif is_state("input_select.radio_station", "Groove Salad") %} http://ice3.somafm.com/groovesalad-128-mp3
-            {% elif is_state("input_select.radio_station", "Deep House Lounge") %} http://198.15.94.34:8006/stream
-            {% endif %}
-           media_content_type: 'audio/mpeg'
-
-stop_playback:
-  alias: Stop stream
-  sequence:
-    - service: media_player.media_stop
-      data_template:
-        entity_id: >
-          {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
-          {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
-          {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
-          {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
-          {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
-          {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
-          {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
-          {% endif %}
-
-
 #########################
 # Entrance Music        #
 #########################
@@ -91,3 +46,255 @@ welcome_home_music_molly:
       continue_on_timeout: 'true'
     - service: media_player.media_stop
       entity_id: media_player.garage
+
+#########################
+# Radio                 #
+#########################
+      
+radio:
+# h/t this thread: https://community.home-assistant.io/t/chromecast-radio-with-station-and-player-selection/12732
+    alias: Play Radio
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: >
+            {% if is_state("input_select.radio_station", "BBC Radio 1") %} http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p
+            {% elif is_state("input_select.radio_station", "BBC Radio 1 Xtra") %} http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_high/ak/bbc_radio_one.m3u8
+            {% elif is_state("input_select.radio_station", "WIOG 102.5") %} https://15723.live.streamtheworld.com/WIOGFMAAC_SC
+            {% elif is_state("input_select.radio_station", "RTE 2FM") %} http://icecast2.rte.ie/ie2fm
+            {% elif is_state("input_select.radio_station", "Hotmix Japan") %} http://streaming.hotmixradio.fm/hotmixradio-japan-128.mp3
+            {% elif is_state("input_select.radio_station", "The Bounce 105.1") %} http://17633.live.streamtheworld.com:3690/WMGCFMAAC_SC
+            {% elif is_state("input_select.radio_station", "NRJ Sweden") %} http://edge-bauersefm-01-cr.sharp-stream.com/nrj_instreamtest_se_mp3
+            {% elif is_state("input_select.radio_station", "Amp Radio Calgary") %} http://newcap.leanstream.co/CKMPFM-MP3
+            {% elif is_state("input_select.radio_station", "Groove Salad") %} http://ice3.somafm.com/groovesalad-128-mp3
+            {% elif is_state("input_select.radio_station", "Deep House Lounge") %} http://198.15.94.34:8006/stream
+            {% endif %}
+           media_content_type: 'audio/mpeg'
+
+stop_playback:
+  alias: Stop stream
+  sequence:
+    - service: media_player.media_stop
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+          {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+          {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+          {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+          {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+          {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+          {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+          {% endif %}
+
+radio_bbcradio1:
+    alias: Radio - BBC Radio 1
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p"
+           media_content_type: 'audio/mpeg'
+
+radio_bbcradio1xtra:
+    alias: Radio - BBC Radio 1 Xtra
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_high/ak/bbc_radio_one.m3u8"
+           media_content_type: 'audio/mpeg'
+
+radio_wiog:
+    alias: Radio - WIOG
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "https://15723.live.streamtheworld.com/WIOGFMAAC_SC"
+           media_content_type: 'audio/mpeg'
+
+radio_rte2fm:
+    alias: Radio - RTE 2FM
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "http://icecast2.rte.ie/ie2fm"
+           media_content_type: 'audio/mpeg'
+
+radio_hotmixjapan:
+    alias: Radio - Hotmix Japan
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "http://streaming.hotmixradio.fm/hotmixradio-japan-128.mp3"
+           media_content_type: 'audio/mpeg'
+
+radio_thebounce:
+    alias: Radio - The Bounce 105.1
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "http://17633.live.streamtheworld.com:3690/WMGCFMAAC_SC"
+           media_content_type: 'audio/mpeg'
+
+radio_nrjsweden:
+    alias: Radio - NRJ Sweden
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "http://edge-bauersefm-01-cr.sharp-stream.com/nrj_instreamtest_se_mp3"
+           media_content_type: 'audio/mpeg'
+
+radio_ampcalgary:
+    alias: Radio - Amp Radio Calgary
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "http://newcap.leanstream.co/CKMPFM-MP3"
+           media_content_type: 'audio/mpeg'
+
+radio_groovesalad:
+    alias: Radio - Groove Salad
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "http://ice3.somafm.com/groovesalad-128-mp3"
+           media_content_type: 'audio/mpeg'
+
+radio_deephouselounge:
+    alias: Radio - Deep House Lounge
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "http://198.15.94.34:8006/stream"
+           media_content_type: 'audio/mpeg'
+
+radio_loungeradio:
+    alias: Radio - Lounge Radio
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "http://edge3.peta.live365.net/b05055_128mp3"
+           media_content_type: 'audio/mpeg'
+
+radio_polkajammernetwork:
+    alias: Radio - Polka Jammer Network
+    sequence:
+      - service: media_player.play_media
+        data_template:
+           entity_id: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+           media_content_id: "http://ic2516.c591.fast-serv.com/stream"
+           media_content_type: 'audio/mpeg'
