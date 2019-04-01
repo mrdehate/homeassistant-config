@@ -80,6 +80,7 @@ radio:
             {% endif %}
            media_content_type: 'audio/mpeg'
 
+# This only stops the source that's selected in the dropdown. Could be improved to stop what's actually playing.
 stop_playback:
   alias: Stop stream
   sequence:
