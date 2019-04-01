@@ -9,49 +9,50 @@ This is my Home Assistant (hassio) configuration!
 
 ## Connected Devices
 
-I've really tried to stick with Z-Wave products for simplicity, though there are a few outliers for various reasons.
+I've really tried to stick with Z-Wave products for simplicity, though there are a few outliers for various reasons. Assume everything listed here is Z-Wave, unless specifically noted.
 
-### Z-Wave
-#### Switches & Dimmers (In-Wall)
+### Switches & Dimmers (In-Wall)
 * Leviton, either the Decora [Smart Switches (DZ15S-1BZ)](https://amzn.to/2D1HXDa) or [Dimmers (DZ6HD-1BZ)](https://amzn.to/2SoMIjY)
   * These are really great, and respond instantaneously! My preferred option.
 * [HomeSeer HS-WS200+](https://amzn.to/2WD5i7d)
   * I have these only where I need to use the scene functionality, and where I can deal with the .5 second-ish delay they come with (like outdoor lights).
 
-#### Outlets (In-Wall)
+### Outlets (In-Wall)
 * [Jasco outlets, either GE or Honeywell brand](https://amzn.to/2WFqysP)
 
-#### Outlets (Plug-In)
+### Outlets (Plug-In)
 * [GE Outdoor (14284)](https://amzn.to/2Tvk0Lu)
 * [Leviton (DZPA1-2BW)](https://amzn.to/2WzqAmh)
 * Inovelli Dual Outlet (NZW37)
 
-#### Sensors
-* [Monoprice Z-Wave Plus Door & Window Sensor (24259)](https://amzn.to/2ML5mx6)
-* [Zooz 4-in-1 Sensor (luminance, motion, humidity, temperature) (ZSE40, version 2)](https://amzn.to/2Glossr)
-* [Ecolink Door and Window Sensor (DWZWAVE2.5-ECO)](https://amzn.to/2TppjMh) (see Bed Presence Detection section below for why I'm using this one)
+### Sensors - Door & Window
+* *ZIGBEE* - Xiaomi Aqara Door/Window Sensor (MCCGQ11LM)
+  * These are a pain to get, but man do I love them. They are tiny and super reliable. I have them hooked directly to my ConBee stick, no gateway involved.
+* [Ecolink Door and Window Sensor (DWZWAVE2.5-ECO)](https://amzn.to/2TppjMh)
+  * This sensor has accessible terminals - see Bed Presence Detection section below for more
 
-#### Buttons
+### Sensors - Temperature, Motion, Etc
+* [Zooz 4-in-1 Sensor (luminance, motion, humidity, temperature) (ZSE40, version 2)](https://amzn.to/2Glossr)
+* *ZIGBEE* - Xiaomi Aqara Temperature Sensor (WSDCGQ11LM)
+
+### Buttons
 * [Hank Four Button Scene Controller (HKZW-SCN04)](https://amzn.to/2EpT5uh)
 * [Hank One Button Scene Controller (HKZW-SCN01)](https://amzn.to/2XvNqvj)
   * There aren't a lot of good Z-Wave options for simple buttons. These are a bit of a hassle, and not super reliable. They do look nice though.
-
-### Zigbee
-I tried really hard to avoid having any Zigbee devices (well, non-Hue anyway), but the price of these Xiaomi sensors suckered me in.
-
-* Xiaomi Aqara Temperature Sensor (WSDCGQ11LM)
-* IKEA Tradfri Wireless Remote
-* IKEA Tradfri Wireless Dimmer
+* *ZIGBEE* - IKEA Tradfri Wireless Remote
+  * This is a lot bigger than the Hank buttons, but more straightforward to deal with. Feels nice too!
+* *ZIGBEE* - IKEA Tradfri Wireless Dimmer
+  * I'm using this as a universal volume knob. I don't particularly recommend it, but it is cheap. 
 
 ### Connected Bulbs
 All my connected bulbs go through the Philips Hue hub
 * Phillips Hue Bulbs
   * Dimmable/White Ambiance/Full Color in BR30 & A19
-* GLEDOPTO ZLL Light Controller (x2)
+* GLEDOPTO ZLL Light Controller (x3)
   * Controls some standard RGB LED roll lights, SMD 5050
 
 ### Media Players
-* Chromecast Audio
+* Chromecast Audio - a whole bunch of them!
 * Also connected are Plex, Roku, and Spotify, though not particularly useful to me
 
 ### Presence Detection
@@ -73,9 +74,19 @@ I have a Tuft and Needle king-size memory foam mattress, with a wood slat base. 
 * [QuietCool Whole House Fan](https://quietcoolsystems.com/) (plugged into a GE in-wall smart outlet in the attic)
 * [Biddeford Electric Mattress Heating Pad](https://amzn.to/2TtzDmu) (5902-908221-100)
   * Note on this, most electric heating pads are digital, which means they don't turn on automatically when power is applied. This one in particular still has a physical switch and dial, which is great. 
-* Lepai Class-D Amplifiers (LP-2020A & similar), and a hodgepodge of mostly low-end PC speakers/subs
-* Disco Ball
+* Lepai Class-D Amplifiers (LP-2020A & similar), and a hodgepodge of mostly low-end PC speakers/subs connected to the Chromecast Audios
+* Disco Ball and pinspot!
 
+## Retired Devices
+These are devices that I have removed from my automation setup for one reason or the other.
+* Raspberry Pi 3
+  * Worked well, but super slow. Also I've lost *so* many SD cards in various other projects, I got scared.
+* Lutron Caseta lights
+  * Nothing particularly bad to say about these, just wasn't excited about another hub involved in my setup. Well, that and the wall buttons are less friendly for just whacking with your hand than the rocker switches are. If my house didn't have neutral wires, this is what I'd be doing for sure.
+* Monoprice Door/Window sensors
+  * The Xiaomi ones are cheaper and work better. Totally worth getting the Conbee stick just for these. 
+* SmartThings
+  * My home automation journey started with SmartThings. My experience there was good, but it's limiting for sure.
 
 ## Notable Automations
 
@@ -89,6 +100,7 @@ I have a Tuft and Needle king-size memory foam mattress, with a wood slat base. 
   * All basement lights (from top of basement stairs)
 * Turn on entry lights when garage door opens
   * Someday would like to make this presence-based, but I'm still not real confident in my presence solution.
+* Turn on closet light when opening closet door
 
 ### Fun with Presence Detection
 * Turn on heated mattress pad before bed, based on the room temperature - turn it off in the middle of the night so I don't bake.
@@ -102,6 +114,7 @@ I have a Tuft and Needle king-size memory foam mattress, with a wood slat base. 
   * Unfortunately Google Cast groups are super flaky in my experience, so this doesn't work 100% of the time - some groups are better than others.
 * Using an IKEA Tradfri dimmer as a universal volume knob, changing volume of whatever Chromecast Audio group is playing
 * Safety switch to turn off whole house fan if insufficient ventilation.
+* Turn on cheapo humidifier in bedroom when it's super dry in the winter
 
 ## Upgrading from a Raspberry Pi 3 to an Intel NUC
 
