@@ -64,6 +64,8 @@ radio:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: >
@@ -93,6 +95,8 @@ stop_playback:
           {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
           {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
           {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+          {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+          {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
           {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
           {% endif %}
 
@@ -108,6 +112,8 @@ radio_bbcradio1:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p"
@@ -125,6 +131,8 @@ radio_bbcradio1xtra:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_high/ak/bbc_radio_one.m3u8"
@@ -142,6 +150,8 @@ radio_wiog:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "https://15723.live.streamtheworld.com/WIOGFMAAC_SC"
@@ -159,6 +169,8 @@ radio_rte2fm:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "http://icecast2.rte.ie/ie2fm"
@@ -176,6 +188,8 @@ radio_hotmixjapan:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "http://streaming.hotmixradio.fm/hotmixradio-japan-128.mp3"
@@ -193,6 +207,8 @@ radio_thebounce:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "http://17633.live.streamtheworld.com:3690/WMGCFMAAC_SC"
@@ -210,6 +226,8 @@ radio_nrjsweden:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "http://edge-bauersefm-01-cr.sharp-stream.com/nrj_instreamtest_se_mp3"
@@ -227,6 +245,8 @@ radio_ampcalgary:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "http://newcap.leanstream.co/CKMPFM-MP3"
@@ -244,6 +264,8 @@ radio_groovesalad:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "http://ice3.somafm.com/groovesalad-128-mp3"
@@ -261,6 +283,8 @@ radio_deephouselounge:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "http://198.15.94.34:8006/stream"
@@ -278,6 +302,8 @@ radio_loungeradio:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "http://edge3.peta.live365.net/b05055_128mp3"
@@ -295,6 +321,8 @@ radio_polkajammernetwork:
             {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
             {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
             {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
            media_content_id: "http://ic2516.c591.fast-serv.com/stream"

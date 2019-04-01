@@ -272,6 +272,8 @@ input_select:
       - Main and Basement
       - Bedroom
       - All Indoor
+      - Garage
+      - Deck
       - Everywhere
     initial: Kitchen
     icon: mdi:speaker-wireless
