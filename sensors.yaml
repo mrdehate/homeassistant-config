@@ -182,6 +182,22 @@
           mdi:battery-charging-wireless-outline
         {% endif %}
 
+    bedroom_door_mollys_closet_battery:
+      value_template: "{{ states.binary_sensor.bedroom_door_mollys_closet.attributes.battery_level }}"
+      friendly_name: "Bedroom Door Mollys Closet Battery"
+      entity_id: binary_sensor.bedroom_door_mollys_closet
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.binary_sensor.bedroom_door_mollys_closet.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('binary_sensor.bedroom_door_mollys_closet', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
+
 ######################################################
 
 - platform: systemmonitor

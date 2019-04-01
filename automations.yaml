@@ -406,6 +406,11 @@
 #########################
 # Bedroom               #
 #########################
+
+#------------------------
+# Bed Heater            |
+#------------------------
+
 # Turn on bed heater if too cold
 - id: 'bedheatermarkon'
   alias: Bed Heater Auto On - Mark
@@ -463,6 +468,10 @@
     - service: homeassistant.turn_off
       data:
         entity_id: switch.bedroom_bedwarmer_mark
+
+#------------------------
+# Bedroom Lamps         |
+#------------------------
 
 # Turn on bedroom lamps with Hank controller
 - id: 'bedroomlampson'
@@ -536,6 +545,10 @@
         entity_id: light.mollys_light
         brightness_pct: 25
 
+#------------------------
+# Bedroom Sideroom      |
+#------------------------
+
 # Auto-dim overhead lights in bedroom when bed is occupied
 - id: 'bedroomautodim-sideroom'
   alias: 'Auto-Dim Bedroom Lights - Side Room'
@@ -554,6 +567,10 @@
     - service: homeassistant.turn_on
       data:
         entity_id: light.bedroom_side_level
+
+#------------------------
+# Bedroom Humidifier    |
+#------------------------
 
 # Keep bedroom humidity up in winter
 - id: 'bedroomhumidifieron'
@@ -613,6 +630,33 @@
       data:
         entity_id: switch.wemo_large
 
+#--------------------------|
+# Bedroom - Mollys Closet  |
+#--------------------------|
+
+# Turn on closet light when door opens
+- id: 'bedroommollyclosetautoon'
+  alias: Bedroom Mollys Closet - Auto On
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.bedroom_door_mollys_closet
+      to: 'on'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.bedroom_mollys_closet
+
+# Turn off closet light when door opens
+- id: 'bedroommollyclosetautooff'
+  alias: Bedroom Mollys Closet - Auto Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.bedroom_door_mollys_closet
+      to: 'off'
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: light.bedroom_mollys_closet
 
 #########################
 # Presence              #

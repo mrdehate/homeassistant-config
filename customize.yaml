@@ -19,3 +19,6 @@ binary_sensor.livingroom_door_slider:
 
 binary_sensor.kitchen_door_garage:
   icon: mdi:door
+
+binary_sensor.bedroom_door_mollys_closet:
+  icon: mdi:door
