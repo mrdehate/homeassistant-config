@@ -775,6 +775,9 @@
     - platform: time_pattern
       minutes: '/10'
       seconds: 00
+    - platform: state
+      entity_id: binary_sensor.livingroom_door_status
+      to: 'off'
   condition:
     condition: and
     conditions:
