@@ -9,6 +9,10 @@
 !*.png
 !*.jpg
 
+!www/
+!www/images/
+!www/images/radio/
+
 # Ignore folders.
 .storage
 .cloud
