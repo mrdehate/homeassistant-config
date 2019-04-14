@@ -25,7 +25,7 @@ homeassistant:
   customize: !include customize.yaml
 
 # introduction:     # Show links to resources in log and frontend
-cloud:
+# cloud:
 config:             # Enables configuration UI
 fastdotcom:         # Fast.com speed test
 frontend:           # Enables the frontend
@@ -186,36 +186,58 @@ notify:
 # Hiding groups that come from Hue. Someday might swap this out to set up rooms
 # here, rather than duplicating effort in GA. And/or use only groups from Hue
 # and not exposing individual bulbs in GA. TBD.
-google_assistant:
-  project_id: !secret google_assistant_projectid
-  api_key: !secret google_assistant_api
-  exposed_domains:
-    - switch
-    - light
-    - scene
-  entity_config:
-    light.custom_group_for_lights:
-      expose: false
-    light.custom_group_for_lights_2:
-      expose: false
-    light.dining_room:
-      expose: false
-    light.living_room:
-      expose: false
-    light.main_floor_accents:
-      expose: false
-    light.bedroom:
-      expose: false
+cloud:
+  google_actions:
+    filter:
+      include_domains:
+        - switch
+        - light
+        - scene
+      exclude_entities:
+        light.dining_room
+        light.living_room
+        light.main_floor_accents
+        light.bedroom
+
+# google_assistant:
+#   project_id: !secret google_assistant_projectid
+#   api_key: !secret google_assistant_api
+#   exposed_domains:
+#     - switch
+#     - light
+#     - scene
+#   entity_config:
+#     light.custom_group_for_lights:
+#       expose: false
+#     light.custom_group_for_lights_2:
+#       expose: false
+#     light.dining_room:
+#       expose: false
+#     light.living_room:
+#       expose: false
+#     light.main_floor_accents:
+#       expose: false
+#     light.bedroom:
+#       expose: false
 
 # Google Home integration
-#googlehome:
-#  devices:
-#    - host: !secret ip-googlehomehub
-#    - host: !secret ip-googlehome
-#    - host: !secret ip-googlehomemini-bedroom
-#    - host: !secret ip-googlehomemini-basement
-#    - host: !secret ip-googlehomemini-garage
-#      track_devices: false
+# googlehome:
+#   devices:
+#     - host: !secret ip-googlehomehub
+#       track_devices: false
+#       track_alarms: true
+#     - host: !secret ip-googlehome
+#       track_devices: false
+#       track_alarms: true
+#     - host: !secret ip-googlehomemini-bedroom
+#       track_devices: false
+#       track_alarms: true
+#     - host: !secret ip-googlehomemini-basement
+#       track_devices: false
+#       track_alarms: true
+#     - host: !secret ip-googlehomemini-garage
+#       track_devices: false
+#       track_alarms: true
 
 
 #########################
