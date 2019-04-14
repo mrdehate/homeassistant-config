@@ -194,10 +194,10 @@ cloud:
         - light
         - scene
       exclude_entities:
-        light.dining_room
-        light.living_room
-        light.main_floor_accents
-        light.bedroom
+        - light.dining_room
+        - light.living_room
+        - light.main_floor_accents
+        - light.bedroom
 
 # google_assistant:
 #   project_id: !secret google_assistant_projectid
