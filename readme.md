@@ -103,10 +103,11 @@ These are devices that I have removed from my automation setup for one reason or
 * Turn on closet light when opening closet door
 
 ### Fun with Presence Detection
-* Turn on heated mattress pad before bed, based on the room temperature - turn it off in the middle of the night so I don't bake.
-* Automatically close garage door every night in case it's left open.
+* Turn on heated mattress pad before bed, based on the room temperature - turn it off in the middle of the night so I don't bake
+* Automatically close garage door every night in case it's left open
 * Send a push notification if everybody leaves the house and the garage door is left open
 * When arriving home, play inspirational entrance music in the garage
+  * And turn it off when opening the door into the house
 
 ### Other Automations
 * Turn on amplifiers when sound is playing to the connected Chromecast Audio
