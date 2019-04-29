@@ -118,7 +118,8 @@ binary_sensor:
 # Text to speech
 #########################
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
 #########################
 # Arlo Cameras
@@ -126,20 +127,6 @@ tts:
 arlo:
   username: !secret arlo_username
   password: !secret arlo_password
-
-#########################
-# Configurator
-#########################
-panel_iframe:
-  configurator:
-    title: Configurator
-    icon: mdi:wrench
-    url: !secret configurator_url
-
-  vscode:
-    title: Visual Studio Code
-    icon: mdi:visual-studio-code
-    url: !secret vscode_url
 
 #########################
 # Garage Door
