@@ -23,7 +23,7 @@ welcome_home_music_mark:
         media_content_type: video/youtube
     - wait_template: "{{ is_state('binary_sensor.kitchen_door_garage', 'on') }}"
       timeout: '00:01:05'
-      continue_on_timeout: 'true'
+      continue_on_timeout: true
     - service: media_player.media_stop
       entity_id: media_player.garage
 
@@ -43,7 +43,7 @@ welcome_home_music_molly:
         media_content_type: video/youtube
     - wait_template: "{{ is_state('binary_sensor.kitchen_door_garage', 'on') }}"
       timeout: '00:01:05'
-      continue_on_timeout: 'true'
+      continue_on_timeout: true
     - service: media_player.media_stop
       entity_id: media_player.garage
 
