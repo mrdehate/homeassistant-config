@@ -776,7 +776,7 @@
       minutes: '/10'
       seconds: 00
     - platform: state
-      entity_id: binary_sensor.livingroom_door_status
+      entity_id: binary_sensor.livingroom_door
       to: 'off'
   condition:
     condition: and
@@ -785,15 +785,15 @@
         entity_id: switch.attic_house_fan
         state: 'on'
       - condition: state
-        entity_id: binary_sensor.livingroom_door_status
+        entity_id: binary_sensor.livingroom_door
         state: 'off'
       - condition: or
         conditions:
           - condition: state
-            entity_id: binary_sensor.bedroom_window_north_status
+            entity_id: binary_sensor.bedroom_window_north
             state: 'off'
           - condition: state
-            entity_id: binary_sensor.bedroom_window_south_status
+            entity_id: binary_sensor.bedroom_window_south
             state: 'off'
   action:
     - service: homeassistant.turn_off
