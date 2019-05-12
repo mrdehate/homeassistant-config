@@ -613,7 +613,7 @@
 #------------------------
 # Bedroom Humidifier    |
 #------------------------
-
+# NOTE: Shares same plug as bedroom fan. Avoid having both automations running at the same time.
 # Keep bedroom humidity up in winter
 - id: 'bedroomhumidifieron'
   alias: 'Bedroom Humidifier On'
@@ -671,6 +671,95 @@
     - service: homeassistant.turn_off
       data:
         entity_id: switch.wemo_large
+
+
+#------------------------
+# Bedroom Window Fan    |
+#------------------------
+# NOTE: Shares same plug as humidifier. Avoid having both automations running at the same time.
+# Auto-On bedroom fan when window is open (and it's warm)
+- id: 'bedroomwindowfanon'
+  alias: 'Bedroom Window Fan On'
+  trigger:
+    - platform: time_pattern
+      minutes: '/5'
+      seconds: 00
+  condition:
+    - condition: time
+      after: '21:00:00'
+      before: '05:00:00'
+    - condition: numeric_state
+      entity_id: sensor.dark_sky_humidity
+      below: 90
+    - condition: numeric_state
+      entity_id: sensor.dark_sky_temperature
+      below: sensor.bedroom_multi_temperature 
+    - condition: numeric_state
+      entity_id: sensor.bedroom_multi_temperature
+      above: 65
+    - condition: state
+      entity_id: binary_sensor.bedroom_window_north
+      state: "on"
+    - condition: state
+      entity_id: switch.wemo_large
+      state: 'off'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.wemo_large
+
+# Turn off bedroom window fan if target is reached
+- id: 'bedroomwindowfanoff'
+  alias: 'Bedroom Window Fan Off'
+  trigger:
+    - platform: time_pattern
+      minutes: '/6'
+      seconds: 00
+  condition:
+    condition: and
+    conditions:
+    - condition: time
+      after: '21:00:00'
+      before: '05:00:00'
+    - condition: state
+      entity_id: switch.wemo_large
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: numeric_state
+        entity_id: sensor.dark_sky_humidity
+        above: 90
+      - condition: numeric_state
+        entity_id: sensor.bedroom_multi_temperature
+        below: sensor.dark_sky_temperature
+      - condition: numeric_state
+        entity_id: sensor.bedroom_multi_temperature
+        below: 65
+      - condition: state
+        entity_id: binary_sensor.bedroom_window_north
+        state: "off"
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.wemo_large
+
+# Turn off humidifer in the morning
+- id: 'bedroomwindowfanautooff'
+  alias: 'Bedroom Window Fan Auto Off'
+  trigger:
+    - platform: time_pattern
+      hours: '5'
+      minutes: 15
+      seconds: 00
+  condition:
+    - condition: state
+      entity_id: switch.wemo_large
+      state: 'on'
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.wemo_large
+
 
 #--------------------------|
 # Bedroom - Mollys Closet  |
