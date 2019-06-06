@@ -41,6 +41,21 @@
         {% else %}
           mdi:battery-charging-wireless-outline
         {% endif %}
+    garage_multi_battery:
+      value_template: "{{ states.zwave.sensor_garage_multi.attributes.battery_level }}"
+      friendly_name: "Garage Multi Sensor Battery"
+      entity_id: zwave.sensor_garage_multi
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.zwave.sensor_garage_multi.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('zwave.sensor_garage_multi', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
     hank_four_button_battery:
       value_template: "{{ states.zwave.button_bedroom_hank_four.attributes.battery_level }}"
       friendly_name: "Bedroom Four Button Battery"
@@ -198,6 +213,21 @@
           mdi:battery-charging-wireless-outline
         {% endif %}
 
+    office_window_battery:
+      value_template: "{{ states.binary_sensor.window_office.attributes.battery_level }}"
+      friendly_name: "Office Window Battery"
+      entity_id: binary_sensor.window_office
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.binary_sensor.window_office.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('binary_sensor.window_office', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
 ######################################################
 
 - platform: systemmonitor
