@@ -26,16 +26,10 @@ homeassistant:
 
 # introduction:     # Show links to resources in log and frontend
 # cloud:
-config:             # Enables configuration UI
+default_config:     # default config
 fastdotcom:         # Fast.com speed test
-frontend:           # Enables the frontend
-history:            # Enables support for tracking state changes over time
-logbook:            # View all events in a logbook
-map:                # Enables a map showing the location of tracked devices
-person:             # Persons
-system_health:      # System health stuff
-updater:            # Checks for available updates
 wake_on_lan:        # enables `wake_on_lan` domain
+discovery:          # Discover some devices automatically
 
 # Includes
 group: !include groups.yaml
@@ -43,18 +37,12 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
-
 http:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: !secret base_url
 #  ssl_certificate: /ssl/fullchain.pem
 #  ssl_key: /ssl/privkey.pem
   
-
-# Discover some devices automatically
-discovery:
-  enable:
-    - homekit
 
 
 #########################
