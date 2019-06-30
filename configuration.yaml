@@ -100,7 +100,11 @@ binary_sensor:
           true
           {%- endif -%}
 
-          
+#########################
+# HACS custom components
+#########################
+hacs:
+  token: !secret hacs_github_token
 
 #########################
 # Text to speech
