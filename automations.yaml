@@ -692,7 +692,7 @@
       entity_id: sensor.dark_sky_humidity
       below: 90
     - condition: template
-      value_template: "{{ (sensor.dark_sky_temperature | float) < (sensor.bedroom_multi_temperature | float) }}"
+      value_template: "{{ states('sensor.dark_sky_temperature') < states('sensor.bedroom_multi_temperature') }}"
     - condition: numeric_state
       entity_id: sensor.bedroom_multi_temperature
       above: 65
@@ -729,7 +729,7 @@
         entity_id: sensor.dark_sky_humidity
         above: 90
       - condition: template
-        value_template: "{{ (sensor.dark_sky_temperature | float) > (sensor.bedroom_multi_temperature | float) }}"
+        value_template: "{{ states('sensor.dark_sky_temperature') > states('sensor.bedroom_multi_temperature') }}"
       - condition: numeric_state
         entity_id: sensor.bedroom_multi_temperature
         below: 65
