@@ -707,7 +707,7 @@
       data:
         entity_id: switch.wemo_large
 
-# Turn off bedroom window fan if target is reached
+# Turn off bedroom window fan if target is reached and window is open
 - id: 'bedroomwindowfanoff'
   alias: 'Bedroom Window Fan Off'
   trigger:
@@ -723,6 +723,9 @@
     - condition: state
       entity_id: switch.wemo_large
       state: 'on'
+    - condition: state
+      entity_id: binary_sensor.bedroom_window_north
+      state: 'on'
     - condition: or
       conditions:
       - condition: numeric_state
@@ -733,15 +736,12 @@
       - condition: numeric_state
         entity_id: sensor.bedroom_multi_temperature
         below: 65
-      - condition: state
-        entity_id: binary_sensor.bedroom_window_north
-        state: "off"
   action:
     - service: homeassistant.turn_off
       data:
         entity_id: switch.wemo_large
 
-# Turn off humidifer in the morning
+# Turn off window fan in the morning
 - id: 'bedroomwindowfanautooff'
   alias: 'Bedroom Window Fan Auto Off'
   trigger:
