@@ -327,3 +327,36 @@ radio_polkajammernetwork:
             {% endif %}
            media_content_id: "http://ic2516.c591.fast-serv.com/stream"
            media_content_type: 'audio/mpeg'
+
+
+spotify_playlist:
+    alias: Play Spotify Playlist
+    sequence:
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+
+      - service: media_player.select_source
+        data_template: 
+          entity_id: media_player.spotify
+          source: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+            {% endif %}
+
+      - service: media_player.play_media
+        data_template:
+          entity_id: media_player.spotify
+          media_content_type: 'playlist'
+          media_content_id: >
+            {% if is_state("input_select.spotify_playlist", "Test 1") %} spotify:playlist:7IgLb3ItiKBeV9FjR7FdJt
+            {% elif is_state("input_select.spotify_playlist", "Test 2") %} spotify:playlist:37i9dQZF1E4EmGFMzkENF2
+            {% endif %}

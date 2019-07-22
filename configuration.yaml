@@ -37,6 +37,9 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
+frontend:
+  themes: !include themes.yaml
+
 http:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: !secret base_url
@@ -54,6 +57,8 @@ weather:
   - platform: darksky
     api_key: !secret darksky_api
     mode: daily
+    scan_interval:
+      minutes: 10
 
 #########################
 # Sensors
@@ -101,10 +106,13 @@ binary_sensor:
           {%- endif -%}
 
 #########################
-# HACS custom components
+# Custom Panel
 #########################
-hacs:
-  token: !secret hacs_github_token
+panel_custom:
+  - name: zwavegraph2
+    sidebar_title: Z-Wave Graph
+    sidebar_icon: mdi:access-point-network
+    url_path: zwave
 
 #########################
 # Text to speech
@@ -223,3 +231,9 @@ input_select:
       - Everywhere
     initial: Kitchen
     icon: mdi:speaker-wireless
+
+  spotify_playlist:
+    name: 'Select Playlist:'
+    options:
+      - Test 1
+      - Test 2
