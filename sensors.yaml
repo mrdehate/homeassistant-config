@@ -180,6 +180,21 @@
         {% else %}
           mdi:battery-charging-wireless-outline
         {% endif %}
+    livingroom_door_front_battery:
+      value_template: "{{ states.binary_sensor.livingroom_door_front.attributes.battery_level }}"
+      friendly_name: "Living Room Door Front Battery"
+      entity_id: binary_sensor.livingroom_door_front
+      unit_of_measurement: '%'
+      icon_template: >
+        {% set battery_level_xod1 = states.binary_sensor.livingroom_door_front.attributes.battery_level|default(0)|int %}
+        {% set battery_round_xod1 = (battery_level_xod1 / 10) |int * 10 %}
+        {% if battery_round_xod1 >= 100 or is_state('binary_sensor.livingroom_door_front', 'unknown') %}
+          mdi:battery
+        {% elif battery_round_xod1 > 0 %}
+          mdi:battery-{{ battery_round_xod1 }}
+        {% else %}
+          mdi:battery-charging-wireless-outline
+        {% endif %}
 
     kitchen_door_garage_battery:
       value_template: "{{ states.binary_sensor.kitchen_door_garage.attributes.battery_level }}"
