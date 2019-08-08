@@ -9,6 +9,14 @@
   scan_interval:
     minutes: 5
 
+- platform: yr
+  name: Weather
+  monitored_conditions:
+    - temperature
+    - symbol
+    - precipitation
+    - humidity
+
 - platform: template
   sensors:
     kitchen_multi_battery:
@@ -252,3 +260,21 @@
     - type: memory_free
     - type: memory_use_percent
     - type: processor_use
+
+- platform: pi_hole
+  host: localhost:4865
+  monitored_conditions:
+    - ads_blocked_today
+    - ads_percentage_today
+    - dns_queries_today
+    - unique_clients
+
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'date_time'
+    - 'date_time_iso'
+    - 'time_date'
+    - 'time_utc'
+    - 'beat'
