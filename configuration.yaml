@@ -48,7 +48,7 @@ weather:
     mode: daily
   - platform: openweathermap
     api_key: !secret openweathermap_api
-    mode: daily
+    mode: freedaily
 
 #########################
 # Sensors
