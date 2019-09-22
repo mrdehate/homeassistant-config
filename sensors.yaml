@@ -261,14 +261,6 @@
     - type: memory_use_percent
     - type: processor_use
 
-- platform: pi_hole
-  host: localhost:4865
-  monitored_conditions:
-    - ads_blocked_today
-    - ads_percentage_today
-    - dns_queries_today
-    - unique_clients
-
 - platform: time_date
   display_options:
     - 'time'
