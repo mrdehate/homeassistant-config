@@ -10,16 +10,22 @@
 # https://www.youtube.com/watch?v=tgIqecROs5M&t=15 <-- AWOLNATION - Sail
 # https://www.youtube.com/watch?v=-ly4NHauQHU <-- Rihanna - Phresh out the Runway
 # https://www.youtube.com/watch?v=QFy0hQ3lY-w <-- Turn Down for What
+# https://www.youtube.com/watch?v=fPO76Jlnz6c&t=14 <-- Coolio - Gangsta's Paradise
+# https://www.youtube.com/watch?v=TZE9gVF1QbA <-- GoT Season 8 intro
 # FRIDAY JAMS ----
 # https://youtu.be/uSD4vsh1zDA?t=25 <-- Black Eyed Peas
 # https://www.youtube.com/watch?v=kfVsfOSbJY0 <-- Rebecca Black
 welcome_home_music_mark:
   alias: Welcome Home Music - Mark
   sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.garage
+        volume_level: 0.20
     - service: media_extractor.play_media
       entity_id: media_player.garage
       data_template:
-        media_content_id: '{{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=MrJLsNo9sCU"] | random }}'
+        media_content_id: '{{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=MrJLsNo9sCU","https://www.youtube.com/watch?v=TZE9gVF1QbA"] | random }}'
         media_content_type: "music"
     - wait_template: "{{ is_state('binary_sensor.kitchen_door_garage', 'on') }}"
       timeout: '00:01:05'
@@ -31,6 +37,10 @@ welcome_home_music_mark:
 welcome_home_music_molly:
   alias: Welcome Home Music - Molly
   sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.garage
+        volume_level: 0.15
     - service: media_extractor.play_media
       entity_id: media_player.garage
       data_template:
@@ -38,7 +48,7 @@ welcome_home_music_molly:
           {% if(now().isoweekday() == 5) %}
           {{ ["https://www.youtube.com/watch?v=kfVsfOSbJY0", "https://youtu.be/uSD4vsh1zDA?t=25"] | random }}
           {% else %}
-          {{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=QFy0hQ3lY-w", "https://www.youtube.com/watch?v=WDZJPJV__bQ&t=16", "https://www.youtube.com/watch?v=PEGccV-NOm8", "https://www.youtube.com/watch?v=-ly4NHauQHU", "https://www.youtube.com/watch?v=tgIqecROs5M&t=15"] | random }}
+          {{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=QFy0hQ3lY-w", "https://www.youtube.com/watch?v=WDZJPJV__bQ&t=16", "https://www.youtube.com/watch?v=PEGccV-NOm8", "https://www.youtube.com/watch?v=-ly4NHauQHU", "https://www.youtube.com/watch?v=tgIqecROs5M&t=15", "https://www.youtube.com/watch?v=fPO76Jlnz6c&t=14", "https://www.youtube.com/watch?v=TZE9gVF1QbA"] | random }}
           {% endif %}
         media_content_type: "music"
     - wait_template: "{{ is_state('binary_sensor.kitchen_door_garage', 'on') }}"
@@ -332,15 +342,10 @@ radio_polkajammernetwork:
 spotify_playlist:
     alias: Play Spotify Playlist
     sequence:
-      - service: media_player.shuffle_set
-        data:
-          entity_id: media_player.spotify
-          shuffle: true
-
-      - service: media_player.select_source
+      - service: spotcast.start
         data_template: 
-          entity_id: media_player.spotify
-          source: >
+          random_song: true
+          entity_id: >
             {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
             {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
             {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
@@ -351,6 +356,40 @@ spotify_playlist:
             {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
             {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
             {% endif %}
+          uri: >
+            {% if is_state("input_select.spotify_playlist", "Discover Weekly") %} spotify:playlist:37i9dQZEVXcF02v937YitR
+            {% elif is_state("input_select.spotify_playlist", "Release Radar") %} spotify:playlist:37i9dQZEVXbsGN3LDZyrGj
+            {% elif is_state("input_select.spotify_playlist", "Bangin Christmas Party") %} spotify:playlist:633RtvT7zVhV3tjBZUxf04
+            {% elif is_state("input_select.spotify_playlist", "Bangin Dinner Party") %} spotify:playlist:6VhS4TX0DK8VKbbGwqwc7T
+            {% elif is_state("input_select.spotify_playlist", "CRJ Radio") %} spotify:playlist:37i9dQZF1E4EmGFMzkENF2
+            {% elif is_state("input_select.spotify_playlist", "Sunset Mix") %} spotify:playlist:7IgLb3ItiKBeV9FjR7FdJt
+            {% elif is_state("input_select.spotify_playlist", "Chillout Mix") %} spotify:playlist:2JdIVh1n5CXBzXGHU5JIwo
+            {% elif is_state("input_select.spotify_playlist", "Beats Mix") %} spotify:playlist:2nj2wZuB216lBaUfAmlrOP
+            {% endif %}
+
+
+spotify_playlist_old:
+    alias: Play Spotify Playlist Broke
+    sequence:
+      - service: media_player.select_source
+        data_template: 
+          entity_id: media_player.spotify
+          source: >
+            {% if is_state("input_select.chromecast_radio", "Kitchen") %} Kitchen
+            {% elif is_state("input_select.chromecast_radio", "Living Room") %} Radio
+            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} Main Floor
+            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} Main and Basement
+            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} Bedroom
+            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} All Indoor
+            {% elif is_state("input_select.chromecast_radio", "Garage") %} Garage
+            {% elif is_state("input_select.chromecast_radio", "Deck") %} Deck
+            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} All Indoor and Outdoor
+            {% endif %}
+
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
 
       - service: media_player.play_media
         data_template:
