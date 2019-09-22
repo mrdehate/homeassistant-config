@@ -19,6 +19,8 @@ default_config:     # default config
 fastdotcom:         # Fast.com speed test
 wake_on_lan:        # enables `wake_on_lan` domain
 discovery:          # Discover some devices automatically
+  ignore:
+    - apple_tv
 
 # Includes
 group: !include groups.yaml
@@ -35,7 +37,12 @@ http:
 #  ssl_certificate: /ssl/fullchain.pem
 #  ssl_key: /ssl/privkey.pem
   
-
+#########################
+# Google
+#########################
+google:
+  client_id: !secret google_id
+  client_secret: !secret google_secret
 
 #########################
 # Weather
@@ -43,12 +50,12 @@ http:
 sun:
 
 weather:
-  - platform: darksky
-    api_key: !secret darksky_api
-    mode: daily
   - platform: openweathermap
     api_key: !secret openweathermap_api
     mode: freedaily
+#  - platform: darksky
+#    api_key: !secret darksky_api
+#    mode: daily
 
 #########################
 # Sensors
@@ -103,6 +110,19 @@ panel_custom:
     sidebar_title: Z-Wave Graph
     sidebar_icon: mdi:access-point-network
     url_path: zwave
+
+#########################
+# HACS
+#########################
+hacs:
+  token: !secret hacs_github_token
+  theme: true
+
+#########################
+# Pi Hole
+#########################
+pi_hole:
+  host: !secret pihole_host
 
 #########################
 # Text to speech
@@ -170,7 +190,14 @@ device_tracker:
     current_location: true
   - platform: netgear
     password: !secret router_password
-    exclude: living_room
+#    accesspoints: true
+    accesspoints:
+      - !secret router_orbi_mac
+      - !secret upstairs_orbi_mac
+      - !secret garage_orbi_mac
+    devices:
+      - !secret molly_mobile_mac
+      - !secret markd_mobile_mac
 
 zone:
   - name: Home
@@ -188,6 +215,14 @@ zone:
     longitude: !secret ao_longitude
     radius: 540
     icon: mdi:worker
+
+#########################
+# Spotcast
+#########################
+spotcast:
+  username: !secret spotify_username
+  password: !secret spotify_password
+
 
 #########################
 # Radio Player Config
@@ -225,5 +260,42 @@ input_select:
   spotify_playlist:
     name: 'Select Playlist:'
     options:
-      - Test 1
-      - Test 2
+      - Discover Weekly
+      - Release Radar
+      - Bangin Christmas Party
+      - Bangin Dinner Party
+      - CRJ Radio
+      - Sunset Mix
+      - Chillout Mix
+      - Beats Mix
+
+#########################
+# Logging
+#########################
+recorder:
+  purge_keep_days: 8
+  exclude:
+    entities:
+      - sensor.date
+      - sensor.date_time
+      - sensor.date_time_iso
+      - sensor.time_date
+      - sensor.internet_time
+      - sensor.time_utc
+      - sensor.time
+      - sensor.memory_free
+      - sensor.memory_use_percent
+      - sensor.disk_use_percent
+      - sensor.processor_use
+      - sensor.rbr50_gateway_bytes_received
+      - sensor.rbr50_gateway_bytes_sent
+      - sensor.rbr50_gateway_kbyte_sec_received
+      - sensor.rbr50_gateway_kbyte_sec_sent
+      - sensor.rbr50_gateway_packets_received
+      - sensor.rbr50_gateway_packets_sec_received
+      - sensor.rbr50_gateway_packets_sec_sent
+      - sensor.rbr50_gateway_packets_sent
+    domains:
+      - updater
+      - zone
+      - zwave
