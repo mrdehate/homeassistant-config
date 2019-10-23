@@ -28,3 +28,12 @@ binary_sensor.kitchen_door_garage:
 
 binary_sensor.bedroom_door_mollys_closet:
   icon: mdi:door
+
+sensor.kitchen_multi_battery:
+  device_class: battery
+
+sensor.garage_multi_battery:
+  device_class: battery
+
+sensor.bedroom_multi_battery:
+  device_class: battery
