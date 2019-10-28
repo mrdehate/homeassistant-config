@@ -12,6 +12,7 @@
 !www/
 !www/images/
 !www/images/radio/
+!themes/
 
 # Ignore folders.
 .storage
