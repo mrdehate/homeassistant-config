@@ -81,7 +81,7 @@
   action:
     - service: cover.close_cover
       entity_id: cover.garage_door
-    - service: notify.notify_pixel_3
+    - service: notify.mark
       data:
         message: 'Hey I closed the garage door for you!'
 
@@ -811,6 +811,9 @@
     - service: homeassistant.turn_off
       data:
         entity_id: group.all_switches
+    - service: notify.mark
+      data:
+        message: 'BYE! I turned everything off for you.'
 
 # Turn on main floor lights when someone arrives home and it's dark
 - id: 'lightsononarrival'
@@ -893,9 +896,9 @@
       entity_id: cover.garage_door
       state: 'open'
   action:
-    - service: notify.notify_pixel_3
+    - service: notify.molly_and_mark
       data:
-        message: 'The garage door is open!'
+        message: 'Hey the garage door is open!'
 
 
 #########################
