@@ -18,6 +18,7 @@ cloud:
 default_config:     # default config
 fastdotcom:         # Fast.com speed test
 wake_on_lan:        # enables `wake_on_lan` domain
+zeroconf:
 discovery:          # Discover some devices automatically
   ignore:
     - apple_tv
@@ -53,6 +54,10 @@ weather:
   - platform: openweathermap
     api_key: !secret openweathermap_api
     mode: freedaily
+  - platform: nws
+    api_key: !secret nws_api
+    station: KLAN
+    mode: daynight
 #  - platform: darksky
 #    api_key: !secret darksky_api
 #    mode: daily
@@ -166,16 +171,28 @@ media_extractor:
 # Notifications
 #########################
 notify:
-  - platform: webostv
+  - name: livingroom_tv
+    platform: webostv
     host: !secret ip_tv
-    name: livingroom_tv
 
-  - platform: html5
-    name: notify
+  - name: html5
+    platform: html5
     vapid_pub_key: !secret vapid_pub_key
     vapid_prv_key: !secret vapid_prv_key
     vapid_email: !secret vapid_email
     
+  - name: molly_and_mark
+    platform: group
+    services:
+      - service: html5_pixel3
+      - service: mobile_app_markd_mobile_app
+
+  - name: mark
+    platform: group
+    services:
+      - service: html5_pixel3
+      - service: mobile_app_markd_mobile_app
+
 #########################
 # Presence Detection
 #########################
