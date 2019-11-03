@@ -34,6 +34,8 @@
       friendly_name: "Garage Multi Sensor Battery"
       entity_id: zwave.sensor_garage_multi
       unit_of_measurement: '%'
+    time_12hr:
+      value_template: "{{ as_timestamp(states('sensor.date_time_iso')) | timestamp_custom('%-I:%M') }}"
 
 - platform: systemmonitor
   resources:
