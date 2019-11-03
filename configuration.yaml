@@ -58,9 +58,9 @@ weather:
     api_key: !secret nws_api
     station: KLAN
     mode: daynight
-#  - platform: darksky
-#    api_key: !secret darksky_api
-#    mode: daily
+  - platform: darksky
+    api_key: !secret darksky_api
+    mode: daily
 
 #########################
 # Sensors
