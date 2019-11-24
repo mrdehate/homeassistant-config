@@ -300,6 +300,7 @@ recorder:
       - sensor.internet_time
       - sensor.time_utc
       - sensor.time
+      - sensor.time_12hr
       - sensor.memory_free
       - sensor.memory_use_percent
       - sensor.disk_use_percent
