@@ -185,7 +185,7 @@ notify:
     platform: group
     services:
       - service: html5_pixel3
-      - service: mobile_app_markd_mobile_app
+      - service: mobile_app_markd_mobile_app 
 
   - name: mark
     platform: group
@@ -240,6 +240,15 @@ spotcast:
   username: !secret spotify_username
   password: !secret spotify_password
 
+#########################
+# Camera
+#########################
+camera:
+  - platform: foscam
+    ip: !secret foscam_ip
+    rtsp_port: !secret foscam_rtsp_port
+    username: !secret foscam_username
+    password: !secret foscam_password
 
 #########################
 # Radio Player Config
