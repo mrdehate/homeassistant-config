@@ -1,4 +1,4 @@
-- name: Home
+- name: home
   entities:
     light.kitchen_entry_level: off
     light.kitchen_side_level: on
@@ -9,7 +9,7 @@
     light.living_room_accent: on
     light.living_room: on
     light.main_floor_accents: off
-- name: Away
+- name: away
   entities:
     switch.deck_lights: off
     switch.outdoor_driveway_light: off
@@ -30,7 +30,10 @@
     switch.basement_lights_north: off
     switch.basement_lights_south: off
     switch.basement_stairs: off
-- name: Goodnight
+    switch.diningroom_south: off
+    switch.dome_plugin: off
+    switch.livingroom_south: off
+- name: goodnight
   entities:
     switch.deck_lights: off
     switch.outdoor_driveway_light: off
@@ -51,6 +54,9 @@
     switch.basement_lights_south: off
     switch.basement_stairs: off
 #    light.bedroom: off
+    switch.diningroom_south: off
+    switch.dome_plugin: off
+    switch.livingroom_south: off
 - name: tv
   entities:
     light.kitchen_entry_level: off
@@ -62,3 +68,13 @@
 #    light.living_room_accent: on
     light.living_room: on
     light.main_floor_accents: on
+- name: christmas
+  entities:
+    switch.diningroom_south: on
+    switch.dome_plugin: on
+    switch.livingroom_south: on
+- name: christmas_off
+  entities:
+    switch.diningroom_south: off
+    switch.dome_plugin: off
+    switch.livingroom_south: off
