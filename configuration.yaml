@@ -267,6 +267,9 @@ input_select:
       - Amp Radio Calgary
       - Groove Salad
       - Deep House Lounge
+      - Smooth Jazz XMas
+      - 96.1 WHNN
+      - Pop Christmas
 
   chromecast_radio:
     name: 'Select Speakers:'
