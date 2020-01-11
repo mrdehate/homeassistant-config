@@ -771,6 +771,49 @@
     data:
       entity_id: light.bedroom_mollys_closet
 
+
+#-----------------------------|
+# Bedroom - Under Bed Lights  |
+#-----------------------------|
+# GOAL: use strip lights under bed to turn on when someone gets up to use the bathroom in the middle of the night
+# Could use bed sensors, but haven't found them especially reliable so far
+
+# Turn on under bed lights when motion and dark
+- id: bedroomnightlighton
+  alias: Bedroom Nightlight - On
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bedroom_motion
+    to: 'on'
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.bedroom_multi_luminance
+    below: 2
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.bedroom_bed_lights
+
+
+# Turn off under bed lights when dark and no motion
+- id: bedroomnightlightoff
+  alias: Bedroom Nightlight - Off
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bedroom_motion
+    to: 'off'
+    for:
+      seconds: 10
+  condition:
+  - condition: state
+    entity_id: light.bedroom_bed_lights
+    state: 'on'
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.bedroom_bed_lights
+
+
 #########################
 # Presence              #
 #########################
@@ -985,6 +1028,7 @@
   - service: hassio.addon_restart
     data:
       addon: core_letsencrypt
+
 #####################
 ## Christmas
 #####################
