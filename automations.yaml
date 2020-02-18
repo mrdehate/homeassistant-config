@@ -32,7 +32,7 @@
   - service: homeassistant.turn_on
     entity_id: light.kitchen_entry_level
 
-    # Turn on garage lights when door opens
+# Turn on garage lights when door opens
 # IF sun is down
 - id: garagelightson
   alias: Garage Door Lights On
@@ -65,6 +65,48 @@
   action:
   - service: homeassistant.turn_off
     entity_id: switch.garage_light
+
+# Turn on garage lights when motion in garage and
+# IF sun is down AND it's dark
+- id: garagelightson
+  alias: Garage Door Lights On
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.garage_motion
+    to: 'on'
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.garage_multi_luminance
+    below: 2
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - service: homeassistant.turn_on
+    entity_id: switch.garage_light
+
+# Turn off garage lights when motion stops
+# IF sun is down
+- id: garagelightsoff
+  alias: Garage Door Lights Off
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.garage_motion
+    from: 'on'
+    to: 'off'
+    for:
+      minutes: 10
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  - condition: state
+    entity_id: switch.garage_light
+    state: 'on'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: switch.garage_light
+
 
 # Make sure garage door is closed at night
 - id: garagedoorautoclose
@@ -530,12 +572,10 @@
       entity_id: zwave.button_bedroom_hank_four
       scene_id: 3
   action:
-  - service: homeassistant.turn_on
-    data:
-      entity_id: light.marks_light
-  - service: homeassistant.turn_on
-    data:
-      entity_id: light.mollys_light
+  - service: light.turn_on
+    entity_id: light.bedroom_marks_light
+  - service: light.turn_on
+    entity_id: light.bedroom_mollys_light
 
 # Turn off bedroom lamps with Hank controller
 - id: bedroomlampsoff
@@ -547,12 +587,10 @@
       entity_id: zwave.button_bedroom_hank_four
       scene_id: 4
   action:
-  - service: homeassistant.turn_off
-    data:
-      entity_id: light.marks_light
-  - service: homeassistant.turn_off
-    data:
-      entity_id: light.mollys_light
+  - service: light.turn_off
+    entity_id: light.bedroom_marks_light
+  - service: light.turn_off
+    entity_id: light.bedroom_mollys_light
 
 # Set lamp brightness to 75%
 - id: bedroomlampsbrightup
@@ -564,13 +602,13 @@
       scene_id: 2
       entity_id: zwave.button_bedroom_hank_four
   action:
-  - service: homeassistant.turn_on
+  - service: light.turn_on
+    entity_id: light.bedroom_marks_light
     data:
-      entity_id: light.marks_light
       brightness_pct: 75
-  - service: homeassistant.turn_on
+  - service: light.turn_on
+    entity_id: light.bedroom_mollys_light
     data:
-      entity_id: light.mollys_light
       brightness_pct: 75
 
 # Set lamp brightness to 25%
@@ -585,11 +623,11 @@
   action:
   - service: homeassistant.turn_on
     data:
-      entity_id: light.marks_light
+      entity_id: light.bedroom_marks_light
       brightness_pct: 25
   - service: homeassistant.turn_on
     data:
-      entity_id: light.mollys_light
+      entity_id: light.bedroom_mollys_light
       brightness_pct: 25
 
 #------------------------
@@ -935,7 +973,7 @@
     minutes: /10
     seconds: 0
   - platform: state
-    entity_id: binary_sensor.livingroom_door
+    entity_id: binary_sensor.livingroom_door_slider
     to: 'off'
   condition:
     condition: and
@@ -944,7 +982,10 @@
       entity_id: switch.attic_house_fan
       state: 'on'
     - condition: state
-      entity_id: binary_sensor.livingroom_door
+      entity_id: binary_sensor.livingroom_door_slider
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.livingroom_door_front
       state: 'off'
     - condition: or
       conditions:
