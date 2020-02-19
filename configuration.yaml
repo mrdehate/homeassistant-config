@@ -3,6 +3,7 @@
 #########################
 zwave:
   usb_path: /dev/ttyACM0
+  config_path: /config/ozw_config/openzwave/config/
 
 # Zigbee
 #zha:
@@ -28,6 +29,7 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+light: !include lights.yaml
 
 frontend:
   themes: !include_dir_merge_named themes
@@ -88,6 +90,24 @@ binary_sensor:
           {%- else -%}
           true
           {%- endif -%}
+      garage_motion:
+        friendly_name: 'Garage Motion'
+        device_class: motion
+        value_template: >-
+          {%- if is_state('sensor.garage_multi_burglar', '0') -%}
+          false
+          {%- else -%}
+          true
+          {%- endif -%}
+      office_motion:
+        friendly_name: 'Office Motion'
+        device_class: motion
+        value_template: >-
+          {%- if is_state('sensor.office_multi_burglar', '0') -%}
+          false
+          {%- else -%}
+          true
+          {%- endif -%}
       bed_mark:
         friendly_name: 'In Bed - Mark'
         device_class: presence
@@ -121,7 +141,6 @@ panel_custom:
 #########################
 hacs:
   token: !secret hacs_github_token
-  theme: true
 
 #########################
 # Pi Hole
@@ -156,14 +175,10 @@ cover:
 # Media
 #########################
 media_player:
-  - platform: spotify
-    client_id: !secret spotify_id
-    client_secret: !secret spotify_secret
 
-# TV
-  - platform: webostv
-    name: Living Room TV
-    host: !secret ip_tv
+spotify:
+  client_id: !secret spotify_id
+  client_secret: !secret spotify_secret
 
 media_extractor:
 
@@ -171,10 +186,6 @@ media_extractor:
 # Notifications
 #########################
 notify:
-  - name: livingroom_tv
-    platform: webostv
-    host: !secret ip_tv
-
   - name: html5
     platform: html5
     vapid_pub_key: !secret vapid_pub_key
@@ -205,16 +216,6 @@ device_tracker:
     client_id: !secret automatic_id
     secret: !secret automatic_secret
     current_location: true
-  - platform: netgear
-    password: !secret router_password
-#    accesspoints: true
-    accesspoints:
-      - !secret router_orbi_mac
-      - !secret upstairs_orbi_mac
-      - !secret garage_orbi_mac
-    devices:
-      - !secret molly_mobile_mac
-      - !secret markd_mobile_mac
 
 zone:
   - name: Home
