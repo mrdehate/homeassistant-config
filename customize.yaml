@@ -14,7 +14,7 @@ binary_sensor.bedroom_window_south:
 binary_sensor.bedroom_window_north:
   icon: mdi:window-closed
 
-binary_sensor.window_office:
+binary_sensor.office_window:
   icon: mdi:window-closed
 
 binary_sensor.livingroom_door_slider:
@@ -23,7 +23,7 @@ binary_sensor.livingroom_door_slider:
 binary_sensor.livingroom_door_front:
   icon: mdi:door
   
-binary_sensor.kitchen_door_garage:
+binary_sensor.kitchen_entry_door:
   icon: mdi:door
 
 binary_sensor.bedroom_door_mollys_closet:
@@ -36,4 +36,7 @@ sensor.garage_multi_battery:
   device_class: battery
 
 sensor.bedroom_multi_battery:
+  device_class: battery
+
+sensor.office_multi_battery:
   device_class: battery
