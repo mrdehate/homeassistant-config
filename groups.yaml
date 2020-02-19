@@ -69,12 +69,6 @@ Basement:
     - switch.basement_lights_north
     - switch.basement_lights_south
 
-Bedroom_Lamps:
-    name: Bedroom Lamps
-    entities:
-    - light.marks_light
-    - light.mollys_light
-
 Bedroom_Status:
     name: Bedroom Status
     entities:
