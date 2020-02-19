@@ -34,8 +34,8 @@
 
 # Turn on garage lights when door opens
 # IF sun is down
-- id: garagelightson
-  alias: Garage Door Lights On
+- id: garagelightsondoor
+  alias: Garage Door Lights On Door Open
   trigger:
   - platform: state
     entity_id: cover.garage_door
@@ -51,8 +51,8 @@
 
 # Turn off garage lights when door closes
 # IF sun is down
-- id: garagelightsoff
-  alias: Garage Door Lights Off
+- id: garagelightsoffdoor
+  alias: Garage Door Lights Off Door Close
   trigger:
   - platform: state
     entity_id: cover.garage_door
@@ -68,8 +68,8 @@
 
 # Turn on garage lights when motion in garage and
 # IF sun is down AND it's dark
-- id: garagelightson
-  alias: Garage Door Lights On
+- id: garagelightsmotion
+  alias: Garage Door Lights On Motion
   trigger:
   - platform: state
     entity_id: binary_sensor.garage_motion
@@ -87,8 +87,8 @@
 
 # Turn off garage lights when motion stops
 # IF sun is down
-- id: garagelightsoff
-  alias: Garage Door Lights Off
+- id: garagelightsoffmotion
+  alias: Garage Door Lights Off Motion
   trigger:
   - platform: state
     entity_id: binary_sensor.garage_motion
