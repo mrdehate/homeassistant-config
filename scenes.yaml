@@ -9,30 +9,41 @@
     light.living_room_accent: on
     light.living_room: on
     light.main_floor_accents: off
+
 - name: away
   entities:
     switch.deck_lights: off
     switch.outdoor_driveway_light: off
     switch.outdoor_front_porch_light: off
+    switch.outdoor_front_house_light: off
     switch.garage_light: off
+
     light.kitchen_entry_level: off
     light.kitchen_side_level: off
     light.kitchen_main_level: off
     light.kitchen_center_level: off
-    switch.outdoor_front_house_light: off
+
     switch.radio_amp: off
     light.dining_room_accent: off
     light.dining_room: off
     light.living_room_accent: off
     light.living_room: off
-    light.bedroom: off
     light.main_floor_accents: off
-    switch.basement_lights_north: off
-    switch.basement_lights_south: off
-    switch.basement_stairs: off
     switch.diningroom_south: off
     switch.dome_plugin: off
     switch.livingroom_south: off
+
+    light.bedroom: off
+    light.bedroom_main_level: off
+    light.bedroom_side_level: off
+
+    switch.basement_lights_north: off
+    switch.basement_lights_south: off
+    switch.basement_stairs: off
+
+    light.basement_office_level: off
+    switch.office_spaceheater: off
+
 - name: goodnight
   entities:
     switch.deck_lights: off
@@ -40,23 +51,30 @@
     switch.outdoor_front_porch_light: off
     switch.outdoor_front_house_light: off
     switch.garage_light: off
+
     light.kitchen_entry_level: off
     light.kitchen_side_level: off
     light.kitchen_main_level: off
     light.kitchen_center_level: off
+
     switch.radio_amp: off
-#    light.dining_room_accent: off
+    light.dining_room_accent: off
     light.dining_room: off
-#    light.living_room_accent: off
+    light.living_room_accent: off
     light.living_room: off
     light.main_floor_accents: off
-    switch.basement_lights_north: off
-    switch.basement_lights_south: off
-    switch.basement_stairs: off
 #    light.bedroom: off
     switch.diningroom_south: off
     switch.dome_plugin: off
     switch.livingroom_south: off
+
+    switch.basement_lights_north: off
+    switch.basement_lights_south: off
+    switch.basement_stairs: off
+
+    light.basement_office_level: off
+    switch.office_spaceheater: off
+
 - name: tv
   entities:
     light.kitchen_entry_level: off
