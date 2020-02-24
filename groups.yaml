@@ -1,38 +1,3 @@
-default_view:
-    view: true
-    name: Lights
-    entities:
-    - group.Main
-    - group.Outdoor
-    - group.Garage
-    - group.Kitchen
-    - group.Basement
-
-Audio:
-    view: true
-    name: Audio
-    entities:
-    - media_player.spotify
-    - switch.radio_amp
-    - switch.deck_amp
-    - switch.garage_amp
-    - automation.amp_auto_on_radio
-    - automation.amp_auto_off_radio
-    - automation.amp_auto_on_deck
-    - automation.amp_auto_off_deck
-    - automation.amp_auto_on_garage
-    - automation.amp_auto_off_garage
-    
-Upstairs:
-    view: true
-    name: Upstairs
-    entities:
-    - group.Bedroom_Lights
-    - switch.wemo_large
-    - switch.wemo_mini
-    - group.Bedroom_Status
-    - switch.attic_house_fan
-
 Outdoor:
     name: Outdoor Lights
     entities:
@@ -41,12 +6,6 @@ Outdoor:
     - switch.outdoor_front_porch_light
     - switch.deck_lights
 
-Garage:
-    name: Garage
-    entities:
-    - cover.garage_door
-    - switch.garage_light
-
 Kitchen:
     name: Kitchen
     entities:
@@ -54,20 +13,6 @@ Kitchen:
     - light.kitchen_entry_level
     - light.kitchen_main_level
     - light.kitchen_center_level
-
-Main: 
-    name: Main
-    entities:
-    - light.dining_room
-    - light.living_room
-    - light.main_floor_accents
-    
-Basement: 
-    name: Basement
-    entities:
-    - switch.basement_stairs
-    - switch.basement_lights_north
-    - switch.basement_lights_south
 
 Bedroom_Status:
     name: Bedroom Status
@@ -84,43 +29,3 @@ Molly_and_Mark:
     entities:
     - device_tracker.mark_md
     - device_tracker.molly_243f96aa_487a_47fe_a4a4_9c7729a4fea8
-
-Scenes:
-    view: true
-    name: Automation
-    entities:
-    - scene.away
-    - scene.goodnight
-    - scene.tv
-    - automation.lights_off_when_home_empty
-    - automation.garage_door_lights_on
-    - automation.garage_door_lights_off
-    
-Batteries:
-    name: Batteries
-    entities:
-    - zwave.sensor_bedroom_multi
-    - zwave.sensor_lr_door_slider
-    - sensor.bedroom_multi_battery
-    - sensor.hank_four_button_battery
-    - sensor.hank_one_button_battery
-    - sensor.bedroom_window_north_battery
-    - sensor.bedroom_window_south_battery
-    - sensor.livingroom_door_slider_battery
-    - sensor.kitchen_multi_battery
-
-Sensors:
-    view: true
-    name: Sensors
-    entities:
-    - sensor.bedroom_multi_relative_humidity
-    - sensor.bedroom_multi_temperature
-    - sensor.bedroom_multi_luminance
-    - sensor.kitchen_multi_relative_humidity
-    - sensor.kitchen_multi_temperature
-    - sensor.kitchen_multi_luminance
-    - binary_sensor.bedroom_motion
-    - binary_sensor.kitchen_motion
-    - binary_sensor.bedroom_window_north_status
-    - binary_sensor.bedroom_window_south_status
-    - binary_sensor.livingroom_door_status
