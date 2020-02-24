@@ -195,14 +195,13 @@ notify:
   - name: molly_and_mark
     platform: group
     services:
-      - service: html5_pixel3
-      - service: mobile_app_markd_mobile_app 
+      - service: mobile_app_pixel_3
+      - service: mobile_app_molly_dehate
 
   - name: mark
     platform: group
     services:
-      - service: html5_pixel3
-      - service: mobile_app_markd_mobile_app
+      - service: mobile_app_pixel_3
 
 #########################
 # Presence Detection
