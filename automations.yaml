@@ -172,18 +172,28 @@
   - platform: state
     entity_id: media_player.radio
     to: 'off'
+    for:
+      seconds: 60
   - platform: state
     entity_id: media_player.all_indoor
     to: 'off'
+    for:
+      seconds: 60
   - platform: state
     entity_id: media_player.all_indoor_and_outdoor
     to: 'off'
+    for:
+      seconds: 60
   - platform: state
     entity_id: media_player.main_floor
     to: 'off'
+    for:
+      seconds: 60
   - platform: state
     entity_id: media_player.main_and_basement
     to: 'off'
+    for:
+      seconds: 60
   condition:
   - condition: state
     entity_id: switch.radio_amp
@@ -220,12 +230,18 @@
   - platform: state
     entity_id: media_player.deck
     to: 'off'
+    for:
+      seconds: 60
   - platform: state
     entity_id: media_player.all_outdoor
     to: 'off'
+    for:
+      seconds: 60
   - platform: state
     entity_id: media_player.all_indoor_and_outdoor
     to: 'off'
+    for:
+      seconds: 60
   condition:
   - condition: state
     entity_id: switch.deck_amp
@@ -261,12 +277,18 @@
   - platform: state
     entity_id: media_player.garage
     to: 'off'
+    for:
+      seconds: 60
   - platform: state
     entity_id: media_player.all_outdoor
     to: 'off'
+    for:
+      seconds: 60
   - platform: state
     entity_id: media_player.all_indoor_and_outdoor
     to: 'off'
+    for:
+      seconds: 60
   condition:
   - condition: state
     entity_id: switch.garage_amp
@@ -303,12 +325,18 @@
   - platform: state
     entity_id: media_player.all_indoor
     to: 'off'
+    for:
+      seconds: 60
   - platform: state
     entity_id: media_player.all_indoor_and_outdoor
     to: 'off'
+    for:
+      seconds: 60
   - platform: state
     entity_id: media_player.bedroom
     to: 'off'
+    for:
+      seconds: 60
   condition:
   - condition: state
     entity_id: switch.bedroom_radio
@@ -943,6 +971,8 @@
   - service: script.turn_on
     entity_id: script.welcome_home_music_molly
 
+# Send notification if garage door left open
+# h/t https://www.home-assistant.io/blog/2020/02/11/android-16-17-release/
 - id: garagedooropennotification
   alias: Garage Door Open Notification
   trigger:
@@ -960,7 +990,21 @@
   - service: notify.molly_and_mark
     data:
       message: Hey the garage door is open!
+      data:
+        actions:
+          - action: "close_garage" # The key you are sending for the event
+            title: "Close Garage Door" # The button title
 
+- id: garagedoorclosenotification
+  alias: Close the garage when notification action is tapped
+  trigger:
+    platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: close_garage
+  action:
+    service: cover.close_cover
+    entity_id: cover.garage_door
 
 #########################
 # Whole House Fan       #
