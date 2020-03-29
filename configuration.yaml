@@ -253,23 +253,26 @@ camera:
 #########################
 # Radio Player Config
 #########################
+# Adding an audio destination? Add it to these places:
+# input_select - chromecast_radio_value
+# input_select - chromecast_radio
+# automation - sync_radio_input_selects
+
 input_select:
-  radio_station:
-    name: 'Select Radio Station:'
+  chromecast_radio_value:
+    name: 'Selected Speaker:'
     options:
-      - BBC Radio 1
-      - BBC Radio 1 Xtra
-      - WIOG 102.5
-      - RTE 2FM
-      - Hotmix Japan
-      - The Bounce 105.1
-      - NRJ Sweden
-      - Amp Radio Calgary
-      - Groove Salad
-      - Deep House Lounge
-      - Smooth Jazz XMas
-      - 96.1 WHNN
-      - Pop Christmas
+      - media_player.kitchen
+      - media_player.radio
+      - media_player.main_floor
+      - media_player.main_and_basement
+      - media_player.bedroom
+      - media_player.basement
+      - media_player.all_indoor
+      - media_player.garage
+      - media_player.deck
+      - media_player.all_indoor_and_outdoor
+    initial: media_player.kitchen
 
   chromecast_radio:
     name: 'Select Speakers:'
@@ -278,6 +281,7 @@ input_select:
       - Living Room
       - Main Floor
       - Main and Basement
+      - Basement
       - Bedroom
       - All Indoor
       - Garage

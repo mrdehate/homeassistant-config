@@ -136,6 +136,29 @@
 ###########################################################################
 ###########################################################################
 
+- id: syncradioinputselects
+  alias: Sync Radio Input Selects
+  trigger:
+  - platform: state
+    entity_id: input_select.chromecast_radio
+  action:
+  - service: input_select.select_option
+    data_template:
+      entity_id: input_select.chromecast_radio_value
+      option: >
+        {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+        {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+        {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+        {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+        {% elif is_state("input_select.chromecast_radio", "Basement") %} media_player.basement
+        {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+        {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+        {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+        {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
+        {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+        {% endif %}
+
+
 # Note: All of these have conditions attached to only turn off when already on, and
 # vice-versa. This is because the Chromecasts are super flaky and often flip to
 # "unavailable" randomly throughout the day, so this helps clean up the logs
