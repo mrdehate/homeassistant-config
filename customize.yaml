@@ -14,7 +14,7 @@ binary_sensor.bedroom_window_south:
 binary_sensor.bedroom_window_north:
   icon: mdi:window-closed
 
-binary_sensor.office_window:
+binary_sensor.sparebedroom_window:
   icon: mdi:window-closed
 
 binary_sensor.livingroom_door_slider:
