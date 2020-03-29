@@ -28,7 +28,8 @@
     light.dining_room: off
     light.living_room_accent: off
     light.living_room: off
-    light.main_floor_accents: off
+    light.livingroom_accent: off
+    light.diningroom_accent: off
     switch.diningroom_south: off
     switch.dome_plugin: off
     switch.livingroom_south: off
@@ -60,9 +61,10 @@
     switch.radio_amp: off
     light.dining_room_accent: off
     light.dining_room: off
-    light.living_room_accent: off
+    light.livingroom_accent: off
     light.living_room: off
-    light.main_floor_accents: off
+#    light.main_floor_accents: off
+    light.diningroom_accent: off
 #    light.bedroom: off
     switch.diningroom_south: off
     switch.dome_plugin: off
@@ -85,7 +87,7 @@
     light.dining_room: off
 #    light.living_room_accent: on
     light.living_room: on
-    light.main_floor_accents: on
+    light.livingroom_accent: off
 - name: christmas
   entities:
     switch.diningroom_south: on
