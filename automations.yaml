@@ -556,6 +556,48 @@
 
 ###########################################################################
 ###########################################################################
+# Office                ###################################################
+###########################################################################
+###########################################################################
+
+# Send notification when office space heater is on and no motion detected
+- id: officecheckforspaceheater
+  alias: Office - Space Heater Check
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.office_motion
+    to: 'off'
+    for:
+      minutes: 30
+  condition:
+  - condition: state
+    entity_id: switch.office_spaceheater
+    state: 'on'
+    for:
+      minutes: 5
+  action:
+  - service: notify.mark
+    data:
+      message: Hey the office heater is still on!
+      data:
+        actions:
+          - action: "off_office_spaceheater"
+            title: "Turn Off"
+
+- id: off_office_spaceheater
+  alias: Turn off space heater when notification action is tapped
+  trigger:
+    platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: off_office_spaceheater
+  action:
+    service: switch.turn_off
+    entity_id: switch.office_spaceheater
+
+
+###########################################################################
+###########################################################################
 # Bedroom               ###################################################
 ###########################################################################
 ###########################################################################
