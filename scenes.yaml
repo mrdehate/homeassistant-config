@@ -91,10 +91,10 @@
 - name: christmas
   entities:
     switch.diningroom_south: on
-    switch.dome_plugin: on
-    switch.livingroom_south: on
+#    switch.dome_plugin: on
+#    switch.livingroom_south: on
 - name: christmas_off
   entities:
     switch.diningroom_south: off
-    switch.dome_plugin: off
-    switch.livingroom_south: off
+#    switch.dome_plugin: off
+#    switch.livingroom_south: off
