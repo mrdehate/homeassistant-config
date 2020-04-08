@@ -104,13 +104,13 @@ radio_bbcradio1:
           media_content_id: "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p"
           media_content_type: 'audio/mpeg'
 
-radio_bbcradio1xtra:
-    alias: Radio - BBC Radio 1 Xtra
+radio_rmqfc:
+    alias: Radio - RMQFC
     sequence:
       - service: media_player.play_media
         data_template:
           entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_high/ak/bbc_radio_one.m3u8"
+          media_content_id: "http://stm3.hostingystreaming.net:20488/stream"
           media_content_type: 'audio/mpeg'
 
 radio_wiog:
@@ -158,13 +158,13 @@ radio_nrjsweden:
           media_content_id: "http://edge-bauersefm-01-cr.sharp-stream.com/nrj_instreamtest_se_mp3"
           media_content_type: 'audio/mpeg'
 
-radio_ampcalgary:
-    alias: Radio - Amp Radio Calgary
+radio_2dayfm:
+    alias: Radio - 2day FM
     sequence:
       - service: media_player.play_media
         data_template:
           entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://newcap.leanstream.co/CKMPFM-MP3"
+          media_content_id: "https://s1.hotdogradio.com/CFRI"
           media_content_type: 'audio/mpeg'
 
 radio_groovesalad:
@@ -176,13 +176,13 @@ radio_groovesalad:
           media_content_id: "http://ice3.somafm.com/groovesalad-128-mp3"
           media_content_type: 'audio/mpeg'
 
-radio_deephouselounge:
-    alias: Radio - Deep House Lounge
+radio_hipoldhop:
+    alias: Radio - Hip Old Hop
     sequence:
       - service: media_player.play_media
         data_template:
           entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://198.15.94.34:8006/stream"
+          media_content_id: "http://streaming211.radionomy.com/Hip-Old-Hop"
           media_content_type: 'audio/mpeg'
 
 radio_loungeradio:
@@ -191,7 +191,7 @@ radio_loungeradio:
       - service: media_player.play_media
         data_template:
           entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://edge3.peta.live365.net/b05055_128mp3"
+          media_content_id: "http://edge1.peta.live365.net/b05055_128mp3"
           media_content_type: 'audio/mpeg'
 
 radio_polkajammernetwork:
