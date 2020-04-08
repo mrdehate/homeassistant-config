@@ -143,12 +143,6 @@ hacs:
   token: !secret hacs_github_token
 
 #########################
-# Pi Hole
-#########################
-pi_hole:
-  host: !secret pihole_host
-
-#########################
 # Text to speech
 #########################
 tts:
