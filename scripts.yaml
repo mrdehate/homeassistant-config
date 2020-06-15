@@ -230,6 +230,15 @@ radio_xmasholidayhits:
           media_content_id: "http://rfcmedia.streamguys1.com/holidayhits.mp3"
           media_content_type: 'audio/mpeg'
 
+radio_stacks921:
+    alias: Radio - Stacks 92.1
+    sequence:
+      - service: media_player.play_media
+        data_template:
+          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+          media_content_id: "https://playerservices.streamtheworld.com/api/livestream-redirect/WQTXFM.mp3"
+          media_content_type: 'audio/mpeg'
+
 spotify_playlist:
     alias: Play Spotify Playlist
     sequence:
