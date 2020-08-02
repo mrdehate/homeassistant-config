@@ -9,14 +9,6 @@
   scan_interval:
     minutes: 5
 
-- platform: yr
-  name: Weather
-  monitored_conditions:
-    - temperature
-    - symbol
-    - precipitation
-    - humidity
-
 - platform: template
   sensors:
     time_12hr:
