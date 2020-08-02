@@ -439,13 +439,10 @@
   action:
   - service: homeassistant.turn_on
     data:
-      entity_id: switch.outdoor_front_porch_light
-  - service: homeassistant.turn_on
-    data:
-      entity_id: switch.outdoor_front_house_light
-  - service: homeassistant.turn_on
-    data:
-      entity_id: switch.outdoor_driveway_light
+      entity_id: 
+        - switch.outdoor_front_porch_light
+        - switch.outdoor_front_house_light
+        - switch.outdoor_driveway_light
 
 - id: alloutdooroff
   alias: Porch Switch - Double Tap All Off
@@ -459,13 +456,10 @@
   action:
   - service: homeassistant.turn_off
     data:
-      entity_id: switch.outdoor_front_porch_light
-  - service: homeassistant.turn_off
-    data:
-      entity_id: switch.outdoor_front_house_light
-  - service: homeassistant.turn_off
-    data:
-      entity_id: switch.outdoor_driveway_light
+      entity_id:
+        - switch.outdoor_front_porch_light
+        - switch.outdoor_front_house_light
+        - switch.outdoor_driveway_light
 
 ###########################################################################
 ###########################################################################
@@ -485,13 +479,10 @@
   action:
   - service: homeassistant.turn_on
     data:
-      entity_id: switch.basement_stairs
-  - service: homeassistant.turn_on
-    data:
-      entity_id: switch.basement_lights_south
-  - service: homeassistant.turn_on
-    data:
-      entity_id: switch.basement_lights_north
+      entity_id:
+        - switch.basement_stairs
+        - switch.basement_lights_south
+        - switch.basement_lights_north
 
 - id: allbasementoff
   alias: Basement Switch - Double Tap All Basement Off
@@ -505,13 +496,10 @@
   action:
   - service: homeassistant.turn_off
     data:
-      entity_id: switch.basement_stairs
-  - service: homeassistant.turn_off
-    data:
-      entity_id: switch.basement_lights_south
-  - service: homeassistant.turn_off
-    data:
-      entity_id: switch.basement_lights_north
+      entity_id:
+        - switch.basement_stairs
+        - switch.basement_lights_south
+        - switch.basement_lights_north
 
 - id: allkitchenon
   alias: Basement Switch - Triple Tap All Kitchen On
@@ -525,13 +513,10 @@
   action:
   - service: homeassistant.turn_on
     data:
-      entity_id: light.kitchen_center_level
-  - service: homeassistant.turn_on
-    data:
-      entity_id: light.kitchen_main_level
-  - service: homeassistant.turn_on
-    data:
-      entity_id: light.kitchen_side_level
+      entity_id:
+        - light.kitchen_center_level
+        - light.kitchen_main_level
+        - light.kitchen_side_level
 
 - id: allkitchenoff
   alias: Basement Switch - Triple Tap All Kitchen Off
@@ -545,13 +530,10 @@
   action:
   - service: homeassistant.turn_off
     data:
-      entity_id: light.kitchen_center_level
-  - service: homeassistant.turn_off
-    data:
-      entity_id: light.kitchen_main_level
-  - service: homeassistant.turn_off
-    data:
-      entity_id: light.kitchen_side_level
+      entity_id: 
+        - light.kitchen_center_level
+        - light.kitchen_main_level
+        - light.kitchen_side_level
 
 
 ###########################################################################
@@ -679,9 +661,9 @@
       scene_id: 3
   action:
   - service: light.turn_on
-    entity_id: light.bedroom_marks_light
-  - service: light.turn_on
-    entity_id: light.bedroom_mollys_light
+    entity_id:
+      - light.bedroom_marks_light
+      - light.bedroom_mollys_light
 
 # Turn off bedroom lamps with Hank controller
 - id: bedroomlampsoff
@@ -694,9 +676,9 @@
       scene_id: 4
   action:
   - service: light.turn_off
-    entity_id: light.bedroom_marks_light
-  - service: light.turn_off
-    entity_id: light.bedroom_mollys_light
+    entity_id:
+      - light.bedroom_marks_light
+      - light.bedroom_mollys_light
 
 # Set lamp brightness to 75%
 - id: bedroomlampsbrightup
@@ -709,11 +691,9 @@
       entity_id: zwave.button_bedroom_hank_four
   action:
   - service: light.turn_on
-    entity_id: light.bedroom_marks_light
-    data:
-      brightness_pct: 75
-  - service: light.turn_on
-    entity_id: light.bedroom_mollys_light
+    entity_id: 
+      - light.bedroom_marks_light
+      - light.bedroom_mollys_light
     data:
       brightness_pct: 75
 
@@ -729,11 +709,9 @@
   action:
   - service: homeassistant.turn_on
     data:
-      entity_id: light.bedroom_marks_light
-      brightness_pct: 25
-  - service: homeassistant.turn_on
-    data:
-      entity_id: light.bedroom_mollys_light
+      entity_id: 
+        - light.bedroom_marks_light
+        - light.bedroom_mollys_light
       brightness_pct: 25
 
 #------------------------
