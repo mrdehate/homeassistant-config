@@ -165,19 +165,12 @@
   alias: Amp Auto-On - Radio
   trigger:
   - platform: state
-    entity_id: media_player.radio
-    to: playing
-  - platform: state
-    entity_id: media_player.all_indoor
-    to: playing
-  - platform: state
-    entity_id: media_player.all_indoor_and_outdoor
-    to: playing
-  - platform: state
-    entity_id: media_player.main_floor
-    to: playing
-  - platform: state
-    entity_id: media_player.main_and_basement
+    entity_id:
+      - media_player.radio
+      - media_player.all_indoor
+      - media_player.all_indoor_and_outdoor
+      - media_player.main_floor
+      - media_player.main_and_basement
     to: playing
   condition:
   - condition: state
@@ -192,27 +185,12 @@
   alias: Amp Auto-Off - Radio
   trigger:
   - platform: state
-    entity_id: media_player.radio
-    to: 'off'
-    for:
-      seconds: 60
-  - platform: state
-    entity_id: media_player.all_indoor
-    to: 'off'
-    for:
-      seconds: 60
-  - platform: state
-    entity_id: media_player.all_indoor_and_outdoor
-    to: 'off'
-    for:
-      seconds: 60
-  - platform: state
-    entity_id: media_player.main_floor
-    to: 'off'
-    for:
-      seconds: 60
-  - platform: state
-    entity_id: media_player.main_and_basement
+    entity_id:
+      - media_player.radio
+      - media_player.all_indoor
+      - media_player.all_indoor_and_outdoor
+      - media_player.main_floor
+      - media_player.main_and_basement
     to: 'off'
     for:
       seconds: 60
@@ -229,13 +207,10 @@
   alias: Amp Auto-On - Deck
   trigger:
   - platform: state
-    entity_id: media_player.deck
-    to: playing
-  - platform: state
-    entity_id: media_player.all_outdoor
-    to: playing
-  - platform: state
-    entity_id: media_player.all_indoor_and_outdoor
+    entity_id:
+      - media_player.deck
+      - media_player.all_outdoor
+      - media_player.all_indoor_and_outdoor
     to: playing
   condition:
   - condition: state
@@ -250,17 +225,10 @@
   alias: Amp Auto-Off - Deck
   trigger:
   - platform: state
-    entity_id: media_player.deck
-    to: 'off'
-    for:
-      seconds: 60
-  - platform: state
-    entity_id: media_player.all_outdoor
-    to: 'off'
-    for:
-      seconds: 60
-  - platform: state
-    entity_id: media_player.all_indoor_and_outdoor
+    entity_id: 
+      - media_player.deck
+      - media_player.all_outdoor
+      - media_player.all_indoor_and_outdoor
     to: 'off'
     for:
       seconds: 60
@@ -276,13 +244,10 @@
   alias: Amp Auto-On - Garage
   trigger:
   - platform: state
-    entity_id: media_player.garage
-    to: playing
-  - platform: state
-    entity_id: media_player.all_outdoor
-    to: playing
-  - platform: state
-    entity_id: media_player.all_indoor_and_outdoor
+    entity_id: 
+      - media_player.garage
+      - media_player.all_outdoor
+      - media_player.all_indoor_and_outdoor
     to: playing
   condition:
   - condition: state
@@ -297,17 +262,10 @@
   alias: Amp Auto-Off - Garage
   trigger:
   - platform: state
-    entity_id: media_player.garage
-    to: 'off'
-    for:
-      seconds: 60
-  - platform: state
-    entity_id: media_player.all_outdoor
-    to: 'off'
-    for:
-      seconds: 60
-  - platform: state
-    entity_id: media_player.all_indoor_and_outdoor
+    entity_id: 
+      - media_player.garage
+      - media_player.all_outdoor
+      - media_player.all_indoor_and_outdoor
     to: 'off'
     for:
       seconds: 60
@@ -324,13 +282,10 @@
   alias: Amp Auto-On - Bedroom
   trigger:
   - platform: state
-    entity_id: media_player.all_indoor
-    to: playing
-  - platform: state
-    entity_id: media_player.all_indoor_and_outdoor
-    to: playing
-  - platform: state
-    entity_id: media_player.bedroom
+    entity_id: 
+      - media_player.all_indoor
+      - media_player.all_indoor_and_outdoor
+      - media_player.bedroom
     to: playing
   condition:
   - condition: state
@@ -345,17 +300,10 @@
   alias: Amp Auto-Off - Bedroom
   trigger:
   - platform: state
-    entity_id: media_player.all_indoor
-    to: 'off'
-    for:
-      seconds: 60
-  - platform: state
-    entity_id: media_player.all_indoor_and_outdoor
-    to: 'off'
-    for:
-      seconds: 60
-  - platform: state
-    entity_id: media_player.bedroom
+    entity_id: 
+      - media_player.all_indoor
+      - media_player.all_indoor_and_outdoor
+      - media_player.bedroom
     to: 'off'
     for:
       seconds: 60
