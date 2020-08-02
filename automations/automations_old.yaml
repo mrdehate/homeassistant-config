@@ -193,7 +193,7 @@
       - media_player.main_and_basement
     to: 'off'
     for:
-      seconds: 60
+      seconds: 120
   condition:
   - condition: state
     entity_id: switch.radio_amp
@@ -231,7 +231,7 @@
       - media_player.all_indoor_and_outdoor
     to: 'off'
     for:
-      seconds: 60
+      seconds: 120
   condition:
   - condition: state
     entity_id: switch.deck_amp
@@ -268,7 +268,7 @@
       - media_player.all_indoor_and_outdoor
     to: 'off'
     for:
-      seconds: 60
+      seconds: 120
   condition:
   - condition: state
     entity_id: switch.garage_amp
@@ -306,7 +306,7 @@
       - media_player.bedroom
     to: 'off'
     for:
-      seconds: 60
+      seconds: 120
   condition:
   - condition: state
     entity_id: switch.bedroom_radio
