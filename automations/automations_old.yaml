@@ -20,13 +20,10 @@
   - condition: sun
     after: sunset
   - condition: state
-    entity_id: light.kitchen_side_level
-    state: 'off'
-  - condition: state
-    entity_id: light.kitchen_center_level
-    state: 'off'
-  - condition: state
-    entity_id: light.kitchen_main_level
+    entity_id: 
+      - light.kitchen_side_level
+      - light.kitchen_center_level
+      - light.kitchen_main_level
     state: 'off'
   - condition: numeric_state
     entity_id: sensor.kitchen_multi_luminance
