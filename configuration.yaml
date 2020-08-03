@@ -9,10 +9,16 @@ zwave:
 #zha:
 #  usb_path: /dev/ttyUSB0
 #  database_path: /config/zigbee.db
+zha_map:
   
 homeassistant:
   # Customization file
   customize: !include customize.yaml
+
+logger:
+  default: info
+  logs:
+    homeassistant.components.zha: notset
 
 # introduction:     # Show links to resources in log and frontend
 cloud:
@@ -27,6 +33,7 @@ discovery:          # Discover some devices automatically
 # Includes
 group: !include groups.yaml
 automation: !include automations.yaml
+automation old: !include_dir_merge_list automations
 script: !include scripts.yaml
 scene: !include scenes.yaml
 light: !include lights.yaml
@@ -45,6 +52,11 @@ http:
 google:
   client_id: !secret google_id
   client_secret: !secret google_secret
+
+google_domains:
+  domain: !secret google_ddns_domain
+  username: !secret google_ddns_id
+  password: !secret google_ddns_pw
 
 #########################
 # Weather
