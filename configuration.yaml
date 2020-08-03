@@ -36,7 +36,6 @@ frontend:
 
 http:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  base_url: !secret base_url
 #  ssl_certificate: /ssl/fullchain.pem
 #  ssl_key: /ssl/privkey.pem
   
@@ -56,10 +55,6 @@ weather:
   - platform: openweathermap
     api_key: !secret openweathermap_api
     mode: freedaily
-  - platform: nws
-    api_key: !secret nws_api
-    station: KLAN
-    mode: daynight
   - platform: darksky
     api_key: !secret darksky_api
     mode: daily
@@ -156,14 +151,6 @@ arlo:
   username: !secret arlo_username
   password: !secret arlo_password
 
-#########################
-# Garage Door
-#########################
-cover:
-  - platform: gogogate2
-    username: !secret garagedoor_username
-    password: !secret garagedoor_password
-    ip_address: !secret garagedoor_ip
 
 #########################
 # Media
@@ -205,10 +192,6 @@ owntracks:
     waypoints: false # disable owntracks from reporting regions - prevents overlapping homes
 
 device_tracker:
-  - platform: automatic
-    client_id: !secret automatic_id
-    secret: !secret automatic_secret
-    current_location: true
 
 zone:
   - name: Home
