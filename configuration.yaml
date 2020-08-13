@@ -4,6 +4,13 @@
 zwave:
   usb_path: /dev/ttyACM0
   config_path: /config/ozw_config/openzwave/config/
+  device_config:
+    light.nursery_fan_level:
+      refresh_value: true
+      polling_intensity: 1
+    light.nursery_light_level:
+      refresh_value: true
+      polling_intensity: 1
 
 # Zigbee
 #zha:
@@ -133,6 +140,39 @@ binary_sensor:
           {%- else -%}
           true
           {%- endif -%}
+
+#########################
+# Fan
+#########################
+fan:
+  - platform: template
+    fans:
+      nursery_fan:
+        friendly_name: "Nursery Fan"
+        value_template: "{{ states('light.nursery_fan_level') }}"
+        speed_template: >
+          {% set output = {0: 'off', 85: 'low', 170: 'medium', 255: 'high'} %}
+          {% set idx = state_attr('light.nursery_fan_level', 'brightness') %}
+          {{ output[idx] }}
+        turn_on:
+          service: light.turn_on
+          entity_id: light.nursery_fan_level
+        turn_off:
+          service: light.turn_off
+          entity_id: light.nursery_fan_level
+        set_speed:
+          service: light.turn_on
+          entity_id: light.nursery_fan_level
+          data_template:
+            brightness: >
+              {% set mapper = {'off' : 0, 'low': 85, 'medium': 170, 'high': 255} %}
+              {{ mapper[speed] }}
+        speeds:
+          - 'off'
+          - 'low'
+          - 'medium'
+          - 'high'
+
 
 #########################
 # Custom Panel
