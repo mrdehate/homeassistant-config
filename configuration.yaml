@@ -250,12 +250,12 @@ zone:
     latitude: !secret wfs_latitude
     longitude: !secret wfs_longitude
     radius: 90
-    icon: mdi:worker
+    icon: mdi:account-hard-hat
   - name: A-O
     latitude: !secret ao_latitude
     longitude: !secret ao_longitude
     radius: 540
-    icon: mdi:worker
+    icon: mdi:account-hard-hat
 
 #########################
 # Spotcast
