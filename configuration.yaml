@@ -183,11 +183,6 @@ panel_custom:
     sidebar_icon: mdi:access-point-network
     url_path: zwave
 
-#########################
-# HACS
-#########################
-hacs:
-  token: !secret hacs_github_token
 
 #########################
 # Text to speech
