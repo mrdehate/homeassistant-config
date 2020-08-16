@@ -239,6 +239,53 @@ radio_stacks921:
           media_content_id: "https://playerservices.streamtheworld.com/api/livestream-redirect/WQTXFM.mp3"
           media_content_type: 'audio/mpeg'
 
+radio_party963:
+  alias: Radio - Party 96.3
+  sequence:
+    - service: media_player.play_media
+      data_template:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "https://17433.live.streamtheworld.com/WMBXHD2AAC.aac"
+        media_content_type: 'audio/aacp'
+
+radio_traxxfmlounge:
+  alias: Radio - Traxx FM Lounge
+  sequence:
+    - service: media_player.play_media
+      data_template:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://traxx004.ice.infomaniak.ch/traxx004-low.mp3"
+        media_content_type: 'audio/mpeg'
+
+radio_traxxfmfunk:
+  alias: Radio - Traxx FM Funk
+  sequence:
+    - service: media_player.play_media
+      data_template:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "https://traxx016.ice.infomaniak.ch/traxx016-low.mp3"
+        media_content_type: 'audio/mpeg'
+        
+radio_superthrowbackparty:
+  alias: Radio - Super Throwback Party
+  sequence:
+    - service: media_player.play_media
+      data_template:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://hestia.cdnstream.com/1543_128?cb=618512.mp3"
+        media_content_type: 'audio/mpeg'
+
+
+radio_discostudio54:
+  alias: Radio - Disco Studio 54
+  sequence:
+    - service: media_player.play_media
+      data_template:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://149.56.147.197:8307/stream?1516542990510"
+        media_content_type: 'audio/mpeg'
+
+
 spotify_playlist:
     alias: Play Spotify Playlist
     sequence:
