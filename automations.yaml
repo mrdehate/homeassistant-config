@@ -9,7 +9,18 @@
     type: remote_button_short_press
   condition: []
   action:
-  - device_id: 1addba5399b940cfa9908e9241ce93eb
-    domain: light
-    entity_id: light.livingroom_accent
-    type: toggle
+  - data: {}
+    entity_id: light.kitchen_center_level
+    service: homeassistant.toggle
+  mode: single
+- id: '1597526054349'
+  alias: Automatic Reboot
+  description: ''
+  trigger:
+  - at: '3:30'
+    platform: time
+  condition: []
+  action:
+  - data: {}
+    service: homeassistant.restart
+  mode: single
