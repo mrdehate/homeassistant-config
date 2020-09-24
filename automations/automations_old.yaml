@@ -140,7 +140,7 @@
     entity_id: input_select.chromecast_radio
   action:
   - service: input_select.select_option
-    data_template:
+    data:
       entity_id: input_select.chromecast_radio_value
       option: >
         {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
@@ -332,7 +332,7 @@
       event: 2002
   action:
     service: media_player.volume_up
-    data_template:
+    data:
       entity_id: '{% if is_state("media_player.kitchen", "playing") %} media_player.kitchen
         {% elif is_state("media_player.radio", "playing") %} media_player.radio {%
         elif is_state("media_player.main_floor", "playing") %} media_player.main_floor
@@ -354,7 +354,7 @@
       event: 3002
   action:
     service: media_player.volume_down
-    data_template:
+    data:
       entity_id: '{% if is_state("media_player.kitchen", "playing") %} media_player.kitchen
         {% elif is_state("media_player.radio", "playing") %} media_player.radio {%
         elif is_state("media_player.main_floor", "playing") %} media_player.main_floor
