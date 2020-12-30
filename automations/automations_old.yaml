@@ -1052,6 +1052,58 @@
       entity_id: switch.attic_house_fan
         
 
+- id: nurseryfanauto
+  alias: "Nursery Fan Auto"
+  description: "Turn on Nursery Fan when it's hot"
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.nursery_temperature
+  action:
+    - choose:
+        - conditions:
+            - condition: numeric_state
+              entity_id: sensor.nursery_temperature
+              below: 72.1
+          sequence:
+            - service: fan.set_speed
+              entity_id: fan.nursery_fan
+              data:
+                speed: 'off'
+        - conditions:
+            - condition: numeric_state
+              entity_id: sensor.nursery_temperature
+              above: 72
+              below: 73.1
+          sequence:
+            - service: fan.set_speed
+              entity_id: fan.nursery_fan
+              data:
+                speed: 'low'
+        - conditions:
+          - condition: numeric_state
+            entity_id: sensor.nursery_temperature
+            above: 73
+            below: 76
+          sequence:
+            - service: fan.set_speed
+              entity_id: fan.nursery_fan
+              data:
+                speed: 'medium'
+        - conditions:
+          - condition: numeric_state
+            entity_id: sensor.nursery_temperature
+            above: 75.9
+          sequence:
+            - service: fan.set_speed
+              entity_id: fan.nursery_fan
+              data:
+                speed: high
+      default:
+        - service: fan.turn_off
+          entity_id: fan.nursery_fan
+
+
 ###########################################################################
 ###########################################################################
 # Buttons               ###################################################
