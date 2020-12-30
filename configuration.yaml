@@ -71,9 +71,6 @@ google_domains:
 sun:
 
 weather:
-  - platform: openweathermap
-    api_key: !secret openweathermap_api
-    mode: freedaily
   - platform: darksky
     api_key: !secret darksky_api
     mode: daily
