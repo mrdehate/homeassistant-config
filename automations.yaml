@@ -1,26 +1,96 @@
-- id: '1592360741345'
-  alias: Kitchen IKEA Remote Sleep
-  description: ''
-  trigger:
-  - device_id: 4a780e30be2c4259b6f7417b317655c0
-    domain: zha
-    platform: device
-    subtype: turn_on
-    type: remote_button_short_press
-  condition: []
-  action:
-  - data: {}
-    entity_id: light.kitchen_center_level
-    service: homeassistant.toggle
-  mode: single
 - id: '1597526054349'
   alias: Automatic Reboot
   description: ''
   trigger:
-  - at: '3:30'
-    platform: time
+  - hours: '3'
+    minutes: '30'
+    platform: time_pattern
+    seconds: '00'
   condition: []
   action:
   - data: {}
     service: homeassistant.restart
   mode: single
+- id: '1599256039624'
+  alias: Kitchen Lights On
+  description: ''
+  trigger:
+  - device_id: 65ed9b7a925a4ddb8101b10772e3d517
+    domain: light
+    entity_id: light.inovelli_lzw31_sn_dimmer_red_series_level
+    platform: device
+    type: turned_on
+  condition: []
+  action:
+  - device_id: ea11e33769d44511a028094f04c56210
+    domain: light
+    entity_id: light.dining_1
+    type: turn_off
+  - device_id: 729040028eca40db96fe7fedc6f5433d
+    domain: light
+    entity_id: light.dining_2
+    type: turn_off
+  - device_id: 87d9562fe03b43fbb07e54a95558935e
+    domain: light
+    entity_id: light.dining_3
+    type: turn_off
+  - device_id: bbab06710a834041ab7d79bceaab2eaa
+    domain: light
+    entity_id: light.dining_4
+    type: turn_off
+  - device_id: f33f94f66f7f44ddad48bde740f05029
+    domain: light
+    entity_id: light.dining_5
+    type: turn_off
+  - device_id: d5d4d01880fd430a963c0fe6cc7d41c5
+    domain: light
+    entity_id: light.dining_6
+    type: turn_off
+  - device_id: 29dc39c7a59d49d6833ac4d630fe5355
+    domain: light
+    entity_id: light.dining_7
+    type: turn_off
+  - device_id: c5d970e9ea894f388604605d30759297
+    domain: light
+    entity_id: light.dining_8
+    type: turn_off
+  mode: single
+- id: '1606442454671'
+  alias: Christmas Timer On
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+  condition: []
+  action:
+  - scene: scene.christmas
+  mode: single
+- id: '1606442516578'
+  alias: Christmas Timer Off
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:00'
+  condition: []
+  action:
+  - scene: scene.christmas_off
+  mode: single
+- id: '1609299842534'
+  alias: ZHA - IKEA five button remote
+  description: ''
+  use_blueprint:
+    path: wormie_dk/zha-ikea-five-button-remote.yaml
+    input:
+      remote: 4a780e30be2c4259b6f7417b317655c0
+      button_on_off:
+      - scene: scene.away
+      button_brightness_up_short:
+      - device_id: aaa6639d08f611eb8246799b73aa84a3
+        domain: cover
+        entity_id: cover.garage_door
+        type: open
+      button_brightness_down_short:
+      - device_id: aaa6639d08f611eb8246799b73aa84a3
+        domain: cover
+        entity_id: cover.garage_door
+        type: close
