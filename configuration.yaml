@@ -238,8 +238,6 @@ notify:
 owntracks:
     waypoints: false # disable owntracks from reporting regions - prevents overlapping homes
 
-device_tracker:
-
 zone:
   - name: Home
     latitude: !secret home_latitude
