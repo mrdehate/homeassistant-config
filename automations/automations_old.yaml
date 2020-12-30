@@ -1123,45 +1123,6 @@
     data:
       entity_id: scene.goodnight
 
-# --------- Kitchen IKEA Tradfri Multi button ----------
-- id: kitchenbutton_garageopen
-  alias: Kitchen Button - Open Garage
-  initial_state: 'on'
-  trigger:
-    platform: event
-    event_type: deconz_event
-    event_data:
-      entity_id: kitchen_multi_button
-      event: 2002
-  action:
-    service: cover.open_cover
-    entity_id: cover.garage_door
-
-- id: kitchenbutton_garageclose
-  alias: Kitchen Button - Close Garage
-  initial_state: 'on'
-  trigger:
-    platform: event
-    event_type: deconz_event
-    event_data:
-      entity_id: kitchen_multi_button
-      event: 3002
-  action:
-    service: cover.close_cover
-    entity_id: cover.garage_door
-
-- id: kitchenbutton_lightsout
-  alias: Kitchen Button - Lights Out
-  initial_state: 'on'
-  trigger:
-    platform: event
-    event_type: deconz_event
-    event_data:
-      entity_id: kitchen_multi_button
-      event: 1002
-  action:
-    service: scene.turn_on
-    entity_id: scene.away
 
 ###########################################################################
 ###########################################################################
