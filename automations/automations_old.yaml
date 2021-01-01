@@ -155,7 +155,6 @@
         {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
         {% endif %}
 
-
 # Note: All of these have conditions attached to only turn off when already on, and
 # vice-versa. This is because the Chromecasts are super flaky and often flip to
 # "unavailable" randomly throughout the day, so this helps clean up the logs
@@ -167,19 +166,14 @@
   - platform: state
     entity_id:
       - media_player.radio
-      - media_player.all_indoor
-      - media_player.all_indoor_and_outdoor
-      - media_player.main_floor
-      - media_player.main_and_basement
     to: playing
   condition:
   - condition: state
     entity_id: switch.radio_amp
-    state: 'off'
+      state: "off"
   action:
   - service: homeassistant.turn_on
     entity_id: switch.radio_amp
-
 
 - id: radioampoff
   alias: Amp Auto-Off - Radio
@@ -187,21 +181,16 @@
   - platform: state
     entity_id:
       - media_player.radio
-      - media_player.all_indoor
-      - media_player.all_indoor_and_outdoor
-      - media_player.main_floor
-      - media_player.main_and_basement
-    to: 'off'
+      to: "off"
     for:
       seconds: 120
   condition:
   - condition: state
     entity_id: switch.radio_amp
-    state: 'on'
+      state: "on"
   action:
   - service: homeassistant.turn_off
     entity_id: switch.radio_amp
-
 
 - id: deckampon
   alias: Amp Auto-On - Deck
@@ -209,17 +198,14 @@
   - platform: state
     entity_id:
       - media_player.deck
-      - media_player.all_outdoor
-      - media_player.all_indoor_and_outdoor
     to: playing
   condition:
   - condition: state
     entity_id: switch.deck_amp
-    state: 'off'
+      state: "off"
   action:
   - service: homeassistant.turn_on
     entity_id: switch.deck_amp
-
 
 - id: deckampoff
   alias: Amp Auto-Off - Deck
@@ -227,15 +213,13 @@
   - platform: state
     entity_id: 
       - media_player.deck
-      - media_player.all_outdoor
-      - media_player.all_indoor_and_outdoor
-    to: 'off'
+      to: "off"
     for:
       seconds: 120
   condition:
   - condition: state
     entity_id: switch.deck_amp
-    state: 'on'
+      state: "on"
   action:
   - service: homeassistant.turn_off
     entity_id: switch.deck_amp
@@ -246,17 +230,14 @@
   - platform: state
     entity_id: 
       - media_player.garage
-      - media_player.all_outdoor
-      - media_player.all_indoor_and_outdoor
     to: playing
   condition:
   - condition: state
     entity_id: switch.garage_amp
-    state: 'off'
+      state: "off"
   action:
   - service: homeassistant.turn_on
     entity_id: switch.garage_amp
-
 
 - id: garageampoff
   alias: Amp Auto-Off - Garage
@@ -264,57 +245,48 @@
   - platform: state
     entity_id: 
       - media_player.garage
-      - media_player.all_outdoor
-      - media_player.all_indoor_and_outdoor
-    to: 'off'
+      to: "off"
     for:
       seconds: 120
   condition:
   - condition: state
     entity_id: switch.garage_amp
-    state: 'on'
+      state: "on"
   action:
   - service: homeassistant.turn_off
     entity_id: switch.garage_amp
-
 
 - id: bedroomradioampon
   alias: Amp Auto-On - Bedroom
   trigger:
   - platform: state
     entity_id: 
-      - media_player.all_indoor
-      - media_player.all_indoor_and_outdoor
       - media_player.bedroom
     to: playing
   condition:
   - condition: state
     entity_id: switch.bedroom_radio
-    state: 'off'
+      state: "off"
   action:
   - service: homeassistant.turn_on
     entity_id: switch.bedroom_radio
-
 
 - id: bedroomradioampoff
   alias: Amp Auto-Off - Bedroom
   trigger:
   - platform: state
     entity_id: 
-      - media_player.all_indoor
-      - media_player.all_indoor_and_outdoor
       - media_player.bedroom
-    to: 'off'
+      to: "off"
     for:
       seconds: 120
   condition:
   - condition: state
     entity_id: switch.bedroom_radio
-    state: 'on'
+      state: "on"
   action:
   - service: homeassistant.turn_off
     entity_id: switch.bedroom_radio
-
 
 ###########################################################################
 ###########################################################################
