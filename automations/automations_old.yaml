@@ -9,123 +9,122 @@
 # (Only fires in the evening - not in the morning because we're probably leaving
 # the house. This could be improved with presence detection?)
 # * Includes luminance sensor; probably overkill with switches, but meh
-- id: '1539744009480'
+- id: "1539744009480"
   alias: Indoor Light when Garage Door Opens
   trigger:
-  - platform: state
-    entity_id: cover.garage_door
-    from: closed
-    to: open
+    - platform: state
+      entity_id: cover.garage_door
+      from: closed
+      to: open
   condition:
-  - condition: sun
-    after: sunset
-  - condition: state
-    entity_id: 
-      - light.kitchen_side_level
-      - light.kitchen_center_level
-      - light.kitchen_main_level
-    state: 'off'
-  - condition: numeric_state
-    entity_id: sensor.kitchen_multi_luminance
-    below: 20
+    - condition: sun
+      after: sunset
+    - condition: state
+      entity_id:
+        - light.kitchen_side_level
+        - light.kitchen_center_level
+        - light.kitchen_main_level
+      state: "off"
+    - condition: numeric_state
+      entity_id: sensor.kitchen_multi_luminance
+      below: 20
   action:
-  - service: homeassistant.turn_on
-    entity_id: light.kitchen_entry_level
+    - service: homeassistant.turn_on
+      entity_id: light.kitchen_entry_level
 
 # Turn on garage lights when door opens
 # IF sun is down
 - id: garagelightsondoor
   alias: Garage Door Lights On Door Open
   trigger:
-  - platform: state
-    entity_id: cover.garage_door
-    from: closed
-    to: open
+    - platform: state
+      entity_id: cover.garage_door
+      from: closed
+      to: open
   condition:
     condition: state
     entity_id: sun.sun
     state: below_horizon
   action:
-  - service: homeassistant.turn_on
-    entity_id: switch.garage_light
+    - service: homeassistant.turn_on
+      entity_id: switch.garage_light
 
 # Turn off garage lights when door closes
 # IF sun is down
 - id: garagelightsoffdoor
   alias: Garage Door Lights Off Door Close
   trigger:
-  - platform: state
-    entity_id: cover.garage_door
-    from: open
-    to: closed
+    - platform: state
+      entity_id: cover.garage_door
+      from: open
+      to: closed
   condition:
     condition: state
     entity_id: sun.sun
     state: below_horizon
   action:
-  - service: homeassistant.turn_off
-    entity_id: switch.garage_light
+    - service: homeassistant.turn_off
+      entity_id: switch.garage_light
 
 # Turn on garage lights when motion in garage and
 # IF sun is down AND it's dark
 - id: garagelightsmotion
   alias: Garage Door Lights On Motion
   trigger:
-  - platform: state
-    entity_id: binary_sensor.garage_motion
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.garage_motion
+      to: "on"
   condition:
-  - condition: numeric_state
-    entity_id: sensor.garage_multi_luminance
-    below: 2
-  - condition: state
-    entity_id: sun.sun
-    state: below_horizon
+    - condition: numeric_state
+      entity_id: sensor.garage_multi_luminance
+      below: 2
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
   action:
-  - service: homeassistant.turn_on
-    entity_id: switch.garage_light
+    - service: homeassistant.turn_on
+      entity_id: switch.garage_light
 
 # Turn off garage lights when motion stops
 # IF sun is down
 - id: garagelightsoffmotion
   alias: Garage Door Lights Off Motion
   trigger:
-  - platform: state
-    entity_id: binary_sensor.garage_motion
-    from: 'on'
-    to: 'off'
-    for:
-      minutes: 10
+    - platform: state
+      entity_id: binary_sensor.garage_motion
+      from: "on"
+      to: "off"
+      for:
+        minutes: 10
   condition:
-  - condition: state
-    entity_id: sun.sun
-    state: below_horizon
-  - condition: state
-    entity_id: switch.garage_light
-    state: 'on'
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - condition: state
+      entity_id: switch.garage_light
+      state: "on"
   action:
-  - service: homeassistant.turn_off
-    entity_id: switch.garage_light
-
+    - service: homeassistant.turn_off
+      entity_id: switch.garage_light
 
 # Make sure garage door is closed at night
 - id: garagedoorautoclose
   alias: Garage Door Auto Close
   trigger:
-  - platform: time_pattern
-    hours: '22'
-    minutes: 20
-    seconds: 0
+    - platform: time_pattern
+      hours: "22"
+      minutes: 20
+      seconds: 0
   condition:
     condition: state
     entity_id: cover.garage_door
     state: open
   action:
-  - service: cover.close_cover
-    entity_id: cover.garage_door
-  - service: notify.mark
-    data:
-      message: Hey I closed the garage door for you!
+    - service: cover.close_cover
+      entity_id: cover.garage_door
+    - service: notify.mark
+      data:
+        message: Hey I closed the garage door for you!
 
 ###########################################################################
 ###########################################################################
@@ -136,24 +135,24 @@
 - id: syncradioinputselects
   alias: Sync Radio Input Selects
   trigger:
-  - platform: state
-    entity_id: input_select.chromecast_radio
+    - platform: state
+      entity_id: input_select.chromecast_radio
   action:
-  - service: input_select.select_option
-    data:
-      entity_id: input_select.chromecast_radio_value
-      option: >
-        {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
-        {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
-        {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
-        {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
-        {% elif is_state("input_select.chromecast_radio", "Basement") %} media_player.basement
-        {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
-        {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
-        {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
-        {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
-        {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
-        {% endif %}
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.chromecast_radio_value
+        option: >
+          {% if is_state("input_select.chromecast_radio", "Kitchen") %} media_player.kitchen
+          {% elif is_state("input_select.chromecast_radio", "Living Room") %} media_player.radio
+          {% elif is_state("input_select.chromecast_radio", "Main Floor") %} media_player.main_floor
+          {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} media_player.main_and_basement
+          {% elif is_state("input_select.chromecast_radio", "Basement") %} media_player.basement
+          {% elif is_state("input_select.chromecast_radio", "Bedroom") %} media_player.bedroom
+          {% elif is_state("input_select.chromecast_radio", "All Indoor") %} media_player.all_indoor
+          {% elif is_state("input_select.chromecast_radio", "Garage") %} media_player.garage
+          {% elif is_state("input_select.chromecast_radio", "Deck") %} media_player.deck
+          {% elif is_state("input_select.chromecast_radio", "Everywhere") %} media_player.all_indoor_and_outdoor
+          {% endif %}
 
 # Note: All of these have conditions attached to only turn off when already on, and
 # vice-versa. This is because the Chromecasts are super flaky and often flip to
@@ -163,130 +162,130 @@
 - id: radioampon
   alias: Amp Auto-On - Radio
   trigger:
-  - platform: state
-    entity_id:
-      - media_player.radio
-    to: playing
+    - platform: state
+      entity_id:
+        - media_player.radio
+      to: playing
   condition:
-  - condition: state
-    entity_id: switch.radio_amp
+    - condition: state
+      entity_id: switch.radio_amp
       state: "off"
   action:
-  - service: homeassistant.turn_on
-    entity_id: switch.radio_amp
+    - service: homeassistant.turn_on
+      entity_id: switch.radio_amp
 
 - id: radioampoff
   alias: Amp Auto-Off - Radio
   trigger:
-  - platform: state
-    entity_id:
-      - media_player.radio
+    - platform: state
+      entity_id:
+        - media_player.radio
       to: "off"
-    for:
-      seconds: 120
+      for:
+        seconds: 120
   condition:
-  - condition: state
-    entity_id: switch.radio_amp
+    - condition: state
+      entity_id: switch.radio_amp
       state: "on"
   action:
-  - service: homeassistant.turn_off
-    entity_id: switch.radio_amp
+    - service: homeassistant.turn_off
+      entity_id: switch.radio_amp
 
 - id: deckampon
   alias: Amp Auto-On - Deck
   trigger:
-  - platform: state
-    entity_id:
-      - media_player.deck
-    to: playing
+    - platform: state
+      entity_id:
+        - media_player.deck
+      to: playing
   condition:
-  - condition: state
-    entity_id: switch.deck_amp
+    - condition: state
+      entity_id: switch.deck_amp
       state: "off"
   action:
-  - service: homeassistant.turn_on
-    entity_id: switch.deck_amp
+    - service: homeassistant.turn_on
+      entity_id: switch.deck_amp
 
 - id: deckampoff
   alias: Amp Auto-Off - Deck
   trigger:
-  - platform: state
-    entity_id: 
-      - media_player.deck
+    - platform: state
+      entity_id:
+        - media_player.deck
       to: "off"
-    for:
-      seconds: 120
+      for:
+        seconds: 120
   condition:
-  - condition: state
-    entity_id: switch.deck_amp
+    - condition: state
+      entity_id: switch.deck_amp
       state: "on"
   action:
-  - service: homeassistant.turn_off
-    entity_id: switch.deck_amp
+    - service: homeassistant.turn_off
+      entity_id: switch.deck_amp
 
 - id: garageampon
   alias: Amp Auto-On - Garage
   trigger:
-  - platform: state
-    entity_id: 
-      - media_player.garage
-    to: playing
+    - platform: state
+      entity_id:
+        - media_player.garage
+      to: playing
   condition:
-  - condition: state
-    entity_id: switch.garage_amp
+    - condition: state
+      entity_id: switch.garage_amp
       state: "off"
   action:
-  - service: homeassistant.turn_on
-    entity_id: switch.garage_amp
+    - service: homeassistant.turn_on
+      entity_id: switch.garage_amp
 
 - id: garageampoff
   alias: Amp Auto-Off - Garage
   trigger:
-  - platform: state
-    entity_id: 
-      - media_player.garage
+    - platform: state
+      entity_id:
+        - media_player.garage
       to: "off"
-    for:
-      seconds: 120
+      for:
+        seconds: 120
   condition:
-  - condition: state
-    entity_id: switch.garage_amp
+    - condition: state
+      entity_id: switch.garage_amp
       state: "on"
   action:
-  - service: homeassistant.turn_off
-    entity_id: switch.garage_amp
+    - service: homeassistant.turn_off
+      entity_id: switch.garage_amp
 
 - id: bedroomradioampon
   alias: Amp Auto-On - Bedroom
   trigger:
-  - platform: state
-    entity_id: 
-      - media_player.bedroom
-    to: playing
+    - platform: state
+      entity_id:
+        - media_player.bedroom
+      to: playing
   condition:
-  - condition: state
-    entity_id: switch.bedroom_radio
+    - condition: state
+      entity_id: switch.bedroom_radio
       state: "off"
   action:
-  - service: homeassistant.turn_on
-    entity_id: switch.bedroom_radio
+    - service: homeassistant.turn_on
+      entity_id: switch.bedroom_radio
 
 - id: bedroomradioampoff
   alias: Amp Auto-Off - Bedroom
   trigger:
-  - platform: state
-    entity_id: 
-      - media_player.bedroom
+    - platform: state
+      entity_id:
+        - media_player.bedroom
       to: "off"
-    for:
-      seconds: 120
+      for:
+        seconds: 120
   condition:
-  - condition: state
-    entity_id: switch.bedroom_radio
+    - condition: state
+      entity_id: switch.bedroom_radio
       state: "on"
   action:
-  - service: homeassistant.turn_off
-    entity_id: switch.bedroom_radio
+    - service: homeassistant.turn_off
+      entity_id: switch.bedroom_radio
 
 ###########################################################################
 ###########################################################################
@@ -305,7 +304,8 @@
   action:
     service: media_player.volume_up
     data:
-      entity_id: '{% if is_state("media_player.kitchen", "playing") %} media_player.kitchen
+      entity_id:
+        '{% if is_state("media_player.kitchen", "playing") %} media_player.kitchen
         {% elif is_state("media_player.radio", "playing") %} media_player.radio {%
         elif is_state("media_player.main_floor", "playing") %} media_player.main_floor
         {% elif is_state("media_player.main_and_basement", "playing") %} media_player.main_and_basement
@@ -327,7 +327,8 @@
   action:
     service: media_player.volume_down
     data:
-      entity_id: '{% if is_state("media_player.kitchen", "playing") %} media_player.kitchen
+      entity_id:
+        '{% if is_state("media_player.kitchen", "playing") %} media_player.kitchen
         {% elif is_state("media_player.radio", "playing") %} media_player.radio {%
         elif is_state("media_player.main_floor", "playing") %} media_player.main_floor
         {% elif is_state("media_player.main_and_basement", "playing") %} media_player.main_and_basement
@@ -354,12 +355,12 @@
       scene_id: 1
       scene_data: 7860
   action:
-  - service: homeassistant.turn_on
-    data:
-      entity_id: 
-        - switch.outdoor_front_porch_light
-        - switch.outdoor_front_house_light
-        - switch.outdoor_driveway_light
+    - service: homeassistant.turn_on
+      data:
+        entity_id:
+          - switch.outdoor_front_porch_light
+          - switch.outdoor_front_house_light
+          - switch.outdoor_driveway_light
 
 - id: alloutdooroff
   alias: Porch Switch - Double Tap All Off
@@ -371,12 +372,12 @@
       scene_id: 2
       scene_data: 7860
   action:
-  - service: homeassistant.turn_off
-    data:
-      entity_id:
-        - switch.outdoor_front_porch_light
-        - switch.outdoor_front_house_light
-        - switch.outdoor_driveway_light
+    - service: homeassistant.turn_off
+      data:
+        entity_id:
+          - switch.outdoor_front_porch_light
+          - switch.outdoor_front_house_light
+          - switch.outdoor_driveway_light
 
 ###########################################################################
 ###########################################################################
@@ -394,12 +395,12 @@
       scene_id: 1
       scene_data: 7860
   action:
-  - service: homeassistant.turn_on
-    data:
-      entity_id:
-        - switch.basement_stairs
-        - switch.basement_lights_south
-        - switch.basement_lights_north
+    - service: homeassistant.turn_on
+      data:
+        entity_id:
+          - switch.basement_stairs
+          - switch.basement_lights_south
+          - switch.basement_lights_north
 
 - id: allbasementoff
   alias: Basement Switch - Double Tap All Basement Off
@@ -411,12 +412,12 @@
       scene_id: 2
       scene_data: 7860
   action:
-  - service: homeassistant.turn_off
-    data:
-      entity_id:
-        - switch.basement_stairs
-        - switch.basement_lights_south
-        - switch.basement_lights_north
+    - service: homeassistant.turn_off
+      data:
+        entity_id:
+          - switch.basement_stairs
+          - switch.basement_lights_south
+          - switch.basement_lights_north
 
 - id: allkitchenon
   alias: Basement Switch - Triple Tap All Kitchen On
@@ -428,12 +429,12 @@
       scene_id: 1
       scene_data: 7920
   action:
-  - service: homeassistant.turn_on
-    data:
-      entity_id:
-        - light.kitchen_center_level
-        - light.kitchen_main_level
-        - light.kitchen_side_level
+    - service: homeassistant.turn_on
+      data:
+        entity_id:
+          - light.kitchen_center_level
+          - light.kitchen_main_level
+          - light.kitchen_side_level
 
 - id: allkitchenoff
   alias: Basement Switch - Triple Tap All Kitchen Off
@@ -445,13 +446,12 @@
       scene_id: 2
       scene_data: 7920
   action:
-  - service: homeassistant.turn_off
-    data:
-      entity_id: 
-        - light.kitchen_center_level
-        - light.kitchen_main_level
-        - light.kitchen_side_level
-
+    - service: homeassistant.turn_off
+      data:
+        entity_id:
+          - light.kitchen_center_level
+          - light.kitchen_main_level
+          - light.kitchen_side_level
 
 ###########################################################################
 ###########################################################################
@@ -463,25 +463,25 @@
 - id: officecheckforspaceheater
   alias: Office - Space Heater Check
   trigger:
-  - platform: state
-    entity_id: binary_sensor.office_motion
-    to: 'off'
-    for:
-      minutes: 30
+    - platform: state
+      entity_id: binary_sensor.office_motion
+      to: "off"
+      for:
+        minutes: 30
   condition:
-  - condition: state
-    entity_id: switch.office_spaceheater
-    state: 'on'
-    for:
-      minutes: 5
+    - condition: state
+      entity_id: switch.office_spaceheater
+      state: "on"
+      for:
+        minutes: 5
   action:
-  - service: notify.mark
-    data:
-      message: Hey the office heater is still on!
+    - service: notify.mark
       data:
-        actions:
-          - action: "off_office_spaceheater"
-            title: "Turn Off"
+        message: Hey the office heater is still on!
+        data:
+          actions:
+            - action: "off_office_spaceheater"
+              title: "Turn Off"
 
 - id: off_office_spaceheater
   alias: Turn off space heater when notification action is tapped
@@ -558,59 +558,59 @@
 - id: bedheatermarkon
   alias: Bed Heater Auto On - Mark
   trigger:
-  - platform: time_pattern
-    minutes: /5
-    seconds: 0
+    - platform: time_pattern
+      minutes: /5
+      seconds: 0
   condition:
-  - condition: time
-    after: '23:00:00'
-    before: 02:00:00
-  - condition: numeric_state
-    entity_id: sensor.bedroom_multi_temperature
-    below: 71
-  - condition: state
-    entity_id: switch.bedroom_bedwarmer_mark
-    state: 'off'
-  action:
-  - service: homeassistant.turn_on
-    data:
+    - condition: time
+      after: "23:00:00"
+      before: 02:00:00
+    - condition: numeric_state
+      entity_id: sensor.bedroom_multi_temperature
+      below: 71
+    - condition: state
       entity_id: switch.bedroom_bedwarmer_mark
+      state: "off"
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.bedroom_bedwarmer_mark
 
 # Turn off bed heater if too warm
 - id: bedheatermarkoff
   alias: Bed Heater Auto Off - Mark
   trigger:
-  - platform: time_pattern
-    minutes: /6
-    seconds: 0
+    - platform: time_pattern
+      minutes: /6
+      seconds: 0
   condition:
-  - condition: numeric_state
-    entity_id: sensor.bedroom_multi_temperature
-    above: 71
-  - condition: state
-    entity_id: switch.bedroom_bedwarmer_mark
-    state: 'on'
-  action:
-  - service: homeassistant.turn_off
-    data:
+    - condition: numeric_state
+      entity_id: sensor.bedroom_multi_temperature
+      above: 71
+    - condition: state
       entity_id: switch.bedroom_bedwarmer_mark
+      state: "on"
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.bedroom_bedwarmer_mark
 
 # Always turn off bed heater in the middle of the night
 - id: bedheatermarkofftime
   alias: Bed Heater Daily Off - Mark
   trigger:
-  - platform: time_pattern
-    hours: '2'
-    minutes: 15
-    seconds: 0
+    - platform: time_pattern
+      hours: "2"
+      minutes: 15
+      seconds: 0
   condition:
-  - condition: state
-    entity_id: switch.bedroom_bedwarmer_mark
-    state: 'on'
-  action:
-  - service: homeassistant.turn_off
-    data:
+    - condition: state
       entity_id: switch.bedroom_bedwarmer_mark
+      state: "on"
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.bedroom_bedwarmer_mark
 
 #------------------------
 # Bedroom Lamps         |
@@ -626,10 +626,10 @@
       entity_id: zwave.button_bedroom_hank_four
       scene_id: 3
   action:
-  - service: light.turn_on
-    entity_id:
-      - light.bedroom_marks_light
-      - light.bedroom_mollys_light
+    - service: light.turn_on
+      entity_id:
+        - light.bedroom_marks_light
+        - light.bedroom_mollys_light
 
 # Turn off bedroom lamps with Hank controller
 - id: bedroomlampsoff
@@ -641,44 +641,44 @@
       entity_id: zwave.button_bedroom_hank_four
       scene_id: 4
   action:
-  - service: light.turn_off
-    entity_id:
-      - light.bedroom_marks_light
-      - light.bedroom_mollys_light
+    - service: light.turn_off
+      entity_id:
+        - light.bedroom_marks_light
+        - light.bedroom_mollys_light
 
 # Set lamp brightness to 75%
 - id: bedroomlampsbrightup
   alias: Make the lights go bright
   trigger:
-  - platform: event
-    event_type: zwave.scene_activated
-    event_data:
-      scene_id: 2
-      entity_id: zwave.button_bedroom_hank_four
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        scene_id: 2
+        entity_id: zwave.button_bedroom_hank_four
   action:
-  - service: light.turn_on
-    entity_id: 
-      - light.bedroom_marks_light
-      - light.bedroom_mollys_light
-    data:
-      brightness_pct: 75
+    - service: light.turn_on
+      entity_id:
+        - light.bedroom_marks_light
+        - light.bedroom_mollys_light
+      data:
+        brightness_pct: 75
 
 # Set lamp brightness to 25%
 - id: bedroomlampsbrightdown
   alias: Make the lights go dim
   trigger:
-  - platform: event
-    event_type: zwave.scene_activated
-    event_data:
-      scene_id: 1
-      entity_id: zwave.button_bedroom_hank_four
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        scene_id: 1
+        entity_id: zwave.button_bedroom_hank_four
   action:
-  - service: homeassistant.turn_on
-    data:
-      entity_id: 
-        - light.bedroom_marks_light
-        - light.bedroom_mollys_light
-      brightness_pct: 25
+    - service: homeassistant.turn_on
+      data:
+        entity_id:
+          - light.bedroom_marks_light
+          - light.bedroom_mollys_light
+        brightness_pct: 25
 
 #------------------------
 # Bedroom Humidifier    |
@@ -688,60 +688,59 @@
 - id: bedroomhumidifieron
   alias: Bedroom Humidifier On
   trigger:
-  - platform: time_pattern
-    minutes: /5
-    seconds: 0
+    - platform: time_pattern
+      minutes: /5
+      seconds: 0
   condition:
-  - condition: time
-    after: '21:00:00'
-    before: 05:00:00
-  - condition: numeric_state
-    entity_id: sensor.bedroom_multi_relative_humidity
-    below: 49
-  - condition: state
-    entity_id: switch.wemo_large
-    state: 'off'
-  action:
-  - service: homeassistant.turn_on
-    data:
+    - condition: time
+      after: "21:00:00"
+      before: 05:00:00
+    - condition: numeric_state
+      entity_id: sensor.bedroom_multi_relative_humidity
+      below: 49
+    - condition: state
       entity_id: switch.wemo_large
+      state: "off"
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.wemo_large
 
 # Turn off humidifier if target is reached
 - id: bedroomhumidifieroff
   alias: Bedroom Humidifier Off
   trigger:
-  - platform: time_pattern
-    minutes: /6
-    seconds: 0
+    - platform: time_pattern
+      minutes: /6
+      seconds: 0
   condition:
-  - condition: numeric_state
-    entity_id: sensor.bedroom_multi_relative_humidity
-    above: 49
-  - condition: state
-    entity_id: switch.wemo_large
-    state: 'on'
-  action:
-  - service: homeassistant.turn_off
-    data:
+    - condition: numeric_state
+      entity_id: sensor.bedroom_multi_relative_humidity
+      above: 49
+    - condition: state
       entity_id: switch.wemo_large
+      state: "on"
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.wemo_large
 
 # Turn off humidifer in the morning
 - id: bedroomhumidifierautooff
   alias: Bedroom Humidifier Auto Off
   trigger:
-  - platform: time_pattern
-    hours: '5'
-    minutes: 15
-    seconds: 0
+    - platform: time_pattern
+      hours: "5"
+      minutes: 15
+      seconds: 0
   condition:
-  - condition: state
-    entity_id: switch.wemo_large
-    state: 'on'
-  action:
-  - service: homeassistant.turn_off
-    data:
+    - condition: state
       entity_id: switch.wemo_large
-
+      state: "on"
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.wemo_large
 
 #------------------------
 # Bedroom Window Fan    |
@@ -751,85 +750,86 @@
 - id: bedroomwindowfanon
   alias: Bedroom Window Fan On
   trigger:
-  - platform: time_pattern
-    minutes: /5
-    seconds: 0
+    - platform: time_pattern
+      minutes: /5
+      seconds: 0
   condition:
-  - condition: time
-    after: '21:00:00'
-    before: 05:00:00
-  - condition: numeric_state
-    entity_id: sensor.dark_sky_humidity
-    below: 90
-  - condition: template
-    value_template: '{{ states(''sensor.dark_sky_temperature'') < states(''sensor.bedroom_multi_temperature'')
-      }}'
-  - condition: numeric_state
-    entity_id: sensor.bedroom_multi_temperature
-    above: 65
-  - condition: state
-    entity_id: binary_sensor.bedroom_window_north
-    state: 'on'
-  - condition: state
-    entity_id: switch.wemo_large
-    state: 'off'
-  action:
-  - service: homeassistant.turn_on
-    data:
+    - condition: time
+      after: "21:00:00"
+      before: 05:00:00
+    - condition: numeric_state
+      entity_id: sensor.dark_sky_humidity
+      below: 90
+    - condition: template
+      value_template:
+        "{{ states('sensor.dark_sky_temperature') < states('sensor.bedroom_multi_temperature')
+        }}"
+    - condition: numeric_state
+      entity_id: sensor.bedroom_multi_temperature
+      above: 65
+    - condition: state
+      entity_id: binary_sensor.bedroom_window_north
+      state: "on"
+    - condition: state
       entity_id: switch.wemo_large
+      state: "off"
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: switch.wemo_large
 
 # Turn off bedroom window fan if target is reached and window is open
 - id: bedroomwindowfanoff
   alias: Bedroom Window Fan Off
   trigger:
-  - platform: time_pattern
-    minutes: /6
-    seconds: 0
+    - platform: time_pattern
+      minutes: /6
+      seconds: 0
   condition:
     condition: and
     conditions:
-    - condition: time
-      after: '21:00:00'
-      before: 05:00:00
-    - condition: state
-      entity_id: switch.wemo_large
-      state: 'on'
-    - condition: state
-      entity_id: binary_sensor.bedroom_window_north
-      state: 'on'
-    - condition: or
-      conditions:
-      - condition: numeric_state
-        entity_id: sensor.dark_sky_humidity
-        above: 90
-      - condition: template
-        value_template: '{{ states(''sensor.dark_sky_temperature'') > states(''sensor.bedroom_multi_temperature'')
-          }}'
-      - condition: numeric_state
-        entity_id: sensor.bedroom_multi_temperature
-        below: 65
+      - condition: time
+        after: "21:00:00"
+        before: 05:00:00
+      - condition: state
+        entity_id: switch.wemo_large
+        state: "on"
+      - condition: state
+        entity_id: binary_sensor.bedroom_window_north
+        state: "on"
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity_id: sensor.dark_sky_humidity
+            above: 90
+          - condition: template
+            value_template:
+              "{{ states('sensor.dark_sky_temperature') > states('sensor.bedroom_multi_temperature')
+              }}"
+          - condition: numeric_state
+            entity_id: sensor.bedroom_multi_temperature
+            below: 65
   action:
-  - service: homeassistant.turn_off
-    data:
-      entity_id: switch.wemo_large
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.wemo_large
 
 # Turn off window fan in the morning
 - id: bedroomwindowfanautooff
   alias: Bedroom Window Fan Auto Off
   trigger:
-  - platform: time_pattern
-    hours: '5'
-    minutes: 15
-    seconds: 0
+    - platform: time_pattern
+      hours: "5"
+      minutes: 15
+      seconds: 0
   condition:
-  - condition: state
-    entity_id: switch.wemo_large
-    state: 'on'
-  action:
-  - service: homeassistant.turn_off
-    data:
+    - condition: state
       entity_id: switch.wemo_large
-
+      state: "on"
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.wemo_large
 
 #--------------------------|
 # Bedroom - Mollys Closet  |
@@ -839,26 +839,25 @@
 - id: bedroommollyclosetautoon
   alias: Bedroom Mollys Closet - Auto On
   trigger:
-  - platform: state
-    entity_id: binary_sensor.bedroom_door_mollys_closet
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.bedroom_door_mollys_closet
+      to: "on"
   action:
-  - service: homeassistant.turn_on
-    data:
-      entity_id: light.bedroom_mollys_closet
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.bedroom_mollys_closet
 
 # Turn off closet light when door opens
 - id: bedroommollyclosetautooff
   alias: Bedroom Mollys Closet - Auto Off
   trigger:
-  - platform: state
-    entity_id: binary_sensor.bedroom_door_mollys_closet
-    to: 'off'
+    - platform: state
+      entity_id: binary_sensor.bedroom_door_mollys_closet
+      to: "off"
   action:
-  - service: homeassistant.turn_off
-    data:
-      entity_id: light.bedroom_mollys_closet
-
+    - service: homeassistant.turn_off
+      data:
+        entity_id: light.bedroom_mollys_closet
 
 #-----------------------------|
 # Bedroom - Under Bed Lights  |
@@ -870,37 +869,35 @@
 - id: bedroomnightlighton
   alias: Bedroom Nightlight - On
   trigger:
-  - platform: state
-    entity_id: binary_sensor.bedroom_motion
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.bedroom_motion
+      to: "on"
   condition:
-  - condition: numeric_state
-    entity_id: sensor.bedroom_multi_luminance
-    below: 2
+    - condition: numeric_state
+      entity_id: sensor.bedroom_multi_luminance
+      below: 2
   action:
-  - service: light.turn_on
-    data:
-      entity_id: light.bedroom_bed_lights
-
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_bed_lights
 
 # Turn off under bed lights when dark and no motion
 - id: bedroomnightlightoff
   alias: Bedroom Nightlight - Off
   trigger:
-  - platform: state
-    entity_id: binary_sensor.bedroom_motion
-    to: 'off'
-    for:
-      seconds: 10
+    - platform: state
+      entity_id: binary_sensor.bedroom_motion
+      to: "off"
+      for:
+        seconds: 10
   condition:
-  - condition: state
-    entity_id: light.bedroom_bed_lights
-    state: 'on'
-  action:
-  - service: light.turn_off
-    data:
+    - condition: state
       entity_id: light.bedroom_bed_lights
-
+      state: "on"
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.bedroom_bed_lights
 
 ###########################################################################
 ###########################################################################
@@ -912,113 +909,113 @@
 - id: lightsoffondeparture
   alias: Lights Off When Home Empty
   trigger:
-  - platform: state
-    entity_id: group.molly_and_mark
-    from: home
-    to: not_home
-    for:
-      minutes: 1
+    - platform: state
+      entity_id: group.molly_and_mark
+      from: home
+      to: not_home
+      for:
+        minutes: 1
   action:
-  - service: light.turn_off
-    data:
-      entity_id: all
-  - service: switch.turn_off
-    data:
-      entity_id: all
-  - service: notify.mark
-    data:
-      message: BYE! I turned everything off for you.
+    - service: light.turn_off
+      data:
+        entity_id: all
+    - service: switch.turn_off
+      data:
+        entity_id: all
+    - service: notify.mark
+      data:
+        message: BYE! I turned everything off for you.
 
 # Turn on main floor lights when someone arrives home and it's dark
 - id: lightsononarrival
   alias: Lights On When Arrival
   trigger:
-  - platform: state
-    entity_id: group.molly_and_mark
-    from: not_home
-    to: home
-    for:
-      seconds: 30
+    - platform: state
+      entity_id: group.molly_and_mark
+      from: not_home
+      to: home
+      for:
+        seconds: 30
   condition:
-  - condition: numeric_state
-    entity_id: sensor.kitchen_multi_luminance
-    below: 20
-  - condition: sun
-    after: sunset
+    - condition: numeric_state
+      entity_id: sensor.kitchen_multi_luminance
+      below: 20
+    - condition: sun
+      after: sunset
   action:
-  - service: homeassistant.turn_on
-    data:
-      entity_id:
-      - light.kitchen_side_level
-      - light.kitchen_entry_level
-      - light.kitchen_main_level
-      - light.kitchen_center_level
-      - light.dining_room
-      - light.living_room
-    
+    - service: homeassistant.turn_on
+      data:
+        entity_id:
+          - light.kitchen_side_level
+          - light.kitchen_entry_level
+          - light.kitchen_main_level
+          - light.kitchen_center_level
+          - light.dining_room
+          - light.living_room
+
 # Turn on music for 30 seconds in the garage on arrival home
 - id: welcomehomemark
   alias: Welcome Home Mark
   trigger:
-  - platform: state
-    entity_id: person.mark_d
-    from: not_home
-    to: home
-    for:
-      seconds: 20
+    - platform: state
+      entity_id: person.mark_d
+      from: not_home
+      to: home
+      for:
+        seconds: 20
   condition:
-  - condition: template
-    value_template: '{{ not is_state(''media_player.garage'', ''playing'') }}'
-  - condition: time
-    after: 09:00:00
-    before: '22:00:00'
+    - condition: template
+      value_template: "{{ not is_state('media_player.garage', 'playing') }}"
+    - condition: time
+      after: 09:00:00
+      before: "22:00:00"
   action:
-  - service: script.turn_on
-    entity_id: script.welcome_home_music_mark
+    - service: script.turn_on
+      entity_id: script.welcome_home_music_mark
 
 # Turn on music for 30 seconds in the garage on arrival home
 - id: welcomehomemolly
   alias: Welcome Home Molly
   trigger:
-  - platform: state
-    entity_id: person.molly
-    from: not_home
-    to: home
-    for:
-      seconds: 20
+    - platform: state
+      entity_id: person.molly
+      from: not_home
+      to: home
+      for:
+        seconds: 20
   condition:
-  - condition: template
-    value_template: '{{ not is_state(''media_player.garage'', ''playing'') }}'
-  - condition: time
-    after: 09:00:00
-    before: '22:00:00'
+    - condition: template
+      value_template: "{{ not is_state('media_player.garage', 'playing') }}"
+    - condition: time
+      after: 09:00:00
+      before: "22:00:00"
   action:
-  - service: script.turn_on
-    entity_id: script.welcome_home_music_molly
+    - service: script.turn_on
+      entity_id: script.welcome_home_music_molly
 
 # Send notification if garage door left open
 # h/t https://www.home-assistant.io/blog/2020/02/11/android-16-17-release/
 - id: garagedooropennotification
   alias: Garage Door Open Notification
   trigger:
-  - platform: state
-    entity_id: group.molly_and_mark
-    from: home
-    to: not_home
-    for:
-      minutes: 2
+    - platform: state
+      entity_id: group.molly_and_mark
+      from: home
+      to: not_home
+      for:
+        minutes: 2
   condition:
-  - condition: state
-    entity_id: cover.garage_door
-    state: open
+    - condition: state
+      entity_id: cover.garage_door
+      state: open
   action:
-  - service: notify.molly_and_mark
-    data:
-      message: Hey the garage door is open!
+    - service: notify.molly_and_mark
       data:
-        actions:
-          - action: "close_garage" # The key you are sending for the event
-            title: "Close Garage Door" # The button title
+        message: Hey the garage door is open!
+        data:
+          actions:
+            - action: "close_garage" # The key you are sending for the event
+              title: "Close Garage Door" # The button title
 
 - id: garagedoorclosenotification
   alias: Close the garage when notification action is tapped
@@ -1041,37 +1038,36 @@
 - id: wholehousefansafetycheck
   alias: Whole House Fan Safety Check
   trigger:
-  - platform: time_pattern
-    minutes: /10
-    seconds: 0
-  - platform: state
-    entity_id: binary_sensor.livingroom_door_slider
-    to: 'off'
+    - platform: time_pattern
+      minutes: /10
+      seconds: 0
+    - platform: state
+      entity_id: binary_sensor.livingroom_door_slider
+      to: "off"
   condition:
     condition: and
     conditions:
-    - condition: state
-      entity_id: switch.attic_house_fan
-      state: 'on'
-    - condition: state
-      entity_id: binary_sensor.livingroom_door_slider
-      state: 'off'
-    - condition: state
-      entity_id: binary_sensor.livingroom_door_front
-      state: 'off'
-    - condition: or
-      conditions:
       - condition: state
-        entity_id: binary_sensor.bedroom_window_north
-        state: 'off'
+        entity_id: switch.attic_house_fan
+        state: "on"
       - condition: state
-        entity_id: binary_sensor.bedroom_window_south
-        state: 'off'
+        entity_id: binary_sensor.livingroom_door_slider
+        state: "off"
+      - condition: state
+        entity_id: binary_sensor.livingroom_door_front
+        state: "off"
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: binary_sensor.bedroom_window_north
+            state: "off"
+          - condition: state
+            entity_id: binary_sensor.bedroom_window_south
+            state: "off"
   action:
-  - service: homeassistant.turn_off
-    data:
-      entity_id: switch.attic_house_fan
-        
+    - service: homeassistant.turn_off
+      data:
+        entity_id: switch.attic_house_fan
 
 - id: nurseryfanauto
   alias: "Nursery Fan Auto"
@@ -1090,7 +1086,7 @@
             - service: fan.set_speed
               entity_id: fan.nursery_fan
               data:
-                speed: 'off'
+                speed: "off"
         - conditions:
             - condition: numeric_state
               entity_id: sensor.nursery_temperature
@@ -1100,21 +1096,21 @@
             - service: fan.set_speed
               entity_id: fan.nursery_fan
               data:
-                speed: 'low'
+                speed: "low"
         - conditions:
-          - condition: numeric_state
-            entity_id: sensor.nursery_temperature
-            above: 73
-            below: 76
+            - condition: numeric_state
+              entity_id: sensor.nursery_temperature
+              above: 73
+              below: 76
           sequence:
             - service: fan.set_speed
               entity_id: fan.nursery_fan
               data:
-                speed: 'medium'
+                speed: "medium"
         - conditions:
-          - condition: numeric_state
-            entity_id: sensor.nursery_temperature
-            above: 75.9
+            - condition: numeric_state
+              entity_id: sensor.nursery_temperature
+              above: 75.9
           sequence:
             - service: fan.set_speed
               entity_id: fan.nursery_fan
@@ -1123,7 +1119,6 @@
       default:
         - service: fan.turn_off
           entity_id: fan.nursery_fan
-
 
 ###########################################################################
 ###########################################################################
@@ -1140,10 +1135,9 @@
       entity_id: zwave.button_hank_one_scene
       scene_id: 1
   action:
-  - service: scene.turn_on
-    data:
-      entity_id: scene.goodnight
-
+    - service: scene.turn_on
+      data:
+        entity_id: scene.goodnight
 
 ###########################################################################
 ###########################################################################
@@ -1154,12 +1148,12 @@
 - id: letsencrypt_renewal
   alias: Let's Encrypt Renewal
   trigger:
-  - platform: time
-    at: 00:00:00
+    - platform: time
+      at: 00:00:00
   action:
-  - service: hassio.addon_restart
-    data:
-      addon: core_letsencrypt
+    - service: hassio.addon_restart
+      data:
+        addon: core_letsencrypt
 
 ###########################################################################
 ###########################################################################
@@ -1170,51 +1164,51 @@
 - id: front_porch_outlet_on
   alias: Front Porch Outlet Timer
   trigger:
-  - event: sunset
-    platform: sun
+    - event: sunset
+      platform: sun
   action:
-  - service: switch.turn_on
-    data:
-      entity_id: switch.outdoor_front_porch_outlet
+    - service: switch.turn_on
+      data:
+        entity_id: switch.outdoor_front_porch_outlet
 - id: front_porch_outlet_off
   alias: Front Porch Outlet Timer Off
   trigger:
-  - platform: time
-    at: 03:00:00
+    - platform: time
+      at: 03:00:00
   action:
-  - service: switch.turn_off
-    data:
-      entity_id: switch.outdoor_front_porch_outlet
+    - service: switch.turn_off
+      data:
+        entity_id: switch.outdoor_front_porch_outlet
 
 - id: welcomehomechristmas
   alias: Welcome Home Christmas
   trigger:
-  - platform: state
-    entity_id: person.molly
-    from: not_home
-    to: home
-    for:
-      seconds: 20
+    - platform: state
+      entity_id: person.molly
+      from: not_home
+      to: home
+      for:
+        seconds: 20
   condition:
-  - condition: sun
-    after: sunset
+    - condition: sun
+      after: sunset
   action:
-  - service: scene.turn_on
-    data:
-      entity_id: scene.christmas
+    - service: scene.turn_on
+      data:
+        entity_id: scene.christmas
 
 - id: christmas_autoon
   alias: Christmas Auto-On
   trigger:
-  - event: sunset
-    platform: sun
+    - event: sunset
+      platform: sun
   condition:
-  - condition: state
-    entity_id: person.molly
-    state: home
-    for:
-      seconds: 20
+    - condition: state
+      entity_id: person.molly
+      state: home
+      for:
+        seconds: 20
   action:
-  - service: scene.turn_on
-    data:
-      entity_id: scene.christmas
+    - service: scene.turn_on
+      data:
+        entity_id: scene.christmas

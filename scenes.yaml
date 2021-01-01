@@ -1,100 +1,164 @@
 - name: home
+  id: home
   entities:
-    light.kitchen_entry_level: off
-    light.kitchen_side_level: on
-    light.kitchen_main_level: on
-    light.kitchen_center_level: on
-    light.dining_room_accent: on
-    light.dining_room: on
-    light.living_room_accent: on
-    light.living_room: on
-    light.main_floor_accents: off
-
+    light.kitchen_entry_level:
+      state: 'off'
+    light.kitchen_side_level:
+      state: 'on'
+    light.kitchen_main_level:
+      state: 'on'
+    light.kitchen_center_level:
+      state: 'on'
+    light.dining_room_accent:
+      state: 'on'
+    light.dining_room:
+      state: 'on'
+    light.living_room_accent:
+      state: 'on'
+    light.living_room:
+      state: 'on'
+    light.main_floor_accents:
+      state: 'off'
 - name: away
+  id: away
   entities:
-    switch.deck_lights: off
-    switch.outdoor_driveway_light: off
-    switch.outdoor_front_porch_light: off
-    switch.outdoor_front_house_light: off
-    switch.garage_light: off
-
-    light.kitchen_entry_level: off
-    light.kitchen_side_level: off
-    light.kitchen_main_level: off
-    light.kitchen_center_level: off
-
-    switch.radio_amp: off
-    light.dining_room_accent: off
-    light.dining_room: off
-    light.living_room_accent: off
-    light.living_room: off
-    light.livingroom_accent: off
-    light.diningroom_accent: off
-    switch.diningroom_south: off
-    switch.dome_plugin: off
-    switch.livingroom_south: off
-
-    light.bedroom: off
-    light.bedroom_main_level: off
-    light.bedroom_side_level: off
-
-    switch.basement_lights_north: off
-    switch.basement_lights_south: off
-    switch.basement_stairs: off
-
-    light.basement_office_level: off
-    switch.office_spaceheater: off
-
+    switch.deck_2:
+      state: 'off'
+    switch.outdoor_driveway_light:
+      state: 'off'
+    switch.outdoor_front_porch_light:
+      state: 'off'
+    switch.outdoor_front_house_light:
+      state: 'off'
+    switch.garage_light:
+      state: 'off'
+    light.kitchen_entry_level:
+      state: 'off'
+    light.kitchen_side_level:
+      state: 'off'
+    light.kitchen_main_level:
+      state: 'off'
+    light.kitchen_center_level:
+      state: 'off'
+    switch.radio_amp:
+      state: 'off'
+    light.dining_room_accent:
+      state: 'off'
+    light.dining_room:
+      state: 'off'
+    light.living_room_accent:
+      state: 'off'
+    light.living_room:
+      state: 'off'
+    light.livingroom_accent:
+      state: 'off'
+    light.diningroom_accent:
+      state: 'off'
+    switch.diningroom_south:
+      state: 'off'
+    switch.dome_plugin:
+      state: 'off'
+    switch.livingroom_south:
+      state: 'off'
+    light.bedroom:
+      state: 'off'
+    light.bedroom_main_level:
+      state: 'off'
+    light.bedroom_side_level:
+      state: 'off'
+    switch.basement_lights_north:
+      state: 'off'
+    switch.basement_lights_south:
+      state: 'off'
+    switch.basement_stairs:
+      state: 'off'
+    light.basement_office_level:
+      state: 'off'
+    switch.office_spaceheater:
+      state: 'off'
 - name: goodnight
+  id: goodnight
   entities:
-    switch.deck_lights: off
-    switch.outdoor_driveway_light: off
-    switch.outdoor_front_porch_light: off
-    switch.outdoor_front_house_light: off
-    switch.garage_light: off
-
-    light.kitchen_entry_level: off
-    light.kitchen_side_level: off
-    light.kitchen_main_level: off
-    light.kitchen_center_level: off
-
-    switch.radio_amp: off
-    light.dining_room_accent: off
-    light.dining_room: off
-    light.livingroom_accent: off
-    light.living_room: off
-#    light.main_floor_accents: off
-    light.diningroom_accent: off
-#    light.bedroom: off
-    switch.diningroom_south: off
-    switch.dome_plugin: off
-    switch.livingroom_south: off
-
-    switch.basement_lights_north: off
-    switch.basement_lights_south: off
-    switch.basement_stairs: off
-
-    light.basement_office_level: off
-    switch.office_spaceheater: off
-
+    switch.deck_2:
+      state: 'off'
+    switch.outdoor_driveway_light:
+      state: 'off'
+    switch.outdoor_front_porch_light:
+      state: 'off'
+    switch.outdoor_front_house_light:
+      state: 'off'
+    switch.garage_light:
+      state: 'off'
+    light.kitchen_entry_level:
+      state: 'off'
+    light.kitchen_side_level:
+      state: 'off'
+    light.kitchen_main_level:
+      state: 'off'
+    light.kitchen_center_level:
+      state: 'off'
+    switch.radio_amp:
+      state: 'off'
+    light.dining_room_accent:
+      state: 'off'
+    light.dining_room:
+      state: 'off'
+    light.livingroom_accent:
+      state: 'off'
+    light.living_room:
+      state: 'off'
+    light.diningroom_accent:
+      state: 'off'
+    switch.diningroom_south:
+      state: 'off'
+    switch.dome_plugin:
+      state: 'off'
+    switch.livingroom_south:
+      state: 'off'
+    switch.basement_lights_north:
+      state: 'off'
+    switch.basement_lights_south:
+      state: 'off'
+    switch.basement_stairs:
+      state: 'off'
+    light.basement_office_level:
+      state: 'off'
+    switch.office_spaceheater:
+      state: 'off'
 - name: tv
+  id: tv
   entities:
-    light.kitchen_entry_level: off
-    light.kitchen_side_level: on
-    light.kitchen_main_level: off
-    light.kitchen_center_level: off
-#    light.dining_room_accent: off
-    light.dining_room: off
-#    light.living_room_accent: on
-    light.living_room: on
-    light.livingroom_accent: off
-- name: christmas
+    light.kitchen_entry_level:
+      state: 'off'
+    light.kitchen_side_level:
+      state: 'on'
+    light.kitchen_main_level:
+      state: 'off'
+    light.kitchen_center_level:
+      state: 'off'
+    light.dining_room:
+      state: 'off'
+    light.living_room:
+      state: 'on'
+    light.livingroom_accent:
+      state: 'off'
+- id: christmas_on
+  name: christmas
   entities:
-    switch.diningroom_south: on
-#    switch.dome_plugin: on
-#    switch.livingroom_south: on
-- name: christmas_off
+    switch.diningroom_south:
+      state: 'on'
+    switch.livingroom_holiday:
+      state: 'on'
+    switch.deck_1:
+      state: 'on'
+  icon: mdi:string-lights
+- id: christmas_off
+  name: christmas_off
   entities:
-    switch.diningroom_south: off
-#    switch.dome_plugin: off
-#    switch.livingroom_south: off
+    switch.diningroom_south:
+      state: 'off'
+    switch.livingroom_holiday:
+      state: 'off'
+    switch.deck_1:
+      state: 'off'
+  icon: mdi:string-lights-off

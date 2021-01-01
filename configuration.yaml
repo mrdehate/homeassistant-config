@@ -28,14 +28,16 @@ logger:
   default: info
   logs:
     homeassistant.components.zha: notset
+#    homeassistant.components.zha: debug
+#    zigpy: debug
 
 # introduction:     # Show links to resources in log and frontend
 cloud:
-default_config:     # default config
-fastdotcom:         # Fast.com speed test
-wake_on_lan:        # enables `wake_on_lan` domain
+default_config: # default config
+fastdotcom: # Fast.com speed test
+wake_on_lan: # enables `wake_on_lan` domain
 zeroconf:
-discovery:          # Discover some devices automatically
+discovery: # Discover some devices automatically
   ignore:
     - apple_tv
 
@@ -54,7 +56,7 @@ http:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 #  ssl_certificate: /ssl/fullchain.pem
 #  ssl_key: /ssl/privkey.pem
-  
+
 #########################
 # Google
 #########################
@@ -86,7 +88,7 @@ binary_sensor:
   - platform: template
     sensors:
       bedroom_motion:
-        friendly_name: 'Bedroom Motion'
+        friendly_name: "Bedroom Motion"
         device_class: motion
         value_template: >-
           {%- if is_state('sensor.bedroom_multi_burglar', '0') -%}
@@ -95,7 +97,7 @@ binary_sensor:
           true
           {%- endif -%}
       kitchen_motion:
-        friendly_name: 'Kitchen Motion'
+        friendly_name: "Kitchen Motion"
         device_class: motion
         value_template: >-
           {%- if is_state('sensor.kitchen_multi_burglar', '0') -%}
@@ -104,7 +106,7 @@ binary_sensor:
           true
           {%- endif -%}
       garage_motion:
-        friendly_name: 'Garage Motion'
+        friendly_name: "Garage Motion"
         device_class: motion
         value_template: >-
           {%- if is_state('sensor.garage_multi_burglar', '0') -%}
@@ -113,7 +115,7 @@ binary_sensor:
           true
           {%- endif -%}
       office_motion:
-        friendly_name: 'Office Motion'
+        friendly_name: "Office Motion"
         device_class: motion
         value_template: >-
           {%- if is_state('sensor.office_multi_burglar', '0') -%}
@@ -122,7 +124,7 @@ binary_sensor:
           true
           {%- endif -%}
       bed_mark:
-        friendly_name: 'In Bed - Mark'
+        friendly_name: "In Bed - Mark"
         device_class: presence
         value_template: >-
           {%- if is_state('binary_sensor.bedroom_bed_mark', 'on') -%}
@@ -131,7 +133,7 @@ binary_sensor:
           true
           {%- endif -%}
       bed_molly:
-        friendly_name: 'In Bed - Molly'
+        friendly_name: "In Bed - Molly"
         device_class: presence
         value_template: >-
           {%- if is_state('binary_sensor.bedroom_bed_molly', 'on') -%}
@@ -167,11 +169,10 @@ fan:
               {% set mapper = {'off' : 0, 'low': 85, 'medium': 170, 'high': 255} %}
               {{ mapper[speed] }}
         speeds:
-          - 'off'
-          - 'low'
-          - 'medium'
-          - 'high'
-
+          - "off"
+          - "low"
+          - "medium"
+          - "high"
 
 #########################
 # Custom Panel
@@ -204,7 +205,6 @@ tts:
 #  username: !secret arlo_username
 #  password: !secret arlo_password
 
-
 #########################
 # Media
 #########################
@@ -225,7 +225,7 @@ notify:
     vapid_pub_key: !secret vapid_pub_key
     vapid_prv_key: !secret vapid_prv_key
     vapid_email: !secret vapid_email
-    
+
   - name: molly_and_mark
     platform: group
     services:
@@ -242,7 +242,7 @@ notify:
 #########################
 
 owntracks:
-    waypoints: false # disable owntracks from reporting regions - prevents overlapping homes
+  waypoints: false # disable owntracks from reporting regions - prevents overlapping homes
 
 zone:
   - name: Home
@@ -292,7 +292,7 @@ camera:
 
 input_select:
   chromecast_radio_value:
-    name: 'Selected Speaker:'
+    name: "Selected Speaker:"
     options:
       - media_player.kitchen
       - media_player.radio
@@ -307,7 +307,7 @@ input_select:
     initial: media_player.kitchen
 
   chromecast_radio:
-    name: 'Select Speakers:'
+    name: "Select Speakers:"
     options:
       - Kitchen
       - Living Room
@@ -323,7 +323,7 @@ input_select:
     icon: mdi:speaker-wireless
 
   spotify_playlist:
-    name: 'Select Playlist:'
+    name: "Select Playlist:"
     options:
       - Discover Weekly
       - Release Radar
