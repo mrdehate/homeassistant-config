@@ -494,6 +494,55 @@
     service: switch.turn_off
     entity_id: switch.office_spaceheater
 
+###########################################################################
+###########################################################################
+# Dining Room               ###############################################
+###########################################################################
+###########################################################################
+
+# Dining Room Hue Dimmer Up
+- id: diningroomdimon
+  alias: Dining Room - Dim Up
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.dimmer_diningroom
+      scene_data: 7680
+      scene_id: 2
+  action:
+    - service: light.turn_on
+      entity_id:
+        - light.dining_1
+        - light.dining_2
+        - light.dining_3
+        - light.dining_4
+        - light.dining_5
+        - light.dining_6
+        - light.dining_7
+        - light.dining_8
+
+        # Dining Room Hue Dimmer Up
+- id: diningroomoff
+  alias: Dining Room - Off
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.dimmer_diningroom
+      scene_data: 7680
+      scene_id: 1
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.dining_1
+        - light.dining_2
+        - light.dining_3
+        - light.dining_4
+        - light.dining_5
+        - light.dining_6
+        - light.dining_7
+        - light.dining_8
 
 ###########################################################################
 ###########################################################################
