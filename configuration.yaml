@@ -353,14 +353,6 @@ recorder:
       - sensor.memory_use_percent
       - sensor.disk_use_percent
       - sensor.processor_use
-      - sensor.rbr50_gateway_bytes_received
-      - sensor.rbr50_gateway_bytes_sent
-      - sensor.rbr50_gateway_kbyte_sec_received
-      - sensor.rbr50_gateway_kbyte_sec_sent
-      - sensor.rbr50_gateway_packets_received
-      - sensor.rbr50_gateway_packets_sec_received
-      - sensor.rbr50_gateway_packets_sec_sent
-      - sensor.rbr50_gateway_packets_sent
     domains:
       - updater
       - zone
