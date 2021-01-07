@@ -1,5 +1,59 @@
 ###########################################################################
 ###########################################################################
+# Tags           ##########################################################
+###########################################################################
+###########################################################################
+
+- id: handle_tag_scan
+  alias: Handle Tag Scan
+  mode: single
+  # Hide warnings when triggered while in delay.
+  max_exceeded: silent
+  variables:
+    # Map scanner device ID to media player entity ID
+    media_players:
+      e6cdbb56a9991c2d99994d685c35759b: media_player.spotify_mark_dehate
+    # Map tag ID to content
+    tags:
+      22-8B-06-34:
+        media_content_id: spotify:album:25it7uSpNFuRoD6uNc0Tfu
+        media_content_type: album
+        media_shuffle: false
+      D0-50-B1-32:
+        media_content_id: spotify:playlist:6VhS4TX0DK8VKbbGwqwc7T
+        media_content_type: playlist
+        media_shuffle: true
+  trigger:
+    platform: event
+    event_type: tag_scanned
+  condition:
+    # Test that we support this device and tag
+    - "{{ trigger.event.data.tag_id in tags }}"
+    - "{{ trigger.event.data.device_id in media_players }}"
+  action:
+    - variables:
+        media_player_entity_id: "{{ media_players[trigger.event.data.device_id] }}"
+        media_content_id: "{{ tags[trigger.event.data.tag_id].media_content_id }}"
+        media_content_type: "{{ tags[trigger.event.data.tag_id].media_content_type }}"
+        media_shuffle: "{{ tags[trigger.event.data.tag_id].media_shuffle }}"
+    - service: media_player.shuffle_set
+      data:
+        entity_id: "{{ media_player_entity_id }}"
+        shuffle: "{{ media_shuffle }}"
+    - service: spotcast.start
+      data:
+        random_song: "{{ media_shuffle }}"
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        uri: "{{ media_content_id }}"
+    #    - service: media_player.play_media
+    #      data:
+    #        entity_id: "{{ media_player_entity_id }}"
+    #        media_content_id: "{{ media_content_id }}"
+    #        media_content_type: "{{ media_content_type }}"
+    - delay: 2 # timeout before we allow processing next scan
+
+###########################################################################
+###########################################################################
 # Garage Door           ###################################################
 ###########################################################################
 ###########################################################################
