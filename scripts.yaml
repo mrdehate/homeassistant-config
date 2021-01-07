@@ -306,7 +306,7 @@ spotify_playlist:
       - delay: '00:00:10'
       - service: media_player.shuffle_set
         data:
-          entity_id: media_player.spotify
+          entity_id: media_player.spotify_mark_dehate
           shuffle: true
 
 spotify_playlist_old:
