@@ -439,73 +439,66 @@
 ###########################################################################
 ###########################################################################
 
-- id: allbasementon
-  alias: Basement Switch - Double Tap All Basement On
+- id: basementswitch
+  alias: Basement Switch
   trigger:
     platform: event
     event_type: zwave.scene_activated
     event_data:
       entity_id: zwave.switch_basement_stair
-      scene_id: 1
-      scene_data: 7860
+  variables:
+    scene_id: '{{ trigger.event.data["scene_id"] }}' # 1 is up, 2 down
+    scene_data: '{{ trigger.event.data["scene_data"]}}' # 7860 is double tap, 7920 triple
   action:
-    - service: homeassistant.turn_on
-      data:
-        entity_id:
-          - switch.basement_stairs
-          - switch.basement_lights_south
-          - switch.basement_lights_north
-
-- id: allbasementoff
-  alias: Basement Switch - Double Tap All Basement Off
-  trigger:
-    platform: event
-    event_type: zwave.scene_activated
-    event_data:
-      entity_id: zwave.switch_basement_stair
-      scene_id: 2
-      scene_data: 7860
-  action:
-    - service: homeassistant.turn_off
-      data:
-        entity_id:
-          - switch.basement_stairs
-          - switch.basement_lights_south
-          - switch.basement_lights_north
-
-- id: allkitchenon
-  alias: Basement Switch - Triple Tap All Kitchen On
-  trigger:
-    platform: event
-    event_type: zwave.scene_activated
-    event_data:
-      entity_id: zwave.switch_basement_stair
-      scene_id: 1
-      scene_data: 7920
-  action:
-    - service: homeassistant.turn_on
-      data:
-        entity_id:
-          - light.kitchen_center_level
-          - light.kitchen_main_level
-          - light.kitchen_side_level
-
-- id: allkitchenoff
-  alias: Basement Switch - Triple Tap All Kitchen Off
-  trigger:
-    platform: event
-    event_type: zwave.scene_activated
-    event_data:
-      entity_id: zwave.switch_basement_stair
-      scene_id: 2
-      scene_data: 7920
-  action:
-    - service: homeassistant.turn_off
-      data:
-        entity_id:
-          - light.kitchen_center_level
-          - light.kitchen_main_level
-          - light.kitchen_side_level
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ scene_id == 1 }}"
+            - condition: template
+              value_template: "{{ scene_data == 7860 }}"
+          sequence:
+            - service: homeassistant.turn_on
+              data:
+                entity_id:
+                  - switch.basement_stairs
+                  - switch.basement_lights_south
+                  - switch.basement_lights_north
+        - conditions:
+            - condition: template
+              value_template: "{{ scene_id == 2 }}"
+            - condition: template
+              value_template: "{{ scene_data == 7860 }}"
+          sequence:
+            - service: homeassistant.turn_off
+              data:
+                entity_id:
+                  - switch.basement_stairs
+                  - switch.basement_lights_south
+                  - switch.basement_lights_north
+        - conditions:
+            - condition: template
+              value_template: "{{ scene_id == 1 }}"
+            - condition: template
+              value_template: "{{ scene_data == 7920 }}"
+          sequence:
+            - service: homeassistant.turn_on
+              data:
+                entity_id:
+                  - light.kitchen_center_level
+                  - light.kitchen_main_level
+                  - light.kitchen_side_level
+        - conditions:
+            - condition: template
+              value_template: "{{ scene_id == 2 }}"
+            - condition: template
+              value_template: "{{ scene_data == 7920 }}"
+          sequence:
+            - service: homeassistant.turn_off
+              data:
+                entity_id:
+                  - light.kitchen_center_level
+                  - light.kitchen_main_level
+                  - light.kitchen_side_level
 
 ###########################################################################
 ###########################################################################
