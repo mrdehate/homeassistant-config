@@ -604,6 +604,28 @@
 ###########################################################################
 ###########################################################################
 
+- id: bedroomofficediscospot
+  alias: Bedroom Office Disco Spot
+  trigger:
+    - platform: state
+      entity_id: switch.bedroom_disco
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: switch.bedroom_disco
+              state: "on"
+          sequence:
+            - service: switch.turn_on
+              entity_id: switch.bedroomoffice_spot
+        - conditions:
+            - condition: state
+              entity_id: switch.bedroom_disco
+              state: "off"
+          sequence:
+            - service: switch.turn_off
+              entity_id: switch.bedroomoffice_spot
+
 ###########################################################################
 # Bed Heater            ###################################################
 ###########################################################################
