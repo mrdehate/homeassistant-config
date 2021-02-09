@@ -24,13 +24,13 @@
 
 - platform: time_date
   display_options:
-    - 'time'
-    - 'date'
-    - 'date_time'
-    - 'date_time_iso'
-    - 'time_date'
-    - 'time_utc'
-    - 'beat'
+    - "time"
+    - "date"
+    - "date_time"
+    - "date_time_iso"
+    - "time_date"
+    - "time_utc"
+    - "beat"
 
 #- platform: serial_pm
 #  serial_device: /dev/tty/USB1

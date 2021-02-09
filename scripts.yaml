@@ -11,7 +11,7 @@ wfh_morning:
       entity_id: switch.basement_lights_north, switch.basement_lights_south, switch.basement_office
     - condition: state
       entity_id: climate.icomfort_s30_dc9576
-      state: 'heat'
+      state: "heat"
     - service: climate.set_temperature
       data:
         entity_id: climate.icomfort_s30_dc9576
@@ -51,7 +51,7 @@ welcome_home_music_mark:
         media_content_id: '{{ ["https://www.youtube.com/watch?v=-cZ7ndjhhps", "https://www.youtube.com/watch?v=MrJLsNo9sCU","https://www.youtube.com/watch?v=TZE9gVF1QbA"] | random }}'
         media_content_type: "music"
     - wait_template: "{{ is_state('binary_sensor.kitchen_entry_door', 'on') }}"
-      timeout: '00:01:05'
+      timeout: "00:01:05"
       continue_on_timeout: true
     - service: media_player.media_stop
       entity_id: media_player.garage
@@ -75,7 +75,7 @@ welcome_home_music_molly:
           {% endif %}
         media_content_type: "music"
     - wait_template: "{{ is_state('binary_sensor.kitchen_entry_door', 'on') }}"
-      timeout: '00:01:05'
+      timeout: "00:01:05"
       continue_on_timeout: true
     - service: media_player.media_stop
       entity_id: media_player.garage
@@ -96,148 +96,148 @@ stop_playback:
         entity_id: "{{ states('input_select.chromecast_radio_value') }}"
 
 radio_bbcradio1:
-    alias: Radio - BBC Radio 1
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - BBC Radio 1
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p"
+        media_content_type: "audio/mpeg"
 
 radio_rmqfc:
-    alias: Radio - RMQFC
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://stm3.hostingystreaming.net:20488/stream"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - RMQFC
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://stm3.hostingystreaming.net:20488/stream"
+        media_content_type: "audio/mpeg"
 
 radio_wiog:
-    alias: Radio - WIOG
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "https://15723.live.streamtheworld.com/WIOGFMAAC_SC"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - WIOG
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "https://15723.live.streamtheworld.com/WIOGFMAAC_SC"
+        media_content_type: "audio/mpeg"
 
 radio_rte2fm:
-    alias: Radio - RTE 2FM
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://icecast2.rte.ie/ie2fm"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - RTE 2FM
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://icecast2.rte.ie/ie2fm"
+        media_content_type: "audio/mpeg"
 
 radio_hotmixjapan:
-    alias: Radio - Hotmix Japan
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://streaming.hotmixradio.fm/hotmixradio-japan-128.mp3"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - Hotmix Japan
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://streaming.hotmixradio.fm/hotmixradio-japan-128.mp3"
+        media_content_type: "audio/mpeg"
 
 radio_thebounce:
-    alias: Radio - The Bounce 105.1
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://17633.live.streamtheworld.com:3690/WMGCFMAAC_SC"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - The Bounce 105.1
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://17633.live.streamtheworld.com:3690/WMGCFMAAC_SC"
+        media_content_type: "audio/mpeg"
 
 radio_nrjsweden:
-    alias: Radio - NRJ Sweden
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://edge-bauersefm-01-cr.sharp-stream.com/nrj_instreamtest_se_mp3"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - NRJ Sweden
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://edge-bauersefm-01-cr.sharp-stream.com/nrj_instreamtest_se_mp3"
+        media_content_type: "audio/mpeg"
 
 radio_2dayfm:
-    alias: Radio - 2day FM
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "https://s1.hotdogradio.com/CFRI"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - 2day FM
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "https://s1.hotdogradio.com/CFRI"
+        media_content_type: "audio/mpeg"
 
 radio_groovesalad:
-    alias: Radio - Groove Salad
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://ice3.somafm.com/groovesalad-128-mp3"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - Groove Salad
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://ice3.somafm.com/groovesalad-128-mp3"
+        media_content_type: "audio/mpeg"
 
-radio_hipoldhop:
-    alias: Radio - Hip Old Hop
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://streaming211.radionomy.com/Hip-Old-Hop"
-          media_content_type: 'audio/mpeg'
+radio_relaxingjazz:
+  alias: Radio - Relaxing Jazz
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://77.68.84.201/stream/3/"
+        media_content_type: "audio/mpeg"
 
 radio_loungeradio:
-    alias: Radio - Lounge Radio
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://edge1.peta.live365.net/b05055_128mp3"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - Lounge Radio
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://edge1.peta.live365.net/b05055_128mp3"
+        media_content_type: "audio/mpeg"
 
 radio_polkajammernetwork:
-    alias: Radio - Polka Jammer Network
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://ic2516.c591.fast-serv.com/stream"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - Polka Jammer Network
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://ic2516.c591.fast-serv.com/stream"
+        media_content_type: "audio/mpeg"
 
 radio_xmassmoothjazz:
-    alias: Radio - Smooth Jazz XMas
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "https://vip2.fastcast4u.com/proxy/wsjfholiday?mp=/1"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - Smooth Jazz XMas
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "https://vip2.fastcast4u.com/proxy/wsjfholiday?mp=/1"
+        media_content_type: "audio/mpeg"
 
 radio_961whnn:
-    alias: Radio - 96.1 WHNN
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://15903.live.streamtheworld.com:3690/WHNNFM_SC"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - 96.1 WHNN
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://15903.live.streamtheworld.com:3690/WHNNFM_SC"
+        media_content_type: "audio/mpeg"
 
 radio_xmasholidayhits:
-    alias: Radio - Holiday Hits
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "http://rfcmedia.streamguys1.com/holidayhits.mp3"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - Holiday Hits
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "http://rfcmedia.streamguys1.com/holidayhits.mp3"
+        media_content_type: "audio/mpeg"
 
 radio_stacks921:
-    alias: Radio - Stacks 92.1
-    sequence:
-      - service: media_player.play_media
-        data:
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          media_content_id: "https://playerservices.streamtheworld.com/api/livestream-redirect/WQTXFM.mp3"
-          media_content_type: 'audio/mpeg'
+  alias: Radio - Stacks 92.1
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        media_content_id: "https://playerservices.streamtheworld.com/api/livestream-redirect/WQTXFM.mp3"
+        media_content_type: "audio/mpeg"
 
 radio_party963:
   alias: Radio - Party 96.3
@@ -246,7 +246,7 @@ radio_party963:
       data:
         entity_id: "{{ states('input_select.chromecast_radio_value') }}"
         media_content_id: "https://17433.live.streamtheworld.com/WMBXHD2AAC.aac"
-        media_content_type: 'audio/aacp'
+        media_content_type: "audio/aacp"
 
 radio_traxxfmlounge:
   alias: Radio - Traxx FM Lounge
@@ -255,7 +255,7 @@ radio_traxxfmlounge:
       data:
         entity_id: "{{ states('input_select.chromecast_radio_value') }}"
         media_content_id: "http://traxx004.ice.infomaniak.ch/traxx004-low.mp3"
-        media_content_type: 'audio/mpeg'
+        media_content_type: "audio/mpeg"
 
 radio_traxxfmfunk:
   alias: Radio - Traxx FM Funk
@@ -264,8 +264,8 @@ radio_traxxfmfunk:
       data:
         entity_id: "{{ states('input_select.chromecast_radio_value') }}"
         media_content_id: "https://traxx016.ice.infomaniak.ch/traxx016-low.mp3"
-        media_content_type: 'audio/mpeg'
-        
+        media_content_type: "audio/mpeg"
+
 radio_superthrowbackparty:
   alias: Radio - Super Throwback Party
   sequence:
@@ -273,8 +273,7 @@ radio_superthrowbackparty:
       data:
         entity_id: "{{ states('input_select.chromecast_radio_value') }}"
         media_content_id: "http://hestia.cdnstream.com/1543_128?cb=618512.mp3"
-        media_content_type: 'audio/mpeg'
-
+        media_content_type: "audio/mpeg"
 
 radio_discostudio54:
   alias: Radio - Disco Studio 54
@@ -283,60 +282,59 @@ radio_discostudio54:
       data:
         entity_id: "{{ states('input_select.chromecast_radio_value') }}"
         media_content_id: "http://149.56.147.197:8307/stream?1516542990510"
-        media_content_type: 'audio/mpeg'
-
+        media_content_type: "audio/mpeg"
 
 spotify_playlist:
-    alias: Play Spotify Playlist
-    sequence:
-      - service: spotcast.start
-        data: 
-          random_song: true
-          entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-          uri: >
-            {% if is_state("input_select.spotify_playlist", "Discover Weekly") %} spotify:playlist:37i9dQZEVXcF02v937YitR
-            {% elif is_state("input_select.spotify_playlist", "Release Radar") %} spotify:playlist:37i9dQZEVXbsGN3LDZyrGj
-            {% elif is_state("input_select.spotify_playlist", "Bangin Christmas Party") %} spotify:playlist:633RtvT7zVhV3tjBZUxf04
-            {% elif is_state("input_select.spotify_playlist", "Bangin Dinner Party") %} spotify:playlist:6VhS4TX0DK8VKbbGwqwc7T
-            {% elif is_state("input_select.spotify_playlist", "CRJ Radio") %} spotify:playlist:37i9dQZF1E4EmGFMzkENF2
-            {% elif is_state("input_select.spotify_playlist", "Sunset Mix") %} spotify:playlist:7IgLb3ItiKBeV9FjR7FdJt
-            {% elif is_state("input_select.spotify_playlist", "Chillout Mix") %} spotify:playlist:2JdIVh1n5CXBzXGHU5JIwo
-            {% elif is_state("input_select.spotify_playlist", "Beats Mix") %} spotify:playlist:2nj2wZuB216lBaUfAmlrOP
-            {% endif %}
-      - delay: '00:00:10'
-      - service: media_player.shuffle_set
-        data:
-          entity_id: media_player.spotify_mark_dehate
-          shuffle: true
+  alias: Play Spotify Playlist
+  sequence:
+    - service: spotcast.start
+      data:
+        random_song: true
+        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+        uri: >
+          {% if is_state("input_select.spotify_playlist", "Discover Weekly") %} spotify:playlist:37i9dQZEVXcF02v937YitR
+          {% elif is_state("input_select.spotify_playlist", "Release Radar") %} spotify:playlist:37i9dQZEVXbsGN3LDZyrGj
+          {% elif is_state("input_select.spotify_playlist", "Bangin Christmas Party") %} spotify:playlist:633RtvT7zVhV3tjBZUxf04
+          {% elif is_state("input_select.spotify_playlist", "Bangin Dinner Party") %} spotify:playlist:6VhS4TX0DK8VKbbGwqwc7T
+          {% elif is_state("input_select.spotify_playlist", "CRJ Radio") %} spotify:playlist:37i9dQZF1E4EmGFMzkENF2
+          {% elif is_state("input_select.spotify_playlist", "Sunset Mix") %} spotify:playlist:7IgLb3ItiKBeV9FjR7FdJt
+          {% elif is_state("input_select.spotify_playlist", "Chillout Mix") %} spotify:playlist:2JdIVh1n5CXBzXGHU5JIwo
+          {% elif is_state("input_select.spotify_playlist", "Beats Mix") %} spotify:playlist:2nj2wZuB216lBaUfAmlrOP
+          {% endif %}
+    - delay: "00:00:10"
+    - service: media_player.shuffle_set
+      data:
+        entity_id: media_player.spotify_mark_dehate
+        shuffle: true
 
 spotify_playlist_old:
-    alias: Play Spotify Playlist Broke
-    sequence:
-      - service: media_player.select_source
-        data: 
-          entity_id: media_player.spotify
-          source: >
-            {% if is_state("input_select.chromecast_radio", "Kitchen") %} Kitchen
-            {% elif is_state("input_select.chromecast_radio", "Living Room") %} Radio
-            {% elif is_state("input_select.chromecast_radio", "Main Floor") %} Main Floor
-            {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} Main and Basement
-            {% elif is_state("input_select.chromecast_radio", "Bedroom") %} Bedroom
-            {% elif is_state("input_select.chromecast_radio", "All Indoor") %} All Indoor
-            {% elif is_state("input_select.chromecast_radio", "Garage") %} Garage
-            {% elif is_state("input_select.chromecast_radio", "Deck") %} Deck
-            {% elif is_state("input_select.chromecast_radio", "Everywhere") %} All Indoor and Outdoor
-            {% endif %}
+  alias: Play Spotify Playlist Broke
+  sequence:
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.spotify
+        source: >
+          {% if is_state("input_select.chromecast_radio", "Kitchen") %} Kitchen
+          {% elif is_state("input_select.chromecast_radio", "Living Room") %} Radio
+          {% elif is_state("input_select.chromecast_radio", "Main Floor") %} Main Floor
+          {% elif is_state("input_select.chromecast_radio", "Main and Basement") %} Main and Basement
+          {% elif is_state("input_select.chromecast_radio", "Bedroom") %} Bedroom
+          {% elif is_state("input_select.chromecast_radio", "All Indoor") %} All Indoor
+          {% elif is_state("input_select.chromecast_radio", "Garage") %} Garage
+          {% elif is_state("input_select.chromecast_radio", "Deck") %} Deck
+          {% elif is_state("input_select.chromecast_radio", "Everywhere") %} All Indoor and Outdoor
+          {% endif %}
 
-      - service: media_player.shuffle_set
-        data:
-          entity_id: media_player.spotify
-          shuffle: true
+    - service: media_player.shuffle_set
+      data:
+        entity_id: media_player.spotify
+        shuffle: true
 
-      - service: media_player.play_media
-        data:
-          entity_id: media_player.spotify
-          media_content_type: 'playlist'
-          media_content_id: >
-            {% if is_state("input_select.spotify_playlist", "Test 1") %} spotify:playlist:7IgLb3ItiKBeV9FjR7FdJt
-            {% elif is_state("input_select.spotify_playlist", "Test 2") %} spotify:playlist:37i9dQZF1E4EmGFMzkENF2
-            {% endif %}
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.spotify
+        media_content_type: "playlist"
+        media_content_id: >
+          {% if is_state("input_select.spotify_playlist", "Test 1") %} spotify:playlist:7IgLb3ItiKBeV9FjR7FdJt
+          {% elif is_state("input_select.spotify_playlist", "Test 2") %} spotify:playlist:37i9dQZF1E4EmGFMzkENF2
+          {% endif %}
