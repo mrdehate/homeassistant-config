@@ -32,6 +32,7 @@
     - "time_utc"
     - "beat"
 
+- platform: spotcast
 #- platform: serial_pm
 #  serial_device: /dev/tty/USB1
 #  name: officepm
