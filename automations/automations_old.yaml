@@ -347,51 +347,51 @@
 ###########################################################################
 ###########################################################################
 
-- id: universalvolumeup
-  alias: Increase Volume
-  trigger:
-    platform: event
-    event_type: deconz_event
-    event_data:
-      entity_id: tradfri_wireless_dimmer
-      event: 2002
-  action:
-    service: media_player.volume_up
-    data:
-      entity_id:
-        '{% if is_state("media_player.kitchen", "playing") %} media_player.kitchen
-        {% elif is_state("media_player.radio", "playing") %} media_player.radio {%
-        elif is_state("media_player.main_floor", "playing") %} media_player.main_floor
-        {% elif is_state("media_player.main_and_basement", "playing") %} media_player.main_and_basement
-        {% elif is_state("media_player.bedroom", "playing") %} media_player.bedroom
-        {% elif is_state("media_player.all_indoor", "playing") %} media_player.all_indoor
-        {% elif is_state("media_player.all_indoor_and_outdoor", "playing") %} media_player.all_indoor_and_outdoor
-        {% endif %}
+# - id: universalvolumeup
+#   alias: Increase Volume
+#   trigger:
+#     platform: event
+#     event_type: deconz_event
+#     event_data:
+#       entity_id: tradfri_wireless_dimmer
+#       event: 2002
+#   action:
+#     service: media_player.volume_up
+#     data:
+#       entity_id:
+#         '{% if is_state("media_player.kitchen", "playing") %} media_player.kitchen
+#         {% elif is_state("media_player.radio", "playing") %} media_player.radio {%
+#         elif is_state("media_player.main_floor", "playing") %} media_player.main_floor
+#         {% elif is_state("media_player.main_and_basement", "playing") %} media_player.main_and_basement
+#         {% elif is_state("media_player.bedroom", "playing") %} media_player.bedroom
+#         {% elif is_state("media_player.all_indoor", "playing") %} media_player.all_indoor
+#         {% elif is_state("media_player.all_indoor_and_outdoor", "playing") %} media_player.all_indoor_and_outdoor
+#         {% endif %}
 
-        '
+#         '
 
-- id: universalvolumedown
-  alias: Decrease Volume
-  trigger:
-    platform: event
-    event_type: deconz_event
-    event_data:
-      entity_id: tradfri_wireless_dimmer
-      event: 3002
-  action:
-    service: media_player.volume_down
-    data:
-      entity_id:
-        '{% if is_state("media_player.kitchen", "playing") %} media_player.kitchen
-        {% elif is_state("media_player.radio", "playing") %} media_player.radio {%
-        elif is_state("media_player.main_floor", "playing") %} media_player.main_floor
-        {% elif is_state("media_player.main_and_basement", "playing") %} media_player.main_and_basement
-        {% elif is_state("media_player.bedroom", "playing") %} media_player.bedroom
-        {% elif is_state("media_player.all_indoor", "playing") %} media_player.all_indoor
-        {% elif is_state("media_player.all_indoor_and_outdoor", "playing") %} media_player.all_indoor_and_outdoor
-        {% endif %}
+# - id: universalvolumedown
+#   alias: Decrease Volume
+#   trigger:
+#     platform: event
+#     event_type: deconz_event
+#     event_data:
+#       entity_id: tradfri_wireless_dimmer
+#       event: 3002
+#   action:
+#     service: media_player.volume_down
+#     data:
+#       entity_id:
+#         '{% if is_state("media_player.kitchen", "playing") %} media_player.kitchen
+#         {% elif is_state("media_player.radio", "playing") %} media_player.radio {%
+#         elif is_state("media_player.main_floor", "playing") %} media_player.main_floor
+#         {% elif is_state("media_player.main_and_basement", "playing") %} media_player.main_and_basement
+#         {% elif is_state("media_player.bedroom", "playing") %} media_player.bedroom
+#         {% elif is_state("media_player.all_indoor", "playing") %} media_player.all_indoor
+#         {% elif is_state("media_player.all_indoor_and_outdoor", "playing") %} media_player.all_indoor_and_outdoor
+#         {% endif %}
 
-        '
+#         '
 
 ###########################################################################
 ###########################################################################
