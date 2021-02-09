@@ -597,6 +597,7 @@
 ###########################################################################
 ###########################################################################
 
+# Auxillary spotlight should mirror state of main disco ball switch
 - id: bedroomofficediscospot
   alias: Bedroom Office Disco Spot
   trigger:
