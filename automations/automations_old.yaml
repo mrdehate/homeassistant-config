@@ -10,29 +10,76 @@
   # Hide warnings when triggered while in delay.
   max_exceeded: silent
   variables:
-    # Map scanner device ID to media player entity ID
+    # List of supported tag scanners @todo - don't need a value here right?
+    tag_scanners:
+      e6cdbb56a9991c2d99994d685c35759b: radio
+    # List of all media players
     media_players:
-      e6cdbb56a9991c2d99994d685c35759b: media_player.spotify_mark_dehate
-    # Map tag ID to content
-    tags:
-      22-8B-06-34:
+      spotify: media_player.spotify_mark_dehate
+      radio: media_player.play_media
+    # List of music
+    music:
+      album_jepsen_dedicated:
         media_content_id: spotify:album:25it7uSpNFuRoD6uNc0Tfu
-        media_content_type: album
+        media_content_type: spotify
         media_shuffle: false
-      D0-50-B1-32:
+        media_player: "{{ media_players.spotify }}"
+      album_dualipa_futurenostalgia:
+        media_content_id: spotify:album:7fJJK56U9fHixgO0HQkhtI
+        media_content_type: spotify
+        media_shuffle: false
+        media_player: "{{ media_players.spotify }}"
+      playlist_discover:
+        media_content_id: spotify:playlist:37i9dQZEVXcF02v937YitR
+        media_content_type: spotify
+        media_shuffle: false
+        media_player: "{{ media_players.spotify }}"
+      playlist_bangin:
         media_content_id: spotify:playlist:6VhS4TX0DK8VKbbGwqwc7T
-        media_content_type: playlist
+        media_content_type: spotify
         media_shuffle: true
+        media_player: "{{ media_players.spotify }}"
+      playlist_loficafe:
+        media_content_id: spotify:playlist:37i9dQZF1DX9RwfGbeGQwP
+        media_content_type: spotify
+        media_shuffle: true
+        media_player: "{{ media_players.spotify }}"
+      radio_polkajammer:
+        media_content_id: http://ic2516.c591.fast-serv.com/stream
+        media_content_type: audio/mpeg
+        media_shuffle: false
+        media_player: "{{ media_players.radio }}"
+      radio_stacks:
+        media_content_id: https://playerservices.streamtheworld.com/api/livestream-redirect/WQTXFM.mp3
+        media_content_type: audio/mpeg
+        media_shuffle: false
+        media_player: "{{ media_players.radio }}"
+      radio_nrj:
+        media_content_id: http://edge-bauersefm-01-cr.sharp-stream.com/nrj_instreamtest_se_mp3
+        media_content_type: audio/mpeg
+        media_shuffle: false
+        media_player: "{{ media_players.radio }}"
+
+    # Assign music to tags
+    tags:
+      22-8B-06-34: "{{ music.album_jepsen_dedicated }}"
+      04-B5-C7-52-24-6E-80: "{{ music.album_dualipa_futurenostalgia }}"
+      D0-50-B1-32: "{{ music.playlist_bangin }}"
+      04-CE-54-52-24-6E-80: "{{ music.playlist_discover }}"
+      04-91-0C-8A-21-6E-84: "{{ music.playlist_loficafe }}"
+      04-F0-82-52-24-6E-80: "{{ music.radio_polkajammer }}"
+      04-13-56-8A-21-6E-81: "{{ music.radio_stacks }}"
+      04-83-74-52-24-6E-80: "{{ music.radio_nrj }}"
   trigger:
     platform: event
     event_type: tag_scanned
   condition:
     # Test that we support this device and tag
     - "{{ trigger.event.data.tag_id in tags }}"
-    - "{{ trigger.event.data.device_id in media_players }}"
+    - "{{ trigger.event.data.device_id in tag_scanners }}"
   action:
     - variables:
-        media_player_entity_id: "{{ media_players[trigger.event.data.device_id] }}"
+        media_player_entity_id: "{{ tags[trigger.event.data.tag_id].media_player }}"
         media_content_id: "{{ tags[trigger.event.data.tag_id].media_content_id }}"
         media_content_type: "{{ tags[trigger.event.data.tag_id].media_content_type }}"
         media_shuffle: "{{ tags[trigger.event.data.tag_id].media_shuffle }}"
@@ -40,16 +87,25 @@
       data:
         entity_id: "{{ media_player_entity_id }}"
         shuffle: "{{ media_shuffle }}"
-    - service: spotcast.start
-      data:
-        random_song: "{{ media_shuffle }}"
-        entity_id: "{{ states('input_select.chromecast_radio_value') }}"
-        uri: "{{ media_content_id }}"
-    #    - service: media_player.play_media
-    #      data:
-    #        entity_id: "{{ media_player_entity_id }}"
-    #        media_content_id: "{{ media_content_id }}"
-    #        media_content_type: "{{ media_content_type }}"
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ media_player_entity_id == media_players.spotify }}"
+          sequence:
+            - service: spotcast.start
+              data:
+                random_song: "{{ media_shuffle }}"
+                entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+                uri: "{{ media_content_id }}"
+        - conditions:
+            - condition: template
+              value_template: "{{ media_player_entity_id == media_players.radio }}"
+          sequence:
+            - service: media_player.play_media
+              data:
+                entity_id: "{{ states('input_select.chromecast_radio_value') }}"
+                media_content_id: "{{ media_content_id }}"
+                media_content_type: "{{ media_content_type }}"
     - delay: 2 # timeout before we allow processing next scan
 
 ###########################################################################
